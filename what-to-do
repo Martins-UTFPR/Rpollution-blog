@@ -1,0 +1,2 @@
+Netlify also supports multiple versions of Hugo, so the build command can be the default hugo. The default version is 0.17, which is too old, and we recommend that you use at least version 0.20. To specify a Hugo version greater or equal to 0.20, you need to create an environment variable HUGO_VERSION on Netlify
+
