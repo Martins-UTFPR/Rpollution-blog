@@ -14,11 +14,11 @@
         {{ $.Scratch.Set "dateType" .Date }}
 
         <time class="published"
-            datetime='{{ ($.Scratch.Get "dateType").Format "2006-01-02" }}'>
-            {{ ($.Scratch.Get "dateType").Format "January 2, 2006" }}</time>
+            datetime='{{ ($.Scratch.Get "dateType").Format "02-01-2006" }}'>
+            {{ ($.Scratch.Get "dateType").Format "02.01.2006" }}</time>
         <span class="author">{{ .Params.author }}</span>
         {{ if .Site.Params.includeReadingTime }}
-            <p>{{ .ReadingTime }} minute read</p>
+            <p style = "font-size: x-small">{{ .ReadingTime }} minutos de leitura</p>
         {{ end }}
         <!--<a href="#" class="author"><span class="name">Jane Doe</span><img src="images/avatar.jpg" alt="" /></a>-->
     </div>
