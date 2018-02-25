@@ -1,29 +1,18 @@
 +++
-title = "About Hugo"
-date = "2014-04-09"
+title = "Sobre o autor e o blog"
+date = "2018-02-24"
 +++
 
-Hugo is a static site engine written in Go.
+Meu nome é William Amorim e sou o idealizador deste blog. Também sou doutorando em Estatística no IME-USP, sócio-fundador da [Curso-R](cusro-r.com) e gosto de escrever [histórias](https://www.wattpad.com/user/WilliamAmorim5) nas horas vagas. 
 
+Eu comecei a trabalhar com poluição do ar em 2016, como tema da minha tese de Doutorado. Foi uma ótima sugestão dos meus orientadores [Antonio Carlos Pedroso de Lima](https://www.ime.usp.br/~acarlos/doku.php) e [Julio Singer](https://www.ime.usp.br/~jmsinger/doku.php).
 
-It makes use of a variety of open source projects including:
+Após um ano e meio estudando a área e analisando dados, resolvi criar este blog com o objetivo de
 
-* [Cobra](https://github.com/spf13/cobra)
-* [Viper](https://github.com/spf13/viper)
-* [J Walter Weatherman](https://github.com/spf13/jWalterWeatherman)
-* [Cast](https://github.com/spf13/cast)
+- organizar meu Doutorado, listando e divulgando os resultados que estavam se perdendo em pastas obscuras do meu computador;
 
-Learn more and contribute on [GitHub](https://github.com/spf13).
+- me aproximar da comunidade científica que trabalha com pesquisa em poluição do ar;
 
-## Setup
+- discutir tópicos interessantes em torno do tema; e
 
-Some fun facts about [Hugo](http://gohugo.io/):
-
-* Built in [Go](http://golang.org/)
-* Loosely inspired by [Jekyll](http://jekyllrb.com/)
-* Primarily developed by [spf13](http://spf13.com/) on the train while commuting to and from Manhattan.
-* Coded in [Vim](http://vim.org) using [spf13-vim](http://vim.spf13.com/)
-
-Have questions or suggestions? Feel free to [open an issue on GitHub](https://github.com/spf13/hugo/issues/new) or [ask me on Twitter](https://twitter.com/spf13).
-
-Thanks for reading!
+- facilitar o acesso a dados públicos de poluição.
