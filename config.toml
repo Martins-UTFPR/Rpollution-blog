@@ -4,7 +4,7 @@ title = "R Pollution"
 theme = "hugo-future-imperfect"
 preserveTaxonomyNames = true
 paginate = 3
-disqusShortname = "shortname"
+disqusShortname = "rpollution"
 googleAnalytics = ""
 pluralizeListTitles = false
 
@@ -45,8 +45,8 @@ pluralizeListTitles = false
   socialShareFacebook  = true
   socialShareReddit    = true
   socialShareLinkedin  = true
-  socialShareStumbleupon = true
-  socialSharePinterest = true
+  socialShareStumbleupon = false
+  socialSharePinterest = false
   socialShareEmail     = true
 
   # Load custom CSS or JavaScript files. The variable is an array so that you
