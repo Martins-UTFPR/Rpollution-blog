@@ -1,7 +1,7 @@
 +++
 title = "Contato"
 type = "contact"
-netlify = true
+netlify = "true"
 emailservice = "formspree/contato@rpollution.com"
 contactname = "Seu nome"
 contactemail = "Seu e-mail"
