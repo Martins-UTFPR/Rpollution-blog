@@ -16,3 +16,6 @@ Após um ano e meio estudando a área e analisando dados, resolvi criar este blo
 - discutir tópicos interessantes em torno do tema; e
 
 - facilitar o acesso a dados públicos de poluição.
+
+O Rpollution está hosteado no [Github](https://github.com/williamorim/Rpollution) e foi criado usando [Hugo](https://gohugo.io/), [Blogdown](https://github.com/rstudio/blogdown) e uma adaptação do tema [Future Imperfect](https://themes.gohugo.io/theme/future-imperfect/).
+
