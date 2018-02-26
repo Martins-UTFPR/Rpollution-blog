@@ -10,7 +10,7 @@ pluralizeListTitles = false
 
 [params]
   # Sets the meta tag description
-  description          = "HTML5 UP theme, Future Imperfect with some extra goodies, ported by Julio Pescador. Powered by Hugo"
+  description          = "Análise de dados de poluição do ar usando o R"
   # Sets the navbarTitle that appears in the top left of the navigation bar
   navbarTitle          = "R Pollution"
   # Sets where "View More Posts" links
