@@ -1,7 +1,7 @@
 ---
 title: O ciclo do ozônio
 author: William Amorim
-date: '2018-02-25'
+date: '2018-02-26'
 slug: o-ciclo-do-ozonio
 type: "post"
 featured: "o-ciclo-do-ozonio.jpeg"
@@ -43,16 +43,16 @@ automotivos e em processos industriais.
 
 O processo pode ser resumido pelo fluxo a seguir:
 
-```{r, eval=TRUE, fig.align='center'}
-knitr::include_graphics("img/fluxograma_ozonio_1.png")
+```{r, eval=TRUE, fig.align='center', echo=FALSE}
+knitr::include_graphics("/img/blog/o-ciclo-do-ozonio/fluxograma_ozonio_1.png")
 ```
 
 Note que, ignornado outros fatores, esse processo é cíclico, isto é, começa com a fotólise do NO$_2$, que também é o produto final. Se não fosse a interação de outros processos químicos, essa estacionariedade deveria impedir que a concentração de ozônio subisse muito ao longo do dia.
 
 Um desses processos descreve a geração de NO$_2$ a partir dos compostos orgânicos voláteis (VOC). 
 
-```{r, eval=TRUE, fig.align='center'}
-knitr::include_graphics("img/fluxograma_ozonio_2.png")
+```{r, eval=TRUE, fig.align='center', echo=FALSE}
+knitr::include_graphics("/img/blog/o-ciclo-do-ozonio/fluxograma_ozonio_2.png")
 ```
 
 Observe que esse processo consome COV e NO e gera NO$_2$. É razoável supor que a interação entre esses dois processos quebra o ciclo de formação de ozônio, de tal forma que:
