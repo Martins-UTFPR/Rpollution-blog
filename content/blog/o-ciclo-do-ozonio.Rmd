@@ -19,23 +19,17 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
                       cache = TRUE, collapse = TRUE)
 ```
 
-Aprendemos na escola ou ouvimos nos noticiários a importância da camada de ozônio, sobre como ela filtra grande parte da radiação solar nociva à vida na Terra.
+Aprendemos na escola ou ouvimos nos noticiários a importância da camada de ozônio, sobre como ela filtra grande parte da radiação solar nociva à vida na Terra. Essa camada corresponde a uma região entre aproximadamente 10 e 50 km da superfície, na estratosfera. Lá, o ozônio empenha o papel de herói.
 
-Essa camada corresponde a uma região entre aproximadamente 10 e 50 km da superfície, na estratosfera. Lá, o ozônio empenha o papel de herói.
+Mas esse mesmo gás pode atuar como vilão. Quando o ozônio aparece mais próximo de nós, no ar que respiramos, ele causa diversos prejuízos ambientais e à saúde humana. Na troposfera, o ozônio é um gás poluente.
 
-Mas esse mesmo gás pode atuar como vilão. Quando o ozônio aparece mais próximo de nós, no ar que respiramos, ele causa diversos prejuízos ambientais e à saúde humana. O ozônio troposférico\footnote{A camada mais baixa da atmosfera.} é considerado um poluente.
+A exposição ao ozônio está associada ao risco de morte por doenças respiratórias, além do aumento de casos de asma, bronquite e ataques cardíacos. Ao contrário de outros gases, como os óxidos de nitrogênio, ele não é emitido diretamente pelas fontes poluentes, mas sim gerado na atmosfera pela reação de alguns compostos na presença de radiação solar.
 
-A exposição ao ozônio está associada ao risco de morte por doenças respiratórias, além do aumento de casos de asma, bronquite e ataques cardíacos.
+Assim, na tentativa de reduzir a concentração do ozônio troposférico, é fundamental entendermos o processo gerador desse gás. O objetivo deste post é apresentar o ciclo diário de formação do ozônio troposférico, comparando o conhecimento teórico de química atmosférica com dados de poluição da cidade de São Paulo.
 
-Ao contrário de outros gases, como os óxidos de nitrogênio, o ozônio não é emitido diretamente pelas fontes poluentes, mas sim gerado na atmosfera pela reação de alguns compostos na presença de radiação solar.
+# Um pouco de qúimica
 
-Assim, na tentativa de reduzir a concentração do ozônio troposférico, é fundamental entendermos o processo gerador desse gás.
-
-O objetivo deste post é apresentar o ciclo diário do ozônio, comparando o conhecimento teórico com dados da cidade de São Paulo.
-
-## Um pouco de qúimica
-
-De forma bem simplificada, a formação do ozônio troposférico depende de três componentes: óxidos de nitrogênio, compostos orgânicos voláteis (VOC) e luz solar.
+De forma simplificada, a formação do ozônio troposférico depende de três componentes: óxidos de nitrogênio, compostos orgânicos voláteis (VOC) e luz solar.
 
 Os óxidos de nitrogênio, NO e NO$_2$, são lançados na atmosfera pelos
 processos de combustão (veicular e industrial). Já os compostos orgânicos voláteis são emitidos por processos evaporativos, da queima incompleta de combustíveis
@@ -49,7 +43,7 @@ knitr::include_graphics("/img/blog/o-ciclo-do-ozonio/fluxograma_ozonio_1.png")
 
 Note que, ignornado outros fatores, esse processo é cíclico, isto é, começa com a fotólise do NO$_2$, que também é o produto final. Se não fosse a interação de outros processos químicos, essa estacionariedade deveria impedir que a concentração de ozônio subisse muito ao longo do dia.
 
-Um desses processos descreve a geração de NO$_2$ a partir dos compostos orgânicos voláteis (VOC). 
+Um dos processos que interagem com o ciclo do ozônio descreve a geração de NO$_2$ a partir dos compostos orgânicos voláteis (VOC). 
 
 ```{r, eval=TRUE, fig.align='center', echo=FALSE}
 knitr::include_graphics("/img/blog/o-ciclo-do-ozonio/fluxograma_ozonio_2.png")
@@ -67,7 +61,7 @@ Dessa forma, a interação entre os dois processos geraria um aumento da concent
 
 Para estudar essa dinâmica, vamos analisar a relação entre os óxidos de nitrogênio e o O3 na cidade de São Paulo de 2008 a 2011. Infelizmente, não temos dados de VOC.
 
-## Ciclo do ozônio em São Paulo
+# Ciclo do ozônio em São Paulo
 
 Vamos utilizar os dados disponibilidados pelos autores do artigo *Reduction in local ozone levels in urban São Paulo due to a shift from ethanol to gasoline use*, que podem ser acessados pelo link bit.do/salvo_geiger_data.
 
@@ -90,32 +84,37 @@ df %>%
   write_rds(path = "data/df_poluentes_2008_2011.rds")
 ```
 
+Então criamos o objeto `df_poluentes` com a base enxuta.
+
 ```{r}
 df_poluentes <- readr::read_rds("data/df_poluentes_2008_2011.rds")
 ```
 
 ### Análise exploratória
 
-Os dados apresentam informações de diversas estações de monitoramento. Vamos focar, inicialmente, na estação "Dom Pedro II".
+Os dados apresentam informações de diversas estações de monitoramento. Vamos focar, inicialmente, na estação "Dom Pedro II", criando o objeto `df_DPII` apenas com os dados dessa estação.
 
 ```{r}
 library(magrittr)
 
+# A estação número 1 representa a Dom Pedro II
 df_DPII <- df_poluentes %>%
-  dplyr::filter(stationno == 1)
+  dplyr::filter(stationno == 1) 
 ```
 
-Vamos visualizar o gráfico da série:
+Vamos visualizar o gráfico das séries de NO, NO$_2$ e O$_3$:
 
 ```{r, fig.align='center'}
 library(ggplot2)
 
 df_DPII %>%
-  tidyr::gather(poluente, concentracao, O3, NO, NO2) %>% 
-  ggplot(aes(x = date, y = concentracao)) +
+  tidyr::gather(poluente, concentration, O3, NO, NO2) %>% 
+  ggplot(aes(x = date, y = concentration)) +
   geom_line() +
   facet_wrap( ~ poluente, ncol = 1, scales = "free_y") + 
   geom_smooth() +
+  labs(y = expression(paste("Concentration", " (", mu, "g/", m^3, ")")),
+       x = "Year") +
   theme_bw()
 ```
 
@@ -130,14 +129,16 @@ df_DPII %>%
   dplyr::summarise(concentration = mean(concentration, na.rm = TRUE)) %>% 
   ggplot(aes(x = hour, y = concentration, color = pollutant, group = pollutant)) +
   geom_line() +
+  labs(y = expression(paste("Average concentration", " (", mu, "g/", m^3, ")")),
+       x = "Hour") +
   theme_bw()
 ```
 
 Os pontos sem informação se referem às horas em que os equipamentos de medidção são desligados para manutenção.
 
-Observamos que o aumento da concentração de ozônio coincide com a queda da concentração de NO e NO$_2$. O nível de NO decai drasticamente, indicando que esse poluente pode estar sendo consumido nos dois processos, gerando O$_3$ e NO$_2$. Observe que a queda da concentração de NO$_2$ é muito menor do que a do NO. Isso sugere que a suposição sobre a interação entre os dois processos é verdadeira.
+Observamos que o aumento da concentração de ozônio coincide com a queda da concentração de NO e NO$_2$. O nível de NO decai drasticamente, indicando que esse poluente pode estar sendo consumido nos dois processos, gerando O$_3$ e NO$_2$. Observe que a queda da concentração de NO$_2$ é muito menor do que a do NO. Isso sugere que a suposição sobre a interação entre os dois processos é razoável.
 
-Vamos ver se esse comportamento se repete para outras estações. São 6 as estações que medem a informação dos 3 poluentes: Dom Pedro II, Ibirapuera, São caetano, Pinheiros, Parelheiros e IPEN. A estação de Itaquera também tem informação dos três poluentes, mas devido à grande taxa de observações faltantes para NO e NO$_2$ (64%), eu optei não incluí-la na análise.
+Vamos ver se esse comportamento se repete para outras estações. São 6 as estações que medem a informação dos 3 poluentes: Dom Pedro II, Ibirapuera, São caetano, Pinheiros, Parelheiros e IPEN. A estação de Itaquera também tem informação dos três poluentes, mas devido à grande taxa de observações faltantes para NO e NO$_2$ (64%), eu optei por não incluí-la na análise.
 
 ```{r, fig.align='center'}
 df_poluentes %>%
@@ -156,14 +157,18 @@ df_poluentes %>%
   ggplot(aes(x = hour, y = concentration, color = pollutant, group = pollutant)) +
   facet_wrap(~stationname) +
   geom_line() +
+  labs(y = expression(paste("Average concentration", " (", mu, "g/", m^3, ")")),
+       x = "Hour") +
   theme_bw()
 ```
 
 O padrão é muito parecido em cada uma das estações. A maior diferença fica nos níveis de NO, que varia provavelmente pela diferença no trânsito local. Nas estações Ibirapuera e IPEN, onde a concentração média de NO é menor durante a manhã, a concentração média de ozônio é maior à tarde.
 
-Nos próximos posts, vamos estudar com mais detalhes a série do ozônio, vendo seu comportamento ao longo da semana e do ano. Além disso, vamos relacioná-la com variáveis climáticas e de trânsito.
+Nos próximos posts, vamos estudar com mais detalhes a série do ozônio, vendo seu comportamento ao longo da semana e do ano. Além disso, vamos relacioná-la com variáveis climáticas, de trânsito e de uso de combustível.
 
-## Referências
+# Referências
+
+Abaixo as referências utilizadas na produção deste post.
 
 ### Ozônio, meio ambiente e saúde
 
