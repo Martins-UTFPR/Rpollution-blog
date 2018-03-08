@@ -52,7 +52,7 @@
               </h3>
               {{ $.Scratch.Set "dateType" .Date }}
               <time class="published" datetime='{{ ($.Scratch.Get "dateType").Format "2006-01-02" }}'>
-                {{ ($.Scratch.Get "dateType").Format "January 2, 2006" }}
+                {{ ($.Scratch.Get "dateType").Format "02.01.2006" }}
               </time>
             </header>
             {{ .Render "featured" }}
@@ -80,7 +80,7 @@
     <section id="categories">
       <header>
         <h3>
-          <a href="/categories/">Categories</a>
+          <a href="/categories/">Categorias</a>
         </h3>
       </header>
         {{ if .Site.Params.categoriesByCount }}

@@ -62,11 +62,11 @@ Mas esse mesmo gás pode atuar como vilão. Quando o ozônio aparece mais próxi
 
 <meta itemprop="datePublished" content="2018-02-26T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-02-26T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1202">
+<meta itemprop="wordCount" content="1263">
 
 
 
-<meta itemprop="keywords" content="O3,São Paulo,Brasil," />
+<meta itemprop="keywords" content="EDA,São Paulo,Brasil," />
 
         
 
@@ -227,11 +227,47 @@ Mas esse mesmo gás pode atuar como vilão. Quando o ozônio aparece mais próxi
                 
                         <article class="mini-post">
                             <header>
+                                <h3><a href="/blog/sazonalidade-do-ozonio/">A sazonalidade do ozônio</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-03-06'>
+                                    06.03.2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/sazonalidade-do-ozonio/" class="image featured">
+            <img src="/img/2018/sazonalidade-do-ozonio.jpeg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
                                 <h3><a href="/blog/o-ciclo-do-ozonio/">O ciclo do ozônio</a></h3>
                                 
                                 <time class="published" datetime=
                                     '2018-02-26'>
-                                    February 26, 2018</time>
+                                    26.02.2018</time>
                             </header>
                             
     
@@ -490,13 +526,13 @@ Mas esse mesmo gás pode atuar como vilão. Quando o ozônio aparece mais próxi
 <p>Os óxidos de nitrogênio, NO e NO<span class="math inline">\(_2\)</span>, são lançados na atmosfera pelos processos de combustão (veicular e industrial). Já os compostos orgânicos voláteis são emitidos por processos evaporativos, da queima incompleta de combustíveis automotivos e em processos industriais.</p>
 <p>O processo pode ser resumido pelo fluxo a seguir:</p>
 <p><img src="/img/blog/o-ciclo-do-ozonio/fluxograma_ozonio_1.png" style="display: block; margin: auto;" /></p>
-<p>Note que, ignornado outros fatores, esse processo é cíclico, isto é, começa com a fotólise do NO<span class="math inline">\(_2\)</span>, que também é o produto final. Se não fosse a interação de outros processos químicos, essa estacionariedade deveria impedir que a concentração de ozônio subisse muito ao longo do dia.</p>
+<p>Note que, ignorando outros fatores, esse processo é cíclico, isto é, começa com a fotólise do NO<span class="math inline">\(_2\)</span>, que também é o produto final. Se não fosse a interação de outros processos químicos, essa estacionariedade deveria impedir que a concentração de ozônio subisse muito ao longo do dia.</p>
 <p>Um dos processos que interagem com o ciclo do ozônio descreve a geração de NO<span class="math inline">\(_2\)</span> a partir dos compostos orgânicos voláteis (VOC).</p>
 <p><img src="/img/blog/o-ciclo-do-ozonio/fluxograma_ozonio_2.png" style="display: block; margin: auto;" /></p>
 <p>Observe que esse processo consome COV e NO e gera NO<span class="math inline">\(_2\)</span>. É razoável supor que a interação entre esses dois processos quebra o ciclo de formação de ozônio, de tal forma que:</p>
 <ol style="list-style-type: decimal">
 <li><p>O NO que reagiria com o ozônio passa também a reagir com peroxi radicais (RO<span class="math inline">\(_2\)</span>°), gerando mais NO<span class="math inline">\(_2\)</span>.</p></li>
-<li><p>Sob a luz solar, mais NO<span class="math inline">\(_2\)</span> é fotolisado, gerando mais radicais Oº e, consequetentemente, mais ozônio.</p></li>
+<li><p>Sob a luz solar, mais NO<span class="math inline">\(_2\)</span> sofre fotólise, gerando mais radicais Oº e, consequentemente, mais ozônio.</p></li>
 <li><p>Esse ozônio extra tem menos NO para reagir, devido ao item 1.</p></li>
 </ol>
 <p>Dessa forma, a interação entre os dois processos geraria um aumento da concentração de ozônio troposférico.</p>
@@ -504,7 +540,7 @@ Mas esse mesmo gás pode atuar como vilão. Quando o ozônio aparece mais próxi
 </div>
 <div id="ciclo-do-ozonio-em-sao-paulo" class="section level1">
 <h1>Ciclo do ozônio em São Paulo</h1>
-<p>Vamos utilizar os dados disponibilidados pelos autores do artigo <em>Reduction in local ozone levels in urban São Paulo due to a shift from ethanol to gasoline use</em>, que podem ser acessados pelo link bit.do/salvo_geiger_data.</p>
+<p>Vamos utilizar os dados disponibilizados pelos autores do artigo <em>Reduction in local ozone levels in urban São Paulo due to a shift from ethanol to gasoline use</em>, que podem ser acessados pelo link <a href="https://goo.gl/9tNzvj" class="uri">https://goo.gl/9tNzvj</a>.</p>
 <div id="importanto-e-manipulando-os-dados" class="section level3">
 <h3>Importanto e manipulando os dados</h3>
 <p>Vamos carregar os dados originais.</p>
@@ -552,7 +588,7 @@ df_DPII %&gt;%
        x = &quot;Hour&quot;) +
   theme_bw()</code></pre>
 <p><img src="/blog/o-ciclo-do-ozonio_files/figure-html/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
-<p>Os pontos sem informação se referem às horas em que os equipamentos de medidção são desligados para manutenção.</p>
+<p>Os pontos sem informação se referem às horas em que os equipamentos de medição são desligados para manutenção.</p>
 <p>Observamos que o aumento da concentração de ozônio coincide com a queda da concentração de NO e NO<span class="math inline">\(_2\)</span>. O nível de NO decai drasticamente, indicando que esse poluente pode estar sendo consumido nos dois processos, gerando O<span class="math inline">\(_3\)</span> e NO<span class="math inline">\(_2\)</span>. Observe que a queda da concentração de NO<span class="math inline">\(_2\)</span> é muito menor do que a do NO. Isso sugere que a suposição sobre a interação entre os dois processos é razoável.</p>
 <p>Vamos ver se esse comportamento se repete para outras estações. São 6 as estações que medem a informação dos 3 poluentes: Dom Pedro II, Ibirapuera, São caetano, Pinheiros, Parelheiros e IPEN. A estação de Itaquera também tem informação dos três poluentes, mas devido à grande taxa de observações faltantes para NO e NO<span class="math inline">\(_2\)</span> (64%), eu optei por não incluí-la na análise.</p>
 <pre class="r"><code>df_poluentes %&gt;%
@@ -579,9 +615,16 @@ df_DPII %&gt;%
 <p>Nos próximos posts, vamos estudar com mais detalhes a série do ozônio, vendo seu comportamento ao longo da semana e do ano. Além disso, vamos relacioná-la com variáveis climáticas, de trânsito e de uso de combustível.</p>
 </div>
 </div>
+<div id="conclusoes" class="section level1">
+<h1>Conclusões</h1>
+<ul>
+<li><p>O processo gerador do ozônio troposférico é complexo e envolve a interação de pelo menos dois processos químicos.</p></li>
+<li><p>Os dados de poluição do ar da cidade de São Paulo, de 2008 a 2011, corroboram o conhecimento teórico sobre a formação do ozônio.</p></li>
+<li><p>Os picos de ozônio em cada dia ocorrem entre 12h e 17h. A magnitude da concentração depende dos níveis de NO e NO<span class="math inline">\(_2\)</span> medidos pela manhã.</p></li>
+</ul>
+</div>
 <div id="referencias" class="section level1">
 <h1>Referências</h1>
-<p>Abaixo as referências utilizadas na produção deste post.</p>
 <div id="ozonio-meio-ambiente-e-saude" class="section level3">
 <h3>Ozônio, meio ambiente e saúde</h3>
 <ul>
@@ -611,7 +654,7 @@ df_DPII %&gt;%
                 <i class="fa fa-folder"></i>
                 
                 
-                <li><a class="article-category-link" href="/categories/an%C3%A1lises">Análises</a></li>
+                <li><a class="article-category-link" href="/categories/oz%C3%B4nio">Ozônio</a></li>
                 
             
         
@@ -625,7 +668,7 @@ df_DPII %&gt;%
                 <i class="fa fa-tags"></i>
                 
                 
-                <li><a class="article-category-link" href="/tags/o3">O3</a></li>
+                <li><a class="article-category-link" href="/tags/eda">EDA</a></li>
                 
                 
                 <li><a class="article-category-link" href="/tags/s%C3%A3o-paulo">São Paulo</a></li>
@@ -670,6 +713,9 @@ df_DPII %&gt;%
 <ul class="actions pagination">
     
 
+    
+        <li><a href="/blog/sazonalidade-do-ozonio/"
+                class="button big next">A sazonalidade do ozônio</a></li>
     
 </ul>
 
@@ -801,11 +847,49 @@ df_DPII %&gt;%
           <article class="mini-post">
             <header>
               <h3>
+                <a href="/blog/sazonalidade-do-ozonio/">A sazonalidade do ozônio</a>
+              </h3>
+              
+              <time class="published" datetime='2018-03-06'>
+                06.03.2018
+              </time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/sazonalidade-do-ozonio/" class="image featured">
+            <img src="/img/2018/sazonalidade-do-ozonio.jpeg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
                 <a href="/blog/o-ciclo-do-ozonio/">O ciclo do ozônio</a>
               </h3>
               
               <time class="published" datetime='2018-02-26'>
-                February 26, 2018
+                26.02.2018
               </time>
             </header>
             
@@ -850,7 +934,7 @@ df_DPII %&gt;%
     <section id="categories">
       <header>
         <h3>
-          <a href="/categories/">Categories</a>
+          <a href="/categories/">Categorias</a>
         </h3>
       </header>
         
@@ -862,8 +946,8 @@ df_DPII %&gt;%
           <article>
             <header>
               
-                <a href="/categories/an%C3%A1lises/">Análises</a>
-                <span style="float:right;">1</span>
+                <a href="/categories/oz%C3%B4nio/">Ozônio</a>
+                <span style="float:right;">2</span>
               
             </header>
           </article>

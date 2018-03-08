@@ -87,7 +87,7 @@
                                 {{ $.Scratch.Set "dateType" .Date }}
                                 <time class="published" datetime=
                                     '{{ ($.Scratch.Get "dateType").Format "2006-01-02" }}'>
-                                    {{ ($.Scratch.Get "dateType").Format "January 2, 2006" }}</time>
+                                    {{ ($.Scratch.Get "dateType").Format "02.01.2006" }}</time>
                             </header>
                             {{ .Render "featured" }}
                         </article>

@@ -7,9 +7,9 @@ type: "post"
 featured: "o-ciclo-do-ozonio.jpeg"
 featuredalt: "Poluição do ar em São Paulo"
 featuredpath: "img/2018"
-categories: ["Análises"]
+categories: ["Ozônio"]
 tags:
-  - O3
+  - EDA
   - São Paulo
   - Brasil
 ---
@@ -41,7 +41,7 @@ O processo pode ser resumido pelo fluxo a seguir:
 knitr::include_graphics("/img/blog/o-ciclo-do-ozonio/fluxograma_ozonio_1.png")
 ```
 
-Note que, ignornado outros fatores, esse processo é cíclico, isto é, começa com a fotólise do NO$_2$, que também é o produto final. Se não fosse a interação de outros processos químicos, essa estacionariedade deveria impedir que a concentração de ozônio subisse muito ao longo do dia.
+Note que, ignorando outros fatores, esse processo é cíclico, isto é, começa com a fotólise do NO$_2$, que também é o produto final. Se não fosse a interação de outros processos químicos, essa estacionariedade deveria impedir que a concentração de ozônio subisse muito ao longo do dia.
 
 Um dos processos que interagem com o ciclo do ozônio descreve a geração de NO$_2$ a partir dos compostos orgânicos voláteis (VOC). 
 
@@ -53,7 +53,7 @@ Observe que esse processo consome COV e NO e gera NO$_2$. É razoável supor que
 
 1. O NO que reagiria com o ozônio passa também a reagir com peroxi radicais (RO$_2$°), gerando mais NO$_2$.
 
-2. Sob a luz solar, mais NO$_2$ é fotolisado, gerando mais radicais Oº e, consequetentemente, mais ozônio.
+2. Sob a luz solar, mais NO$_2$ sofre fotólise, gerando mais radicais Oº e, consequentemente, mais ozônio.
 
 3. Esse ozônio extra tem menos NO para reagir, devido ao item 1.
 
@@ -63,7 +63,7 @@ Para estudar essa dinâmica, vamos analisar a relação entre os óxidos de nitr
 
 # Ciclo do ozônio em São Paulo
 
-Vamos utilizar os dados disponibilidados pelos autores do artigo *Reduction in local ozone levels in urban São Paulo due to a shift from ethanol to gasoline use*, que podem ser acessados pelo link bit.do/salvo_geiger_data.
+Vamos utilizar os dados disponibilizados pelos autores do artigo *Reduction in local ozone levels in urban São Paulo due to a shift from ethanol to gasoline use*, que podem ser acessados pelo link [https://goo.gl/9tNzvj](https://goo.gl/9tNzvj).
 
 ### Importanto e manipulando os dados
 
@@ -134,7 +134,7 @@ df_DPII %>%
   theme_bw()
 ```
 
-Os pontos sem informação se referem às horas em que os equipamentos de medidção são desligados para manutenção.
+Os pontos sem informação se referem às horas em que os equipamentos de medição são desligados para manutenção.
 
 Observamos que o aumento da concentração de ozônio coincide com a queda da concentração de NO e NO$_2$. O nível de NO decai drasticamente, indicando que esse poluente pode estar sendo consumido nos dois processos, gerando O$_3$ e NO$_2$. Observe que a queda da concentração de NO$_2$ é muito menor do que a do NO. Isso sugere que a suposição sobre a interação entre os dois processos é razoável.
 
@@ -166,9 +166,15 @@ O padrão é muito parecido em cada uma das estações. A maior diferença fica 
 
 Nos próximos posts, vamos estudar com mais detalhes a série do ozônio, vendo seu comportamento ao longo da semana e do ano. Além disso, vamos relacioná-la com variáveis climáticas, de trânsito e de uso de combustível.
 
-# Referências
+# Conclusões
 
-Abaixo as referências utilizadas na produção deste post.
+- O processo gerador do ozônio troposférico é complexo e envolve a interação de pelo menos dois processos químicos.
+
+- Os dados de poluição do ar da cidade de São Paulo, de 2008 a 2011, corroboram o conhecimento teórico sobre a formação do ozônio.
+
+- Os picos de ozônio em cada dia ocorrem entre 12h e 17h. A magnitude da concentração depende dos níveis de NO e NO$_2$ medidos pela manhã.
+
+# Referências
 
 ### Ozônio, meio ambiente e saúde
 

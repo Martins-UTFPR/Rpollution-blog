@@ -1,0 +1,25 @@
+---
+title: Ozônio, clima e trânsito
+author: William Amorim
+date: '2018-03-06'
+slug: ozonio-clima-transito
+type: "post"
+featured: "ozonio-clima-transito.jpeg"
+featuredalt: "Poluição do ar"
+featuredpath: "img/2018"
+categories: ["Análises"]
+tags:
+  - O3
+  - São Paulo
+  - Brasil
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE,
+                      cache = TRUE, collapse = TRUE)
+```
+
+Seguindo a análise do [último post](https://www.rpollution.com/blog/o-ciclo-do-ozonio/), vamos continuar estudando a série de concentração do ozônio na cidade de São Paulo, agora associando os dados com variáveis meteorológicas e de tráfego. Vamos utilizar dados de 2008 a 2011.
+
+# Análise exploratória
+

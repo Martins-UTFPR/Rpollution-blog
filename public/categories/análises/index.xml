@@ -6,19 +6,19 @@
     <description>Recent content in Análises on R Pollution</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Mon, 26 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/an%C3%A1lises/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>O ciclo do ozônio</title>
-      <link>/blog/o-ciclo-do-ozonio/</link>
-      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
+      <title>A sazonalidade do ozônio</title>
+      <link>/blog/sazonalidade-do-ozonio/</link>
+      <pubDate>Tue, 06 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>/blog/o-ciclo-do-ozonio/</guid>
-      <description>Aprendemos na escola ou ouvimos nos noticiários a importância da camada de ozônio, sobre como ela filtra grande parte da radiação solar nociva à vida na Terra. Essa camada corresponde a uma região entre aproximadamente 10 e 50 km da superfície, na estratosfera. Lá, o ozônio empenha o papel de herói.
-Mas esse mesmo gás pode atuar como vilão. Quando o ozônio aparece mais próximo de nós, no ar que respiramos, ele causa diversos prejuízos ambientais e à saúde humana.</description>
+      <guid>/blog/sazonalidade-do-ozonio/</guid>
+      <description>Seguindo a análise do último post, vamos continuar estudando a sazonalidade da série de concentração do ozônio na cidade de São Paulo. Vamos utilizar dados de 2008 a 2013.
+Os dados Os dados originais utilizados neste post foram disponibilizados pelos autores do artigo Reduced ultrafine particle levels in São Paulo’s atmosphere during shifts from gasoline to ethanol use, que podem ser acessados pelo link https://goo.gl/9tNzvj. Utilizaremos aqui uma versão enxuta dessa base, disponível em aqui.</description>
     </item>
     
   </channel>
