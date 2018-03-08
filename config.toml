@@ -5,7 +5,7 @@ theme = "hugo-future-imperfect"
 preserveTaxonomyNames = true
 paginate = 3
 disqusShortname = "rpollution"
-googleAnalytics = ""
+googleAnalytics = "UA-115370597-1"
 pluralizeListTitles = false
 
 [params]
