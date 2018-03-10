@@ -1,0 +1,184 @@
+---
+title: Coletando dados da CETESB
+author: William Amorim
+date: '2018-03-06'
+slug: scraper-cetesb
+type: "post"
+featured: "scraper-cetesb.jpeg"
+featuredalt: "Dados"
+featuredpath: "img/2018"
+categories: ["Coleta de dados"]
+tags:
+  - CETESB
+  - São Paulo
+  - Brasil
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE,
+                      cache = TRUE, collapse = TRUE)
+```
+
+
+Conversando com um colega irlandês, ele disse que os melhores web scrapers devem ser brasileiros. 
+
+Web scraping é a *arte* de se extrair informações da internet de forma ágil, consistente e automatizada. Na maioria dos casos, a coleta é de dados públicos, que, por princípio, já deveriam ser acessíveis e disponibilizados prontos para análise. Principalmente no Brasil, por motivação política, despreparo ou mero desinteresse, a coleta de sistemática de dados públicos é uma tarefa quase sempre inexequível, geralmente pela existência de captchas, sistemas ineficientes ou outras barreiras e limitações.
+
+O site da CETESB disponibiliza dados de poluição do ar por meio do sistema [Qualar](http://qualar.cetesb.sp.gov.br/qualar/home.do). Para acessar os dados, você precisa fazer um cadastro, criando um login, e então enviar um pequeno formulário com os dados que deseja exportar.
+
+Os dados solicitados são exibidos então numa nova janela, com a opção de exportá-los como csv. Esse método de exportar os dados gera duas dificuldades:
+
+1. Se você precisa de dados de várias estações e de vários poluente, você precisará repetir esse processo para cada combinação de estação/poluente. Pegar todos os dados de ozônio da Grande São Paulo, por exemplo, exigiria repetir a solicitação 23 vezes.
+
+2. Como a planilha é impressa na tela, se você precisar de uma série muito longa, você vai demorar bastante para carregar a página e seu computador corre um grande risco de travar no meio do caminho por falta de memória RAM.
+
+Para contornar este problema, veremos neste post como construir um scraper para coletar dados do Qualar usando o R. Em seguida, vamos transformar o código numa função para replicar o processo para diversos parâmetros rodando apenas algumas linhas de códigos.
+
+subordinado à estrutura do site
+
+# Construindo o scraper
+
+Construir um scraper demanda conhecimentos específicos, principalmente sobre desenvolvimento Web. Não entrarei em detalhes sobre tópicos dessa natureza aqui neste post, mas deixarei a seguir uma lista de referências para quem quisar estudar e entender o assunto mais profundamente.
+
+-
+
+
+-
+
+- 
+
+subordinado à estrutura do site
+### Login
+
+Primeiro, como o sistema Qualar existe login (?), precisamos capturar o cookie do site para manter a sessão com o login.  
+
+```{r}
+library(magrittr)
+library(httr)
+
+res <- GET("http://qualar.cetesb.sp.gov.br/qualar/home.do")
+my_cookie <- cookies(res)$value %>% purrr::set_names(cookies(res)$name)
+
+# url <- "http://qualar.cetesb.sp.gov.br/qualar/home.do"
+# session <- rvest::html_session(url)
+# 
+# form <- rvest::html_form(xml2::read_html(url))[[1]]
+# 
+# filled_form <- rvest::set_values(form,
+#                                  cetesb_login = "thewilliam89@gmail.com",
+#                                  cetesb_password  = "wouldy0ukindly?")
+# 
+# login <- rvest::submit_form(session, filled_form)
+```
+
+Agora, precisamos enviar uma requisição POST para fazer o login e acessar o sistema.
+
+```{r}
+url <- "http://qualar.cetesb.sp.gov.br/qualar/autenticador"
+
+res <- POST(
+  url, 
+  body = list(
+    cetesb_login = "thewilliam89@gmail.com",
+    cetesb_password = "wouldy0ukindly?",
+    enviar = "OK"
+  ), 
+  encode = "form",
+  set_cookies(my_cookie)
+)
+```
+
+### Requisitando os dados
+
+Então, fazemos uma requisão POST para acessar os dados. Nessa requisição, precisamos definir quais dados queremos acessar.
+
+```{r}
+url <- "http://qualar.cetesb.sp.gov.br/qualar/exportaDados.do"
+
+res <- POST(
+  url,
+  query = list(method = "pesquisar"),
+  body = list(
+    irede = "A",
+    dataInicialStr  = "04/03/2018",
+    dataFinalStr = "05/03/2018",
+    cDadosInvalidos = "on",
+    iTipoDado = "P",
+    estacaoVO.nestcaMonto = "Parque D. Pedro II",
+    parametroVO.nparmt = "63"
+  ),
+  encode = "form",
+  set_cookies(my_cookie),
+  write_disk("teste.html", overwrite = TRUE)
+)
+```
+
+### Parseando os dados
+
+Agora precisamos ler o resultado da nossa requisição e transformar num data.frame.
+
+```{r}
+content(res) %>% 
+  rvest::html_table(fill = TRUE) %>%
+  extract2(2)
+```
+
+
+# Transformando o scraper numa função
+
+Agora precisamos pegar a tabela dentro do arquivo html.
+
+```{r}
+scraper_CETESB <- function(station, parameter, start, end, type = "P", login, password, invalidData = "on", network = "A") {
+  
+  
+  res <- GET("http://qualar.cetesb.sp.gov.br/qualar/home.do")
+  my_cookie <- cookies(res)$value %>% purrr::set_names(cookies(res)$name)
+  
+  url <- "http://qualar.cetesb.sp.gov.br/qualar/autenticador"
+  
+  res <- POST(
+    url, 
+    body = list(
+      cetesb_login = login,
+      cetesb_password = password,
+      enviar = "OK"
+    ), 
+    encode = "form",
+    set_cookies(my_cookie)
+  )
+  
+  url <- "http://qualar.cetesb.sp.gov.br/qualar/exportaDados.do"
+  
+  res <- POST(
+    url,
+    query = list(method = "pesquisar"),
+    body = list(
+      irede = network,
+      dataInicialStr  = start,
+      dataFinalStr = end,
+      cDadosInvalidos = invalidData,
+      iTipoDado = type,
+      estacaoVO.nestcaMonto = station,
+      parametroVO.nparmt = parameter
+    ),
+    encode = "form",
+    set_cookies(my_cookie),
+    write_disk("teste.html", overwrite = TRUE)
+  )
+  
+  content(res) %>% 
+  rvest::html_table(fill = TRUE) %>%
+  extract2(2)
+  
+}
+
+```
+
+# Agradecimentos
+
+Agradecimento especial ao execelente [Daniel Falbel](https://github.com/dfalbel) pela ajuda com web scraping.
+
+
+
+
