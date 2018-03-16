@@ -1,0 +1,2945 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<HEAD>
+<TITLE>Serviços - CETESB</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META HTTP-EQUIV="Pragma" content="no-cache">
+<META HTTP-EQUIV="Cache-control" content="no-cache, no-store, must-revalidate">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+
+<link rel="stylesheet" href="jsp/css/style.css">
+<script type="text/javascript" src="jsp/js/functions.js"></script>
+
+
+<script type="text/javascript" src="jsp/js/array_login.js"></script>
+
+<script type="text/javascript" src="jsp/js/funcoes.js"></script>
+
+<script language="javascript" type="text/javascript">
+
+
+
+function exportar() {
+	document.exportaDadosForm.action="/qualar/exportaDados.do?method=exportar";
+	document.exportaDadosForm.submit();
+}
+
+</script>
+</HEAD>
+
+
+
+
+<script language="javascript">
+
+function init(){
+	var mensagem = "";
+	var msgPopup = 'null';
+	var msgPopupErro = 'null';
+
+	if ((msgPopup != null) && (msgPopup != "null") && (msgPopup != "")) {
+		mensagem = msgPopup;
+		
+		if ((msgPopupErro != null) && (msgPopupErro != "null") && (msgPopupErro != "")) {
+			mensagem += '\n\nErro:\n' + msgPopupErro;
+		}
+
+		alert(mensagem);
+	} 
+}
+
+</script>
+
+
+<body onLoad="init();" style="text-align:center; margin: 0px;"> 
+
+
+<form name="exportaDadosForm" method="post" action="/qualar/exportaDados.do?method=pesquisar">
+
+</br>  
+<table width="80%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="12%" rowspan="3" align="middle" valign="center">&nbsp;<img src="jsp/imagens/LogoCetesb.gif" width="50" height="63"></td>
+    <td width="88%" height="32" align="center" valign="center" class="font06">&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="center" valign="center" class="font02"><span class="font06">Sistema de Informa&ccedil;&atilde;o de Qualidade do Ar</span></td>
+  </tr>
+  <tr>
+    <td align="center" valign="center" class="font02">&nbsp;</td>
+  </tr>
+</table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" id="tbl" style="width:150%;">
+	<tr>
+	  	<th height="79" colspan="22" class="font04">Exportar Dados            </th>
+	</tr>
+	<tr>
+		<th width="1%"></th>
+		<th id="tit_tab" width="9%">Tipo de Rede </th>
+		<th id="tit_tab" width="9%">Tipo de Monitoramento </th>
+		<th id="tit_tab" width="7%">Tipo </th>
+		<th nowrap id="tit_tab" width="7%">Data</th>
+		<th width="4%" nowrap id="tit_tab">Hora</th>
+		<th width="5%" id="tit_tab">C&oacute;digo Esta&ccedil;&atilde;o </th>
+		<th width="8%" id="tit_tab"><p>Nome Esta&ccedil;&atilde;o </p></th>
+		<th width="7%" id="tit_tab">Nome Par&acirc;metro </th>
+		<th width="5%" id="tit_tab">Unidade de Medida </th>
+		<th width="5%" id="tit_tab">Média Horária </th>
+		<th width="3%" id="tit_tab">Média Móvel </th>
+		<th nowrap id="tit_tab" width="5%">V&aacute;lido</th>
+		<th  id="tit_tab" width="7%">Dt. Amostragem</th>
+		<th id="tit_tab" width="6%">Dt. Instala&ccedil;&atilde;o</th>
+		<th id="tit_tab" width="6%">Dt. Retirada </th>
+		<th id="tit_tab" width="7%">Concentra&ccedil;&atilde;o</th>
+		<th id="tit_tab" width="3%">Taxa</th>
+		<th width="1%"></th>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			01:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			20
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			02:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			19
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			03:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			18
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			12
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			11
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			06:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			12
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			07:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			7
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			08:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			11
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			09:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			30
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			10:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			50
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			11:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			79
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			12:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			116
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			13:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			144
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			14:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			127
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			15:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			153
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			16:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			95
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			17:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			65
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			18:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			52
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			19:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			46
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			20:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			38
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			21:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			32
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			22:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			30
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			23:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			18
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			24:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			11
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			01:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			12
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			02:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			6
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			03:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			3
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			04:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			2
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			2
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			06:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			3
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			07:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			3
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			08:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			6
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			09:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			18
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			10:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			30
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			11:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			37
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			12:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			67
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			13:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			91
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			14:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			99
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			15:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			99
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			16:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			62
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			17:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			39
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			18:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			22
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			19:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			17
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			20:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			7
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			21:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			3
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			22:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			2
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			23:00&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			72
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			2
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td id="borda_azul" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+	<tr>
+		<td>
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Automático
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			CETESB
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Dados Primários
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			05/03/2018
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			24:00&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			72
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Parque D.Pedro II
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			O3 (Ozônio)
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			µg/m3&nbsp;
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			2
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			Sim
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td id="borda_branco" style="text-align: center">
+			-
+		</td>
+		<td>
+		</td>
+	</tr>
+	
+	
+
+</table>
+
+<table width="150%" border="0" align="center" cellpadding="0" cellspacing="1">
+  <tr>
+    <td align="right"> &nbsp;
+        <input type="button" name="btnExportar" value="Exportar Dados" class="estilo" onClick="exportar();">
+  &nbsp; </td>
+  </tr>
+</table>
+
+<BR>
+</form>
+</BODY>
+</html>

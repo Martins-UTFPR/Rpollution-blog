@@ -6,10 +6,21 @@
     <description>Recent content on R Pollution</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Tue, 06 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Coletando dados da CETESB</title>
+      <link>/blog/scraper-cetesb/</link>
+      <pubDate>Fri, 16 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/scraper-cetesb/</guid>
+      <description>Conversando com um colega irlandês, ele me disse que os melhores web scrapers devem ser brasileiros. Isso não é uma coisa legal.
+Web scraping (ou raspagem web) é a arte de se coletar dados da internet. A necessidade de se raspar uma página web surge quando baixar manualmente as informações que queremos analisar se torna uma tarefa chata, demorada ou até mesmo inexequível.
+Por princípio, dados públicos deveriam ser sempre acessíveis e disponibilizados prontos para análise.</description>
+    </item>
     
     <item>
       <title>A sazonalidade do ozônio</title>
@@ -29,6 +40,15 @@ Os dados Os dados originais utilizados neste post foram disponibilizados pelos a
       <guid>/blog/o-ciclo-do-ozonio/</guid>
       <description>Aprendemos na escola ou ouvimos nos noticiários a importância da camada de ozônio, sobre como ela filtra grande parte da radiação solar nociva à vida na Terra. Essa camada corresponde a uma região entre aproximadamente 10 e 50 km da superfície, na estratosfera. Lá, o ozônio empenha o papel de herói.
 Mas esse mesmo gás pode atuar como vilão. Quando o ozônio aparece mais próximo de nós, no ar que respiramos, ele causa diversos prejuízos ambientais e à saúde humana.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/blog/teste/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/teste/</guid>
+      <description>Servi�os - CETESB/*** Exporta dados para txt*/function exportar() {document.exportaDadosForm.action=&#34;/qualar/exportaDados.do?method=exportar&#34;;document.exportaDadosForm.submit();}function init(){var mensagem = &#34;&#34;;var msgPopup = &#39;null&#39;;var msgPopupErro = &#39;null&#39;;if ((msgPopup != null) &amp;&amp; (msgPopup != &#34;null&#34;) &amp;&amp; (msgPopup != &#34;&#34;)) {mensagem = msgPopup;if ((msgPopupErro != null) &amp;&amp; (msgPopupErro != &#34;null&#34;) &amp;&amp; (msgPopupErro != &#34;&#34;)) {mensagem += &#39;\n\nErro:\n&#39; + msgPopupErro;}alert(mensagem);} } &amp;nbsp;&amp;nbsp;Sistema de Informa&amp;ccedil;&amp;atilde;o de Qualidade do Ar&amp;nbsp;Exportar Dados Tipo de Rede Tipo de Monitoramento Tipo DataHoraC&amp;oacute;digo Esta&amp;ccedil;&amp;atilde;o Nome Esta&amp;ccedil;&amp;atilde;o Nome Par&amp;acirc;metro Unidade de Medida M�dia Hor�ria M�dia M�vel V&amp;aacute;lidoDt.</description>
     </item>
     
   </channel>
