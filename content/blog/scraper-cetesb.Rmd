@@ -26,11 +26,11 @@ Web scraping (ou raspagem web) é a *arte* de se coletar dados da internet. A ne
 
 Por princípio, dados públicos deveriam ser sempre acessíveis e disponibilizados prontos para análise. No entanto, por motivação política, desconhecimento de engenharia e análise de dados ou mera falta de interesse, é muito comum termos dados públicos escondidos atrás captchas ou sistemas ineficientes. E os órgãos públicos brasileiros são especialistas nisso.
 
-O objetivo deste post é discutir ideias gerais sobre web scraping e usá-las para constuir um scraper para coletar dados de poluição do ar da CETESB.
+O objetivo deste post é discutir ideias gerais sobre web scraping e usá-las para construir um scraper para coletar dados de poluição do ar da CETESB.
 
 # Qualar
 
-O [Qualar](http://qualar.cetesb.sp.gov.br/qualar/home.do) é o sistema de informações de qualidade do ar da CETESB. Por meio dele, podemos acessar os dados de todas as estações de monitoramento do estado de Sâo Pauo. O sistema exige a criação de um login e então o envio de um pequeno formulário com quais informações você gostaria de visualizar.
+O [Qualar](http://qualar.cetesb.sp.gov.br/qualar/home.do) é o sistema de informações de qualidade do ar da CETESB. Por meio dele, podemos acessar os dados de todas as estações de monitoramento do estado de São Paulo. O sistema exige a criação de um login e então o envio de um pequeno formulário com quais informações você gostaria de visualizar.
 
 O Qualar funciona muito bem para pequenas consultas, mas na extração de uma massa grande de dados existem duas dificuldades:
 
@@ -49,7 +49,7 @@ Para construir o scraper, vamos seguir os passos definidos [neste post](http://c
 1. Definir a página que você quer raspar.
 2. Identificar exatamente as requisições que produzem o que você quer.
 3. Construir um programa que imite as requisições que você faria manualmente.
-4. Repitir o passo (3) quantas vezes quiser.
+4. Repetir o passo (3) quantas vezes quiser.
 
 Um fluxo mais estruturado do web scraping é discutido [neste post](http://curso-r.com/blog/2018/02/18/2018-02-18-fluxo-scraping/) do [Caio Lente](https://github.com/ctlente/).
 
@@ -81,7 +81,7 @@ knitr::include_graphics("/img/blog/scraper-cetesb/qualar_dados.png")
 
 ## PASSO 2
 
-Para descobrir qual requisição é feita em cada momento, podemos utilizar o "Inspect element" do navegador. Eu estou usando o Firefox neste post, mas o procedimento é semelhante em outros navegarores. 
+Para descobrir qual requisição é feita em cada momento, podemos utilizar o "Inspect element" do navegador. Eu estou usando o Firefox neste post, mas o procedimento é semelhante em outros navegadores. 
 
 O login é uma submissão de formulário. Inspecionando o html da página, podemos ver que os itens que o formulário precisa enviar são o "cetesb_login" e o "cetesb_passoword".
 
@@ -139,7 +139,7 @@ res <- POST(
 )
 ```
 
-Então fazemos uma requisão POST para acessar os dados. Essa requisição imita a pesqusia dentro da página "Exportar dados". Nela, precisamos definir quais dados queremos acessar.
+Então fazemos uma requisição POST para acessar os dados. Essa requisição imita a pesquisa dentro da página "Exportar dados". Nela, precisamos definir quais dados queremos acessar.
 
 ```{r, eval = FALSE}
 url <- "http://qualar.cetesb.sp.gov.br/qualar/exportaDados.do"
@@ -171,7 +171,7 @@ readr::read_csv("data/station_ids.csv")
 readr::read_csv("data/param_ids.csv")
 ```
 
-Para finaliar, precisamos ler o resultado da nossa requisição e transformar a tabela existe no html em um data frame.
+Para finalizar, precisamos ler o resultado da nossa requisição e transformar a tabela existe no html em um data frame.
 
 ```{r, eval = FALSE}
 content(res) %>% 
@@ -256,7 +256,7 @@ Iterando essa função fica fácil repetir o processo para diversas estações e
 
 # Agradecimentos
 
-Agradecimento especial ao execelente [Daniel Falbel](https://github.com/dfalbel) pela ajuda com o código e com web scraping.
+Agradecimento especial ao excelente [Daniel Falbel](https://github.com/dfalbel) pela ajuda com o código e com web scraping.
 
 # Referências
 

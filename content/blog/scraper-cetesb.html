@@ -19,10 +19,10 @@ tags:
 <p>Conversando com um colega irlandês, ele me disse que <strong>os melhores web scrapers devem ser brasileiros</strong>. Isso não é uma coisa legal.</p>
 <p>Web scraping (ou raspagem web) é a <em>arte</em> de se coletar dados da internet. A necessidade de se raspar uma página web surge quando baixar manualmente as informações que queremos analisar se torna uma tarefa chata, demorada ou até mesmo inexequível.</p>
 <p>Por princípio, dados públicos deveriam ser sempre acessíveis e disponibilizados prontos para análise. No entanto, por motivação política, desconhecimento de engenharia e análise de dados ou mera falta de interesse, é muito comum termos dados públicos escondidos atrás captchas ou sistemas ineficientes. E os órgãos públicos brasileiros são especialistas nisso.</p>
-<p>O objetivo deste post é discutir ideias gerais sobre web scraping e usá-las para constuir um scraper para coletar dados de poluição do ar da CETESB.</p>
+<p>O objetivo deste post é discutir ideias gerais sobre web scraping e usá-las para construir um scraper para coletar dados de poluição do ar da CETESB.</p>
 <div id="qualar" class="section level1">
 <h1>Qualar</h1>
-<p>O <a href="http://qualar.cetesb.sp.gov.br/qualar/home.do">Qualar</a> é o sistema de informações de qualidade do ar da CETESB. Por meio dele, podemos acessar os dados de todas as estações de monitoramento do estado de Sâo Pauo. O sistema exige a criação de um login e então o envio de um pequeno formulário com quais informações você gostaria de visualizar.</p>
+<p>O <a href="http://qualar.cetesb.sp.gov.br/qualar/home.do">Qualar</a> é o sistema de informações de qualidade do ar da CETESB. Por meio dele, podemos acessar os dados de todas as estações de monitoramento do estado de São Paulo. O sistema exige a criação de um login e então o envio de um pequeno formulário com quais informações você gostaria de visualizar.</p>
 <p>O Qualar funciona muito bem para pequenas consultas, mas na extração de uma massa grande de dados existem duas dificuldades:</p>
 <ol style="list-style-type: decimal">
 <li><p>Se você precisa de dados de várias estações e de vários poluente, você precisará repetir esse processo para cada combinação de estação/poluente. Pegar todos os dados de ozônio da Grande São Paulo, por exemplo, exigiria repetir a solicitação 23 vezes.</p></li>
@@ -38,7 +38,7 @@ tags:
 <li>Definir a página que você quer raspar.</li>
 <li>Identificar exatamente as requisições que produzem o que você quer.</li>
 <li>Construir um programa que imite as requisições que você faria manualmente.</li>
-<li>Repitir o passo (3) quantas vezes quiser.</li>
+<li>Repetir o passo (3) quantas vezes quiser.</li>
 </ol>
 <p>Um fluxo mais estruturado do web scraping é discutido <a href="http://curso-r.com/blog/2018/02/18/2018-02-18-fluxo-scraping/">neste post</a> do <a href="https://github.com/ctlente/">Caio Lente</a>.</p>
 <div id="passo-1" class="section level2">
@@ -54,7 +54,7 @@ tags:
 </div>
 <div id="passo-2" class="section level2">
 <h2>PASSO 2</h2>
-<p>Para descobrir qual requisição é feita em cada momento, podemos utilizar o “Inspect element” do navegador. Eu estou usando o Firefox neste post, mas o procedimento é semelhante em outros navegarores.</p>
+<p>Para descobrir qual requisição é feita em cada momento, podemos utilizar o “Inspect element” do navegador. Eu estou usando o Firefox neste post, mas o procedimento é semelhante em outros navegadores.</p>
 <p>O login é uma submissão de formulário. Inspecionando o html da página, podemos ver que os itens que o formulário precisa enviar são o “cetesb_login” e o “cetesb_passoword”.</p>
 <p><img src="/img/blog/scraper-cetesb/inspect-form-login.png" style="display: block; margin: auto;" /></p>
 <p>Para descobrir que tipo de requisição o login faz, basta abrir o Inspect element antes de fazer o login, logar no site e olhar a aba “Network”. A requisição que queremos é a “autenticador”. Ela faz uma requisição POST para a url “<a href="http://qualar.cetesb.sp.gov.br/qualar/autenticador" class="uri">http://qualar.cetesb.sp.gov.br/qualar/autenticador</a>”.</p>
@@ -90,7 +90,7 @@ res &lt;- POST(
   encode = &quot;form&quot;,
   set_cookies(my_cookie)
 )</code></pre>
-<p>Então fazemos uma requisão POST para acessar os dados. Essa requisição imita a pesqusia dentro da página “Exportar dados”. Nela, precisamos definir quais dados queremos acessar.</p>
+<p>Então fazemos uma requisição POST para acessar os dados. Essa requisição imita a pesquisa dentro da página “Exportar dados”. Nela, precisamos definir quais dados queremos acessar.</p>
 <pre class="r"><code>url &lt;- &quot;http://qualar.cetesb.sp.gov.br/qualar/exportaDados.do&quot;
 
 res &lt;- POST(
@@ -148,7 +148,7 @@ res &lt;- POST(
 ## 18    62 TOL          Tolueno                            
 ## 19    28 UR           Umidade Relativa do Ar             
 ## 20    24 VV           Velocidade do Vento</code></pre>
-<p>Para finaliar, precisamos ler o resultado da nossa requisição e transformar a tabela existe no html em um data frame.</p>
+<p>Para finalizar, precisamos ler o resultado da nossa requisição e transformar a tabela existe no html em um data frame.</p>
 <pre class="r"><code>content(res) %&gt;% 
   rvest::html_table(fill = TRUE) %&gt;%
   extract2(2)</code></pre>
@@ -222,7 +222,7 @@ res &lt;- POST(
 </div>
 <div id="agradecimentos" class="section level1">
 <h1>Agradecimentos</h1>
-<p>Agradecimento especial ao execelente <a href="https://github.com/dfalbel">Daniel Falbel</a> pela ajuda com o código e com web scraping.</p>
+<p>Agradecimento especial ao excelente <a href="https://github.com/dfalbel">Daniel Falbel</a> pela ajuda com o código e com web scraping.</p>
 </div>
 <div id="referencias" class="section level1">
 <h1>Referências</h1>
