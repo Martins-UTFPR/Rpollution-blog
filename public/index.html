@@ -355,7 +355,7 @@ ga('send', 'pageview');
             16.03.2018</time>
         <span class="author">William Amorim</span>
         
-            <p style = "font-size: x-small">8 minutos de leitura</p>
+            <p style = "font-size: x-small">9 minutos de leitura</p>
         
         
     </div>
@@ -657,6 +657,68 @@ res &lt;- POST(
                password = &quot;sua_senha&quot;, 
                invalidData = &quot;on&quot;, 
                network = &quot;A&quot;)</code></pre>
+<p>Agora só precisamos tirar colunas vazias e corrigir o nome das colunas.</p>
+<pre class="r"><code>dados_cetesb &lt;- dados_cetesb %&gt;%
+  janitor::remove_empty_cols()
+  
+col_names &lt;- as.character(dados_cetesb[1,])
+
+dados_cetesb &lt;- dados_cetesb %&gt;% 
+  magrittr::set_colnames(col_names) %&gt;% 
+  dplyr::slice(-1)</code></pre>
+<p>Eis um resumo dos dados que queríamos:</p>
+<pre class="r"><code>dados_cetesb %&gt;% 
+  dplyr::select(`Nome Estação`:`Média Horária`) %&gt;% 
+  head %&gt;% 
+  knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Nome Estação</th>
+<th align="center">Nome Parâmetro</th>
+<th align="center">Unidade de Medida</th>
+<th align="center">Média Horária</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Parque D.Pedro II</td>
+<td align="center">O3 (Ozônio)</td>
+<td align="center">µg/m3</td>
+<td align="center">20</td>
+</tr>
+<tr class="even">
+<td align="center">Parque D.Pedro II</td>
+<td align="center">O3 (Ozônio)</td>
+<td align="center">µg/m3</td>
+<td align="center">19</td>
+</tr>
+<tr class="odd">
+<td align="center">Parque D.Pedro II</td>
+<td align="center">O3 (Ozônio)</td>
+<td align="center">µg/m3</td>
+<td align="center">18</td>
+</tr>
+<tr class="even">
+<td align="center">Parque D.Pedro II</td>
+<td align="center">O3 (Ozônio)</td>
+<td align="center">µg/m3</td>
+<td align="center">12</td>
+</tr>
+<tr class="odd">
+<td align="center">Parque D.Pedro II</td>
+<td align="center">O3 (Ozônio)</td>
+<td align="center">µg/m3</td>
+<td align="center">11</td>
+</tr>
+<tr class="even">
+<td align="center">Parque D.Pedro II</td>
+<td align="center">O3 (Ozônio)</td>
+<td align="center">µg/m3</td>
+<td align="center">12</td>
+</tr>
+</tbody>
+</table>
 <p>Iterando essa função fica fácil repetir o processo para diversas estações e parâmetros.</p>
 </div>
 </div>

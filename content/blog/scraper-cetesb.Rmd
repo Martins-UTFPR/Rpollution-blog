@@ -242,6 +242,37 @@ scraper_CETESB(station = "72",
                network = "A")
 ```
 
+Agora só precisamos tirar colunas vazias e corrigir o nome das colunas.
+
+```{r, eval=FALSE}
+dados_cetesb <- dados_cetesb %>%
+  janitor::remove_empty_cols()
+  
+col_names <- as.character(dados_cetesb[1,])
+
+dados_cetesb <- dados_cetesb %>% 
+  magrittr::set_colnames(col_names) %>% 
+  dplyr::slice(-1)
+```
+
+Eis um resumo dos dados que queríamos:
+
+```{r, eval = FALSE}
+dados_cetesb %>% 
+  dplyr::select(`Nome Estação`:`Média Horária`) %>% 
+  head %>% 
+  knitr::kable()
+```
+
+```{r, echo = FALSE, eval=TRUE}
+library(magrittr)
+
+readr::read_rds(path = "data/dados_cetesb.rds") %>% 
+  dplyr::select(`Nome Estação`:`Média Horária`) %>% 
+  head %>% 
+  knitr::kable(align = 'c')
+```
+
 Iterando essa função fica fácil repetir o processo para diversas estações e parâmetros.
 
 # Observações
