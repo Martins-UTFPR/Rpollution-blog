@@ -19,7 +19,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
                       cache = TRUE, collapse = TRUE)
 ```
 
-As condições climáticas são os principais fatores de influência na formação de ozônio troposférico. Como vimos [neste post](), a luz solar, por exemplo, tem papel fundamental. É natural supor que a chuva e o vento também operem a sua influência.
+As condições climáticas são os principais fatores de influência na formação de ozônio troposférico. Como vimos [neste post](https://www.rpollution.com/blog/o-ciclo-do-ozonio/), a luz solar, por exemplo, tem papel fundamental. É natural supor que a chuva e o vento também operem a sua influência.
 
 Neste post, continuaremos a análise da série de ozônio em Sâo Paulo (2008-2013) relacionando as concentrações com dados meteorológicos.
 
