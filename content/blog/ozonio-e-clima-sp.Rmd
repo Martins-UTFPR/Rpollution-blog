@@ -1,0 +1,228 @@
+---
+title: Ozônio e o clima (SP)
+author: William Amorim
+date: '2018-03-16'
+slug: ozonio-clima-sp
+type: "post"
+featured: "ozonio-clima-sp.png"
+featuredalt: "Ozônio e clima"
+featuredpath: "img/2018"
+categories: ["Ozônio"]
+tags:
+  - EDA
+  - São Paulo
+  - Brasil 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE,
+                      cache = TRUE, collapse = TRUE)
+```
+
+As condições climáticas são os principais fatores de influência na formação de ozônio troposférico. Como vimos [neste post](), a luz solar, por exemplo, tem papel fundamental. É natural supor que a chuva e o vento também operem a sua influência.
+
+Neste post, continuaremos a análise da série de ozônio em Sâo Paulo (2008-2013) relacionando as concentrações com dados meteorológicos.
+
+## Os dados
+
+Os dados originais utilizados neste post foram disponibilizados pelos autores do artigo *Reduced ultrafine particle levels in São Paulo's atmosphere during shifts from gasoline to ethanol use*, que podem ser acessados pelo link [https://goo.gl/9tNzvj](https://goo.gl/9tNzvj). Utilizaremos aqui uma versão enxuta dessa base, disponível em [aqui](https://github.com/williamorim/Rpollution-blog/tree/master/content/blog/data). 
+
+O código abaixo salva os dados no objeto `df_O3`.
+
+```{r}
+df_O3 <- readr::read_rds("data/df_O3_clima_2008_2013.rds")
+```
+
+Vamos utilizar apenas a estação Dom Pedro II para esta análise e considerar a média diária das variáveis entre o meio-dia e às 17 horas. Além de filtrar a base e calcular as médias, o código abaixo seleciona apenas as variáveis que utilizaremos neste análise: temperatura (tp), radiação (rd), precipitação (pp), umidade (hm), velocidade do vento (ws) e inversão térmica (dv_ti_0to199m_9am e dv_ti_200to499m_9am).
+
+```{r}
+library(dplyr)
+
+df_tarde_DPII <- df_O3 %>%
+  filter(siteid == 1, hour %in% 12:16) %>% 
+  group_by(date) %>%
+  summarise_at(.vars = vars(o3_mass_conc, 
+                                   tp, rd, hm, ws, pp,
+                                   dv_ti_0to199m_9am, 
+                                   dv_ti_200to499m_9am),
+                      .funs = funs(mean),
+                      na.rm = TRUE) %>% 
+  ungroup()
+```
+
+Como vimos no post sobre a formação do ozônio, as condições climáticas no período da manhã também são importantes para o nível de ozônio no período da tarde. Portanto, vamos acrescentar ao objeto `df_tarde_DPII` o valor médio das variáveis climáticas entre 6 e 10 da manhã.
+
+```{r}
+medidas_manha <- df_O3 %>%
+  filter(siteid == 1, hour %in% 6:10) %>% 
+  group_by(date) %>%
+  summarise_at(.vars = vars(tp, rd, hm, ws, pp),
+                      .funs = funs(mean),
+                      na.rm = TRUE)  %>%
+  rename(morning_tp = tp,
+                morning_rd = rd,
+                morning_hm = hm,
+                morning_ws = ws,
+                morning_pp = pp)
+
+df_tarde_DPII <- df_tarde_DPII %>%  
+  left_join(medidas_manha, by = "date")
+
+```
+
+A seguir, apresentamos uma visão geral da concentração de ozônio ao longo do ano. Observe que os máximas tendem a ocorrer nos primeiros e nos últimos meses do ano.
+
+```{r}
+library(ggridges)
+
+df_tarde_DPII %>%
+  mutate(month = lubridate::month(date),
+         month = as.factor(month)) %>% 
+ggplot(aes(x = o3_mass_conc, y = month, fill = month)) + 
+  geom_density_ridges(show.legend = FALSE) +
+  labs(y = "Month", x = "Ozone") +
+  theme_bw()
+```
+
+
+## Temperatura
+
+Abaixo podemos ver o comportamento da temperatura nos períodos da manhã e da tarde ao longo do ano. As temperaturas à tarde são bem menos sensíveis às estações do ano.
+
+```{r}
+df_tarde_DPII %>% 
+  select(date,
+         `Afternoon Temperature` = tp,
+         `Moorning Temperature` = morning_tp) %>% 
+  tidyr::gather(serie, value,
+                `Afternoon Temperature`, 
+                `Moorning Temperature`) %>%
+  mutate(month = lubridate::month(date),
+         month = as.factor(month)) %>% 
+  ggplot(aes(x = value, y = month, fill = month)) + 
+  geom_density_ridges(show.legend = FALSE) +
+  facet_wrap(~serie, ncol = 2, scales = "free") +
+  labs(y = "Month", x = "Celsius") +
+  theme_bw()
+```
+
+Comparando as séries abaixo, observamos que o ozônio tende a apresentar maiores concentrações em períodos quentes.
+
+```{r, echo = FALSE}
+df_tarde_DPII %>% 
+  select(date, O3 = o3_mass_conc, 
+                `Afternoon Temperature` = tp,
+                `Moorning Temperature` = morning_tp) %>% 
+  tidyr::gather(serie, value, O3, 
+                `Afternoon Temperature`, `Moorning Temperature`) %>% 
+  ggplot(aes(x = date, y = value)) +
+  geom_line() +
+  geom_smooth(se = FALSE) +
+  facet_wrap(~serie, nrow = 3, scales = "free_y") +
+  theme_bw() +
+  labs(x = "Year", y = "Value")
+```
+
+## Radiação
+
+```{r, echo = FALSE}
+df_tarde_DPII %>% 
+  dplyr::select(date, O3 = o3_mass_conc, 
+                `Afternoon Radiation` = rd,
+                `Moorning Radiation` = morning_rd) %>% 
+  tidyr::gather(serie, value, O3, 
+                `Afternoon Radiation`, `Moorning Radiation`) %>% 
+  ggplot(aes(x = date, y = value)) +
+  geom_line() +
+  geom_smooth(se = FALSE) +
+  facet_wrap(~serie, nrow = 3, scales = "free_y") +
+  theme_bw() +
+  labs(x = "Year", y = "Value")
+```
+
+## Precipitação
+
+```{r, echo = FALSE}
+df_tarde_DPII %>% 
+  dplyr::select(date, O3 = o3_mass_conc, 
+                `Afternoon Precipitation` = pp,
+                `Moorning Precipitation` = morning_pp) %>% 
+  tidyr::gather(serie, value, O3, 
+                `Afternoon Precipitation`, `Moorning Precipitation`) %>% 
+  ggplot(aes(x = date, y = value)) +
+  geom_line() +
+  geom_smooth(se = FALSE) +
+  facet_wrap(~serie, nrow = 3, scales = "free_y") +
+  theme_bw() +
+  labs(x = "Year", y = "Value")
+```
+
+```{r, echo=FALSE}
+df_tarde_DPII <- df_tarde_DPII %>% 
+mutate(pp_c = ifelse(pp == 0, "Não", "Sim"),
+         morning_pp_c = ifelse(morning_pp == 0, "Não", "Sim"))
+```
+
+```{r, echo=FALSE}
+df_tarde_DPII %>%
+  select(date, o3_mass_conc, pp_c, morning_pp_c) %>% 
+  na.omit %>% 
+  tidyr::gather(period, precipitation, pp_c, morning_pp_c) %>% 
+  ggplot(aes(x = period, y = o3_mass_conc, fill = precipitation)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(fill = "Precipitation", y = "Ozone", x = "Period") +
+  scale_x_discrete(labels = c("Morning", "Afternoon"))
+```
+
+## Umidade
+
+Os gráficos das séries mostram que as mínimas de umidade tendem a ocorrer nos meses mais frios, quando os níveis de ozônio não menores.
+
+```{r, echo = FALSE}
+df_tarde_DPII %>% 
+  dplyr::select(date, O3 = o3_mass_conc, 
+                `Afternoon Humidity` = hm,
+                `Moorning Humidity` = morning_hm) %>% 
+  tidyr::gather(serie, value, O3, 
+                `Afternoon Humidity`, `Moorning Humidity`) %>% 
+  ggplot(aes(x = date, y = value)) +
+  geom_line() +
+  geom_smooth(se = FALSE) +
+  facet_wrap(~serie, nrow = 3, scales = "free_y") +
+  theme_bw() +
+  labs(x = "Year", y = "Value")
+```
+
+## Velocidade do vento
+
+```{r, echo = FALSE}
+df_tarde_DPII %>% 
+  dplyr::select(date, O3 = o3_mass_conc, 
+                `Afternoon Wind speed` = ws,
+                `Moorning Wind speed` = morning_ws) %>% 
+  tidyr::gather(serie, value, O3, 
+                `Afternoon Wind speed`, `Moorning Wind speed`) %>% 
+  ggplot(aes(x = date, y = value)) +
+  geom_line() +
+  geom_smooth(se = FALSE) +
+  facet_wrap(~serie, nrow = 3, scales = "free_y") +
+  theme_bw() +
+  labs(x = "Year", y = "Value")
+```
+
+## Inversão térmica
+
+```{r}
+df_tarde_DPII %>%
+  select(date, o3_mass_conc, dv_ti_0to199m_9am, dv_ti_200to499m_9am) %>% 
+  na.omit %>% 
+  tidyr::gather(period, inversao, dv_ti_0to199m_9am, dv_ti_200to499m_9am) %>%
+  mutate(inversao = as.factor(inversao)) %>% 
+  ggplot(aes(x = period, y = o3_mass_conc, fill = inversao)) +
+  geom_boxplot() +
+  theme_bw() +
+  labs(fill = "Thermal inversion", y = "Ozone", x = "Period") +
+  scale_x_discrete(labels = c("0 a 199 metros", "200 a 499 metros")) +
+  scale_fill_discrete(labels = c("No", "Yes"))
+```
