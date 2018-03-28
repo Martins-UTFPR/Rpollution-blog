@@ -1,0 +1,85 @@
+---
+title: Ozônio e o clima (SP)
+author: William Amorim
+date: '2018-03-28'
+slug: ozonio-clima-sp
+type: "post"
+featured: "ozonio-clima-sp.png"
+featuredalt: "Ozônio e clima"
+featuredpath: "img/2018"
+categories: ["Ozônio"]
+tags:
+  - EDA
+  - São Paulo
+  - Brasil 
+---
+
+
+
+<p>As condições climáticas são a principal fonte de variação dos níveis de poluentes atmosféricos numa determinada região. Como vimos <a href="https://www.rpollution.com/blog/o-ciclo-do-ozonio/">neste post</a>, a luz solar, por exemplo, tem papel fundamental na formação do ozônio, sendo esperado que em dias com pouca luz, as concentrações de ozônio sejam menores. É natural supor que outros fatores, como chuva e o vento, também operem a sua influência, sendo fundamental levarmos essas variáveis em conta na hora da análise.</p>
+<p>Neste post, continuaremos o estudo da série de ozônio em São Paulo (2008-2013) relacionando as concentrações com dados meteorológicos.</p>
+<div id="os-dados" class="section level2">
+<h2>Os dados</h2>
+<p>Os dados originais utilizados neste post foram disponibilizados pelos autores do artigo <em>Reduced ultrafine particle levels in São Paulo’s atmosphere during shifts from gasoline to ethanol use</em>, que podem ser acessados pelo link <a href="https://goo.gl/9tNzvj" class="uri">https://goo.gl/9tNzvj</a>. Utilizaremos aqui uma versão enxuta dessa base, disponível em <a href="https://github.com/williamorim/Rpollution-blog/tree/master/content/blog/data">aqui</a>.</p>
+<p>O código abaixo salva os dados no objeto <code>df_O3</code>.</p>
+<pre class="r"><code>df_O3 &lt;- readr::read_rds(&quot;data/df_O3_clima_2008_2013.rds&quot;)</code></pre>
+<p>Vamos utilizar apenas a estação Dom Pedro II para esta análise e considerar a média diária das variáveis entre o meio-dia e às 17 horas. Além de filtrar a base e calcular as médias, o código abaixo seleciona apenas as variáveis que utilizaremos neste análise: temperatura (tp), radiação (rd), precipitação (pp), umidade (hm), velocidade do vento (ws) e inversão térmica (dv_ti_0to199m_9am e dv_ti_200to499m_9am).</p>
+<pre class="r"><code>library(dplyr)
+
+df_tarde_DPII &lt;- df_O3 %&gt;%
+  filter(siteid == 1, hour %in% 12:16) %&gt;% 
+  group_by(date) %&gt;%
+  summarise_at(.vars = vars(o3_mass_conc, 
+                                   tp, rd, hm, ws, pp,
+                                   dv_ti_0to199m_9am, 
+                                   dv_ti_200to499m_9am),
+                      .funs = funs(mean),
+                      na.rm = TRUE) %&gt;% 
+  ungroup()</code></pre>
+<p>Como vimos no post sobre a formação do ozônio, as condições climáticas no período da manhã também são importantes para o nível de ozônio no período da tarde. Portanto, vamos acrescentar ao objeto <code>df_tarde_DPII</code> o valor diário médio das variáveis climáticas entre 6 e 10 da manhã.</p>
+<pre class="r"><code>medidas_manha &lt;- df_O3 %&gt;%
+  filter(siteid == 1, hour %in% 6:10) %&gt;% 
+  group_by(date) %&gt;%
+  summarise_at(.vars = vars(tp, rd, hm, ws, pp),
+                      .funs = funs(mean),
+                      na.rm = TRUE)  %&gt;%
+  rename(morning_tp = tp,
+                morning_rd = rd,
+                morning_hm = hm,
+                morning_ws = ws,
+                morning_pp = pp)
+
+df_tarde_DPII &lt;- df_tarde_DPII %&gt;%  
+  left_join(medidas_manha, by = &quot;date&quot;)</code></pre>
+</div>
+<div id="eda" class="section level2">
+<h2>EDA</h2>
+<p>A seguir, apresentamos uma visão geral da concentração de ozônio ao longo do ano. Observe que os máximas tendem a ocorrer nos primeiros e nos últimos meses do ano.</p>
+<pre class="r"><code>library(ggridges)
+
+df_tarde_DPII %&gt;%
+  mutate(month = lubridate::month(date),
+         month = as.factor(month)) %&gt;% 
+ggplot(aes(x = o3_mass_conc, y = month, fill = month)) + 
+  geom_density_ridges(show.legend = FALSE) +
+  labs(y = &quot;Month&quot;, x = &quot;Ozone&quot;) +
+  theme_bw()</code></pre>
+<p><img src="/blog/ozonio-e-clima-sp_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Repare na diferença entre as distribuições de janeiro e os meses próximos. Será efeito das férias escolares, período em que há menos trânsito?</p>
+<p>Como temos muitas variáveis climáticas para analisar, para facilitar a visualização, eu montei um <a href="https://www.rpollution.com/flexdashboards/ozonio-clima-sp/dash-ozonio-clima-sp.html">dashboard com todos os gráficos</a>. A seguir, os principais comentários.</p>
+<ul>
+<li><p>A concentração de ozônio tende a ser maior nos dias quentes, principalmente quando a temperatura sobe à tarde.</p></li>
+<li><p>Como era de se esperar, dias com maior radiação estão associados a maiores níveis de ozônio.</p></li>
+<li><p>Dias com chuva estão associados a menores concentrações de ozônio.</p></li>
+<li><p>Umidade alta, principalmente à tarde, está associada com menores concentrações de ozônio.</p></li>
+<li><p>A relação enter a velocidade do vento, tanto de manhã quanto à tarde, e a concentração de ozônio não é muito clara.</p></li>
+<li><p>Parece haver uma leve associação entre a ocorrência de inversões térmicas e maiores concentrações de ozônio.</p></li>
+</ul>
+</div>
+<div id="referencias" class="section level2">
+<h2>Referências</h2>
+<ul>
+<li><p>Pacote <code>flexdashboards</code>: <a href="https://rmarkdown.rstudio.com/flexdashboard/" class="uri">https://rmarkdown.rstudio.com/flexdashboard/</a></p></li>
+<li><p><code>ggplot2</code> extentions: <a href="http://www.ggplot2-exts.org/gallery/" class="uri">http://www.ggplot2-exts.org/gallery/</a></p></li>
+</ul>
+</div>

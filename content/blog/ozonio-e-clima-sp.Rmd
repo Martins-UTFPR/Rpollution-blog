@@ -1,7 +1,7 @@
 ---
 title: Ozônio e o clima (SP)
 author: William Amorim
-date: '2018-03-16'
+date: '2018-03-28'
 slug: ozonio-clima-sp
 type: "post"
 featured: "ozonio-clima-sp.png"
@@ -50,7 +50,7 @@ df_tarde_DPII <- df_O3 %>%
   ungroup()
 ```
 
-Como vimos no post sobre a formação do ozônio, as condições climáticas no período da manhã também são importantes para o nível de ozônio no período da tarde. Portanto, vamos acrescentar ao objeto `df_tarde_DPII` o valor médio das variáveis climáticas entre 6 e 10 da manhã.
+Como vimos no post sobre a formação do ozônio, as condições climáticas no período da manhã também são importantes para o nível de ozônio no período da tarde. Portanto, vamos acrescentar ao objeto `df_tarde_DPII` o valor diário médio das variáveis climáticas entre 6 e 10 da manhã.
 
 ```{r}
 medidas_manha <- df_O3 %>%
@@ -85,4 +85,26 @@ ggplot(aes(x = o3_mass_conc, y = month, fill = month)) +
   labs(y = "Month", x = "Ozone") +
   theme_bw()
 ```
+
+Repare na diferença entre as distribuições de janeiro e os meses próximos. Será efeito das férias escolares, período em que há menos trânsito?
+
+Como temos muitas variáveis climáticas para analisar, para facilitar a visualização, eu montei um [dashboard com todos os gráficos](https://www.rpollution.com/flexdashboards/ozonio-clima-sp/dash-ozonio-clima-sp.html). A seguir, os principais comentários.
+
+- A concentração de ozônio tende a ser maior nos dias quentes, principalmente quando a temperatura sobe à tarde.
+
+- Como era de se esperar, dias com maior radiação estão associados a maiores níveis de ozônio.
+
+- Dias com chuva estão associados a menores concentrações de ozônio.
+
+- Umidade alta, principalmente à tarde, está associada com menores concentrações de ozônio.
+
+- A relação enter a velocidade do vento, tanto de manhã quanto à tarde, e a concentração de ozônio não é muito clara.
+
+- Parece haver uma leve associação entre a ocorrência de inversões térmicas e maiores concentrações de ozônio.
+
+## Referências
+
+- Pacote `flexdashboards`: https://rmarkdown.rstudio.com/flexdashboard/
+
+- `ggplot2` extentions: http://www.ggplot2-exts.org/gallery/
 
