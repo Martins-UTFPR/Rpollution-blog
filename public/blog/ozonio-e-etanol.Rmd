@@ -1,0 +1,198 @@
+---
+title: Ozônio e etanol
+author: William Amorim
+date: '2018-04-16'
+slug: ozonio-e-etanol
+type: "post"
+featured: "ozonio-e-etanol.jpg"
+featuredalt: "Poluição do ar em São Paulo"
+featuredpath: "img/2018"
+categories: ["Ozônio"]
+tags:
+  - EDA
+  - São Paulo
+  - Brasil
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE,
+                      cache = TRUE, collapse = TRUE)
+```
+
+
+Nos últimos posts, nós estudamos a concentração de ozônio na cidade de São Paulo, descrevendo o processo gerador desse gás na camada mais baixa da atmosfera, analisando a sua sazonalidade ao longo do ano, da semana e dentro de cada dia, e investigando a sua associação com variáveis climáticas.
+
+Neste post, vamos encerrar essa análise exploratória estudando a relação entre a concentração de ozônio e o uso de etanol. Essa análise foi motivada pelos artigos [Reduction in local ozone levels in urban São Paulo due to a shift from ethanol to gasoline use](https://www.nature.com/articles/ngeo2144) e [Reduced ultrafine particle levels in São Paulo during shifts from gasoline to ethanol](https://www.nature.com/articles/s41467-017-00041-5), que sugeriram uma associação entre o uso de etanol e uma maior concentração do gás na região metropolitana de São Paulo. 
+
+O uso de etanol será representado pela estimativa da proporção de carros bicombustíveis rodando a gasolina na cidade, em relação àqueles rodando com etanol. Essa variável foi produto do artigo [Build it, but will they come? Evidence from consumer choice between gasoline and sugarcane ethanol](https://www.sciencedirect.com/science/article/pii/S0095069613000223). No processo de estimação, os autores consideraram o preço de ambos os combustíveis, as quantidades vendidas pelas distribuidoras e pesquisas realizadas com consumidores na hora do abastecimento em diversos postos espalhados pela cidade.
+
+## Dados
+
+Mais uma vez, utilizaremos uma versão reduzida da base disponibilizada pelos autores do artigo [Reduction in local ozone levels in urban São Paulo due to a shift from ethanol to gasoline use](https://www.nature.com/articles/ngeo2144). A base utilizada aqui pode ser acessada pelo [Github deste blog](https://github.com/williamorim/Rpollution-blog/tree/master/content/blog/data). Como já fizemos nos outros posts, consideraremos a média diária da concentração de ozônio medida entre o meio-dia e as 16 horas (inclusive) e focaremos a análise nos dados da estação Dom Pedro II.
+
+O código abaixo lê a base e calcula as médias diárias pela manhã e pela tarde das variáveis de interesse.
+
+```{r}
+library(dplyr)
+
+df_O3 <- readr::read_rds("data/df_O3_combustiveis_2008_2013.rds")
+
+df_tarde_DPII <- df_O3 %>%
+  filter(siteid == 1, hour %in% 12:16) %>% 
+  group_by(date) %>%
+  summarise_at(.vars = vars(dayofweek, o3_mass_conc, congestion_city,
+                                   congestion_region, share_gas),
+                      .funs = funs(mean),
+                      na.rm = TRUE) %>%  
+  ungroup()
+
+medidas_manha <- df_O3 %>%
+  filter(siteid == 1, hour %in% 6:10) %>% 
+  group_by(date) %>%
+  summarise_at(.vars = vars(congestion_region, congestion_city),
+                      .funs = funs(mean),
+                      na.rm = TRUE)  %>%
+  rename(morning_congestion_city = congestion_city,
+         morning_congestion_region = congestion_region)
+
+df_tarde_DPII <- df_tarde_DPII %>%  
+  left_join(medidas_manha, by = "date") %>% 
+  rename(z_congestion_city = congestion_city,
+         z_congestion_region = congestion_region) 
+# O z foi incluido no nome apenas para o grid dos 
+# gráficos ficarem na ordem certa.
+```
+
+Para alguns gráficos, utilizaremos as funções contidas [nesse arquivo](https://github.com/williamorim/Rpollution-blog/tree/master/content/blog/utils/graphs-ozonio-e-etanol.R).
+
+## EDA
+
+Vamos começar a análise exploratória estudando a relação entre a concentração de ozônio e a proporção estimada de carros a gasolina. Observamos pelo gráfico abaixo que há dois picos de utilização de gasolina, um no começo de 2010 e outro nos primeiros meses de 2011.
+
+```{r}
+library(ggplot2)
+source("utils/graphs-ozonio-e-etanol.R")
+
+series_plot(df_tarde_DPII, date, vars(share_gas, o3_mass_conc),
+            xlab = "Ano", ylab = "Valor",
+            facets_names = c(share_gas = "Proporção de carros a gasolina",
+                             o3_mass_conc = "Ozônio"))
+```
+
+Analisando o gráfico de dispersão das variáveis, não conseguimos enxergar uma associação clara entre elas.
+
+```{r}
+scatter_plot(df_tarde_DPII, o3_mass_conc, 
+             vars(share_gas),
+             xlab = "%", 
+             ylab = expression(paste(O[3], " (", mu, "g/", m^3, ")")),
+             facets_names = c(share_gas = "Proporção de carros a gasolina"))
+```
+
+Analisando agora a relação entre a concentração de ozônio e o trânsito na região da estação de monitoramento, notamos que os dias de maior congestionamento não apresentaram níveis elevados do poluente. Isso sugere uma relação negativa entre as variáveis.
+
+```{r}
+scatter_plot(df_tarde_DPII, o3_mass_conc, 
+             vars(morning_congestion_region, z_congestion_region),
+             xlab = "Quilômetros", 
+             ylab = expression(paste(O[3], " (", mu, "g/", m^3, ")")),
+             facets_names = c(z_congestion_region = "Trânsito pela tarde",
+                              morning_congestion_region = "Trânsito pela manhã"))
+```
+
+Vamos ver agora qual é a concentração media de ozônio em cada dia da semana. O gráfico abaixo mostra que a concentração média de ozônio é maior nos fins de semana. Isso parece contra-intuitivo, pois nos fins semana há uma menor circulação de veículos na cidade.
+
+```{r}
+dias <- c("Domingo", "Segunda", "Terça", "Quarta", "Quinta", 
+          "Sexta", "Sábado")
+
+df_tarde_DPII %>% 
+  group_by(dayofweek) %>% 
+  summarise(o3_mass_conc = mean(o3_mass_conc, na.rm = TRUE)) %>% 
+  mutate(dayofweek = as.factor(dayofweek),
+         dayofweek = forcats::lvls_revalue(dayofweek, dias),
+         dayofweek = forcats::lvls_reorder(dayofweek, c(1, 7, 6:2)),
+         o3_mass_conc_lab = round(o3_mass_conc, 1),
+         o3_mass_conc_lab = format(o3_mass_conc_lab, nsmall = 1)) %>% 
+  ggplot() +
+  geom_bar(aes(x = dayofweek, y = o3_mass_conc), 
+           stat = "identity", fill = "royalblue") +
+  geom_text(aes(x = dayofweek, y = 30, label = dayofweek), color = "white",
+            fontface = 2) +
+  geom_text(aes(x = dayofweek, y = o3_mass_conc - 5, label = o3_mass_conc_lab),
+            color = "white") +
+  coord_flip() +
+  theme_bw() +
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
+        plot.margin = unit(c(0.5, 1, 0.5, 0.5), "cm")) +
+  labs(y = expression(paste(O[3], " (", mu, "g/", m^3, ")")), 
+       x = "Dia da semana")
+```
+
+O gráfico a seguir mostra a diferença de trânsito (na região da estação de monitoramento) entre os dias da semana.
+
+```{r}
+df_tarde_DPII %>%
+  group_by(dayofweek) %>% 
+  summarise(congestion_region = mean(z_congestion_region, na.rm = TRUE),
+            morning_congestion_region = 
+              mean(morning_congestion_region, na.rm = TRUE)) %>% 
+  mutate(dayofweek = as.factor(dayofweek),
+         dayofweek = forcats::lvls_revalue(dayofweek, dias),
+         dayofweek = forcats::lvls_reorder(dayofweek, c(2:7, 1))) %>%
+  tidyr::gather(serie, value, -dayofweek) %>% 
+  mutate(serie = forcats::lvls_reorder(serie, c(2, 1))) %>% 
+  ggplot() +
+  geom_bar(aes(x = dayofweek, y = value, fill = serie), 
+           stat = "identity", position = "dodge") +
+  theme_bw() +
+  theme(legend.position = "top", 
+        axis.text.x = element_text(angle = 45, vjust = 0.5),
+        plot.margin = unit(c(0.5, 0.5, 0.5, 1), "cm")) +
+  scale_fill_discrete(labels = c("Trânsito pela manhã", 
+                                "Trânsito pela tarde")) +
+  labs(y = "Quilômetros", x = "Dias da semana", fill = "")
+```
+
+Se a concentração de ozônio é menor nos fins de semana, e é razoável supor que não há associação entre o dia da semana e as condições climáticas, isso sugere que dias de maior congestionamento estão associados a dias de menores concentrações de ozônio. Em outras palavras, as emissões dos veículos rodando na cidade estão reagindo com o ozônio presente no ar, diminuindo sua concentração.
+
+Será que isso muda a depender do combustível que está sendo mais utilizado naquele período? O gráfico abaixo mostra que a concentração de ozônio continua maior nos fins de semana, independentemente de qual combustível estimamos que está sendo mais usado.
+
+```{r}
+df_tarde_DPII %>%
+  mutate(share_cat = ifelse(share_gas < 0.5, 
+                            "Proporção de carros a álcool > 50%", 
+                            "Proporção de carros a gasolina > 50%")) %>% 
+  group_by(dayofweek, share_cat) %>% 
+  summarise(o3_mass_conc = mean(o3_mass_conc, na.rm = TRUE)) %>%
+  ungroup() %>% 
+  mutate(dayofweek = as.factor(dayofweek),
+         dayofweek = forcats::lvls_revalue(dayofweek, dias),
+         dayofweek = forcats::lvls_reorder(dayofweek, c(1, 7, 6:2)),
+         o3_mass_conc_lab = round(o3_mass_conc, 1),
+         o3_mass_conc_lab = format(o3_mass_conc_lab, nsmall = 1)) %>%
+  ggplot() +
+  geom_bar(aes(x = dayofweek, y = o3_mass_conc), 
+           stat = "identity", fill = "royalblue") +
+  geom_text(aes(x = dayofweek, y = 25, label = dayofweek), color = "white",
+            fontface = 2) +
+  geom_text(aes(x = dayofweek, y = o3_mass_conc - 6, label = o3_mass_conc_lab),
+            color = "white") +
+  coord_flip() +
+  facet_grid(~share_cat) +
+  theme_bw() +
+  theme(axis.text.y = element_blank(), axis.ticks.y = element_blank(),
+        plot.margin = unit(c(0.5, 1, 0.5, 0.5), "cm")) +
+  labs(y = expression(paste(O[3], " (", mu, "g/", m^3, ")")), 
+       x = "Dia da semana")
+```
+
+## Interpretação e hipóteses
+
+Se as emissões veiculares estão ajudando a consumir o ozônio gerado ao longo do dia, seria importante descobrir quais componentes dessas emissões são as responsáveis por esse processo. Para levantar hipóteses sobre isso, vamos lembrar dos [processos geradores do ozônio](https://www.rpollution.com/blog/o-ciclo-do-ozonio/).
+
+Em cenários com altas concentrações de NO e baixas de COV (compostos orgânicos voláteis), temos menos NO$_2$ sendo gerado pelo COV, menos ozônio gerado pelo NO$_2$ e mais ozônio sendo consumido pelo NO. Já em cenários com baixas concentrações de NO e altas de COV, temos mais NO$_2$ sendo gerado pelo COV, mais ozônio gerado pelo NO$_2$ e menos ozônio sendo consumido pelo NO. Mais detalhes sobre essa dinâmica podem ser encontradas no artigo [Ethanol and Ozone](https://www.researchgate.net/publication/261950077_Ethanol_and_Ozone).
+
+É sabido que a queima veicular de gasolina gera mais NO do que a queima de etanol, enquanto a queima parcial ou evaporação do etanol gera mais COV do que a gasolina. Então, períodos com maior proporção de carros rodando a gasolina geram cenários com altas concentrações de NO e baixas de COV, levando a menores concentrações de ozônio. Assim, os indícios encontrados nesta análise são compatíveis com as conclusões dos trabalhos realizados: o maior uso de etanol está associado a maiores níveis de ozônio. E como os períodos com maior proporção estimada de carros rodando com etanol ainda apresentam maiores concentrações de ozônio nos fins de semana (quando há menos tráfego), uma hipótese razoável é que o efeito da frota rodando exclusivamente a gasolina (ou a diesel) na geração de ozônio ainda deve ser prevalente em relação ao efeito dos veículos bicombustíveis. 
+
+Nos próximos posts, vamos deixar o ozônio um pouco de lado e começar a a analisar outros poluentes, como óxidos de carbono, nitrogênio e material particulado.

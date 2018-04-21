@@ -6,10 +6,20 @@
     <description>Recent content in São Paulo on R Pollution</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Wed, 28 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 16 Apr 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/s%C3%A3o-paulo/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ozônio e etanol</title>
+      <link>/blog/ozonio-e-etanol/</link>
+      <pubDate>Mon, 16 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/ozonio-e-etanol/</guid>
+      <description>Nos últimos posts, nós estudamos a concentração de ozônio na cidade de São Paulo, descrevendo o processo gerador desse gás na camada mais baixa da atmosfera, analisando a sua sazonalidade ao longo do ano, da semana e dentro de cada dia, e investigando a sua associação com variáveis climáticas.
+Neste post, vamos encerrar essa análise exploratória estudando a relação entre a concentração de ozônio e o uso de etanol. Essa análise foi motivada pelos artigos Reduction in local ozone levels in urban São Paulo due to a shift from ethanol to gasoline use e Reduced ultrafine particle levels in São Paulo during shifts from gasoline to ethanol, que sugeriram uma associação entre o uso de etanol e uma maior concentração do gás na região metropolitana de São Paulo.</description>
+    </item>
     
     <item>
       <title>Ozônio e o clima (SP)</title>
