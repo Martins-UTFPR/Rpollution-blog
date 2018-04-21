@@ -159,7 +159,6 @@
 		-webkit-transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		-ms-transition: color 0.2s ease, border-bottom-color 0.2s ease;
 		transition: color 0.2s ease, border-bottom-color 0.2s ease;
-		border-bottom: dotted 1px rgba(160, 160, 160, 0.65);
 		color: inherit;
 		text-decoration: none;
 	}
@@ -173,12 +172,12 @@
 
 		a:hover {
 			border-bottom-color: transparent;
-			color: #2ebaae !important;
+			color: #0086b3;
 		}
 
 			a:hover:before {
-				color: #2ebaae !important;
-			}
+				color: #0086b3;
+    }
 
 	strong, b {
 		color: #333333;
@@ -191,6 +190,8 @@
 
 	p {
 		margin: 0 0 2em 0;
+		text-align: justify;
+    text-justify: inter-word;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -259,7 +260,7 @@
 		background: rgba(160, 160, 160, 0.075);
 		border: solid 1px rgba(160, 160, 160, 0.3);
 		font-family: "Courier New", monospace;
-		font-size: 0.9em;
+		font-size: 0.8em;
 		margin: 0 0.25em;
 		padding: 0.25em 0.65em;
 	}
@@ -1345,12 +1346,13 @@
 
     #content p a,
 		#content ul li a {
-        border-bottom: dotted 2px rgba(160,160,160,.65);
+        border-bottom-color: transparent;
+        color: #0086b3
     }
 
         #content p a:hover {
-            border-bottom-color: transparent;
-        }
+          border-bottom: dotted 2px;
+    }
 
     #content blockquote,
 		#content p,
@@ -2608,7 +2610,9 @@
 		}
 
 		#intro header p {
-			font-size: 0.8em;
+			font-size: 0.7em;
+			align-items: center;
+		  text-align: center;
 		}
 
 	@media screen and (max-width: 980px) {
