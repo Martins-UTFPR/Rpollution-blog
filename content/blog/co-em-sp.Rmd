@@ -4,6 +4,7 @@ author: William Amorim
 date: '2018-06-16'
 slug: co-em-sp
 type: "post"
+draft: true
 featured: "co-em-sp.jpg"
 featuredalt: "Poluição veicular"
 featuredpath: "img/2018"
