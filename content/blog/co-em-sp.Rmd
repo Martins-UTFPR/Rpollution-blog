@@ -1,0 +1,186 @@
+---
+title: Monóxido de carbono em São Paulo
+author: William Amorim
+date: '2018-06-16'
+slug: co-em-sp
+type: "post"
+featured: "co-em-sp.jpg"
+featuredalt: "Poluição veicular"
+featuredpath: "img/2018"
+categories: ["CO"]
+tags:
+  - EDA
+  - São Paulo
+  - Brasil
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE,
+                      cache = TRUE, collapse = TRUE)
+```
+
+Mapa das estações
+
+```{r}
+# Mapa das estações
+df_carbon %>%
+  left_join(station_coord, by = "stationname") %>% 
+  distinct(stationname, .keep_all = TRUE) %>% 
+  leaflet() %>%
+  addTiles() %>% 
+  addMarkers(lng = ~long, lat = ~lat, popup = ~stationname)
+```
+
+
+## Dados
+
+
+
+## EDA
+
+Filtrando para Pinheiros
+
+Média horária
+
+```{r}
+df_carbon %>%
+  filter(stationname == "Pinheiros") %>% 
+  group_by(dayofweek, hour) %>% 
+  summarise(co_mass_conc = mean(co_mass_conc)) %>% 
+  ggplot(aes(x = hour, y = co_mass_conc)) +
+  geom_line() +
+  facet_wrap(~dayofweek, nrow = 2) +
+  theme_bw() +
+  labs(x = "Hora", y = "CO (ppm)") +
+  scale_x_continuous(breaks = c(1, 6, 11, 16, 21, 24))
+```
+
+Filtrando para 7h às 11h da manhã
+
+Série horária de Pinheiros
+
+```{r}
+df_carbon %>%
+  filter(
+    stationname == "Pinheiros", 
+    !dayofweek %in% c("sáb","dom"),
+    hour %in% 7:11
+  ) %>%
+  group_by(date) %>% 
+  summarise(co_mass_conc = mean(co_mass_conc)) %>% 
+  ggplot(aes(x = date, y = co_mass_conc)) +
+  geom_line() +
+  geom_smooth() +
+  theme_bw() +
+  labs(x = "Ano", y = "CO (ppm)")
+```
+
+Distribuição por mês
+
+```{r}
+df_carbon %>%
+  filter(
+    stationname == "Pinheiros",
+    !dayofweek %in% c("sáb","dom"),
+    hour %in% 7:11
+  ) %>%
+  group_by(date) %>% 
+  summarise(co_mass_conc = mean(co_mass_conc, na.rm = TRUE)) %>%
+  mutate(month = lubridate::month(date, label = TRUE),
+         month = forcats::fct_rev(as.factor(month)),
+         co_mass_conc = co_mass_conc + 1) %>% 
+  ggplot(aes(x = co_mass_conc, y = month)) +
+  geom_density_ridges(aes(fill = month), show.legend = FALSE) +
+  xlim(0.3, 5) +
+  theme_bw() +
+  labs(x = "CO (ppm)", y = "Mês")
+```
+
+Série das outras estações
+
+```{r}
+df_carbon %>%
+  filter(
+    !stationname %in% c("IPEN-USP", "Pinheiros"),
+    !dayofweek %in% c("sáb","dom"),
+    hour %in% 7:11
+  ) %>%
+  group_by(stationname, date) %>% 
+  summarise(co_mass_conc = mean(co_mass_conc)) %>%
+  filter(co_mass_conc < 10, co_mass_conc > 0) %>% 
+  ggplot(aes(x = date, y = co_mass_conc)) +
+  geom_line() +
+  geom_smooth() +
+  facet_wrap(~stationname, scales = "free_y", nrow = 3) +
+  theme_bw() +
+  labs(x = "Ano", y = "CO (ppm)") +
+  scale_x_date(date_breaks = "3 years", date_labels = "%Y")
+```
+
+Distribuição das outras estações
+
+```{r}
+df_carbon %>%
+  filter(
+    !dayofweek %in% c("sáb","dom"),
+    hour %in% 7:11
+  ) %>%
+  mutate(
+    co_mass_conc = co_mass_conc + 1,
+    stationname = forcats::fct_rev(as.factor(stationname))
+  ) %>%
+  ggplot(aes(x = co_mass_conc, y = stationname)) +
+  geom_density_ridges(aes(fill = stationname), show.legend = FALSE) +
+  xlim(0.8, 5.5) +
+  theme_bw() +
+  labs(x = "CO (ppm)", y = "Mês")
+```
+
+médias anuais por estação
+
+```{r}
+df_carbon %>%
+  filter(
+    !dayofweek %in% c("sáb","dom"),
+    hour %in% 7:11
+  ) %>%
+  mutate(year = lubridate::year(date)) %>% 
+  group_by(stationname, year) %>% 
+  summarise(co_mass_conc = mean(co_mass_conc, na.rm = TRUE)) %>%
+  ggplot(aes(x = stationname, y = co_mass_conc)) +
+  geom_bar(aes(fill = stationname), stat = "identity") +
+  facet_wrap(~year) +
+  theme_bw() +
+  labs(y = "CO (ppm)", fill = "Estações") +
+  scale_x_discrete(breaks = element_blank()) +
+  theme(legend.position = "bottom", axis.title.x = element_blank())
+```
+
+
+Mapa de calor das estações
+
+```{r}
+df_carbon %>%
+  filter(
+    !dayofweek %in% c("sáb","dom"),
+    hour %in% 7:11,
+    lubridate::year(date) == 2018
+  ) %>%
+  group_by(stationname) %>% 
+  summarise(co_mass_conc = mean(co_mass_conc, na.rm = TRUE)) %>% 
+  left_join(station_coord, by = "stationname") %>% 
+  leaflet() %>%1354
+  addProviderTiles(providers$CartoDB.Positron) %>%
+  addHeatmap(
+    lng = ~long, 
+    lat = ~lat, 
+    intensity = ~co_mass_conc,
+    blur = 30,
+    radius = 30
+  )
+```
+
+
+
+
+
