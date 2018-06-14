@@ -72,11 +72,11 @@ Como temos dados de 10 estações, para facilitar a análise, focaremos inicialm
 
 No gráfico a seguir, apresentamos a média da concentração de CO em cada hora do dia, separado por dia da semana. Podemos observar que:
 
-- durante a semana, há dois picos de ozônio durannte o dia, um de manhã, ~7h às ~11h, e outro à noite, ~18h ~0h, períodos de maior congestionamento na cidade;
+- durante a semana, há dois picos de CO durannte o dia, um de manhã, ~7h às ~11h, e outro à noite, ~18h ~0h, períodos de maior congestionamento na cidade;
 
 - nos fins de semana, os picos da noite são mais acentuados, sendo que no domingo nem mesmo existe um pico pela manhã;
 
-- em média, os níveis máximos de ozônio paracem estar por volta de 1.2 ppm ([partes por milhão](https://pt.wikipedia.org/wiki/Parte_por_milh%C3%A3o)) em todos os dias da semana.
+- em média, os níveis máximos de CO paracem estar por volta de 1.2 ppm ([partes por milhão](https://pt.wikipedia.org/wiki/Parte_por_milh%C3%A3o)) em todos os dias da semana.
 
 ```{r}
 df_carbon %>%
@@ -91,7 +91,7 @@ df_carbon %>%
   scale_x_continuous(breaks = c(1, 6, 11, 16, 21, 24))
 ```
 
-Vamos agora considerar apenas os picos matinais, excluindo os fins de semana. A série horária da estação de Pinheiros está apresentada abaixo. Pela curva suavizada, observamos que a concentração de CO está diminuindo levemente ao longo dos anos. A principal explicação desse fenômeno é a mudança do padrão de emissão veicular. Apesar de termos mais veículos rodando na cidade, os veículos novos são menos poluentes. Mais informações sobre esse tema podem ser encontradas no artigo [Variations of Carbon Monoxide Concentrations in the Megacity of São Paulo from 2000 to 2015 in Different Time Scales](http://www.mdpi.com/2073-4433/8/5/81).
+Vamos agora considerar apenas os picos matinais, excluindo os fins de semana. A série horária da estação de Pinheiros está apresentada abaixo. Pela curva suavizada, observamos que a concentração de CO está diminuindo levemente ao longo dos anos. Isso é explicado pela redução das emissões veiculares devido a novas tecnologias (como motores menos poluentes) e leis de proteção ambiental que obrigam os fabricantes a cumprir com padrões de emissões estabelecidos pelo governo ([Variations of Carbon Monoxide Concentrations in the Megacity of São Paulo from 2000 to 2015 in Different Time Scales](http://www.mdpi.com/2073-4433/8/5/81)).
 
 
 ```{r}
@@ -193,7 +193,7 @@ df_carbon %>%
 ```
 
 
-Por fim, apresentamos um mapa de calor da concentração de ozônio para os dados de 2018, sendo que as regiões mais quentes são aquelas com maior concentração média ao longo do ano.
+Por fim, apresentamos um mapa de calor da concentração de CO para os dados de 2018, sendo que as regiões mais quentes são aquelas com maior concentração média ao longo do ano.
 
 ```{r}
 df_carbon %>%

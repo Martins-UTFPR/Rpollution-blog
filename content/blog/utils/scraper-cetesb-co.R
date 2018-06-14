@@ -39,8 +39,8 @@ get_cetesb_data <- function(station, parameter, year) {
     parameter = parameter,
     start = start,
     end = end,
-    login = "thewilliam89@gmail.com",
-    password = "wouldy0uqua?"
+    login = "seulogin",
+    password = "seupassword"
   )
   
   if(!is.null(df)) {
