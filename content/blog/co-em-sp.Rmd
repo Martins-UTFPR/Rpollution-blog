@@ -20,7 +20,17 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
                       cache = TRUE, collapse = TRUE)
 ```
 
-Mapa das estações
+Neste post, vamos analisar a série do monóxido de carbono (CO), de 2008 a 2018, na cidade de São Paulo.
+
+O que você precisa saber sobre o monóxido de carbono:
+
+- CO é um gás sem cor, sem cheiro, insípido, inflamável e tóxico para humanos, animais e plantas.
+
+- A exposição ao CO pode causar dor de cabeça, tontura, fraqueza, nâusea e, em altas concentrações, desorientação, coma e morte por asfixiação.
+
+- Segundo a CETESB, cerca de 97% das concentrações de CO é gerada por emissões veiculares.
+
+Entre as estações da CETESB que medem a concentração horária de CO, selecionamos para essa análise aquelas com informação de janeiro de 2008 a maio de 2018. Ao total, foram 11 estações, cuja localidade está apresentada no mapa a seguir:
 
 ```{r}
 # Mapa das estações
@@ -35,6 +45,9 @@ df_carbon %>%
 
 ## Dados
 
+Os dados dessa análise foram extraídos do sistema Qualar, como discutido [neste post](https://www.rpollution.com/blog/scraper-cetesb/).
+
+O código utilizado pode ser acessado [aqui]().
 
 
 ## EDA
