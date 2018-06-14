@@ -20,6 +20,16 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
                       cache = TRUE, collapse = TRUE)
 ```
 
+```{r, echo = FALSE}
+library(tidyverse)
+library(leaflet)
+library(ggridges)
+
+df_carbon <- read_rds("data/df-carbon-2008-2018.rds")
+station_coord <- readxl::read_excel("utils/cetesb_station_geoposition.xlsx")
+```
+
+
 Neste post, vamos analisar a série do monóxido de carbono (CO), de 2008 a 2018, na cidade de São Paulo.
 
 O que você precisa saber sobre o monóxido de carbono:
@@ -30,9 +40,9 @@ O que você precisa saber sobre o monóxido de carbono:
 
 - Segundo a CETESB, cerca de 97% das concentrações de CO é gerada por emissões veiculares.
 
-Entre as estações da CETESB que medem a concentração horária de CO, selecionamos para essa análise aquelas com informação de janeiro de 2008 a maio de 2018. Ao total, foram 11 estações, cuja localidade está apresentada no mapa a seguir:
+Entre as estações da CETESB que medem a concentração horária de CO, selecionamos para essa análise aquelas com informação de janeiro de 2008 a maio de 2018. Ao total, foram 10 estações, cuja localidade está apresentada no mapa a seguir:
 
-```{r}
+```{r, echo = FALSE}
 # Mapa das estações
 df_carbon %>%
   left_join(station_coord, by = "stationname") %>% 
@@ -47,14 +57,26 @@ df_carbon %>%
 
 Os dados dessa análise foram extraídos do sistema Qualar, como discutido [neste post](https://www.rpollution.com/blog/scraper-cetesb/).
 
-O código utilizado pode ser acessado [aqui]().
+O código utilizado pode ser acessado [aqui](https://github.com/williamorim/Rpollution-blog/blob/master/content/blog/utils/scraper-cetesb-co.R). Repare que, para facilitar o acompanhamento do processo, as requisições foram feitas separadamente para cada estação/ano, pois requisões com um volume muito grande de dados demoravam muito para serem concluídas. Após todos os arquivos serem baixados, os dados foram consolidados em uma única base, que pode ser acessada [neste link](https://github.com/williamorim/Rpollution-blog/blob/master/content/blog/data/df-carbon-2008-2018.rds).
 
+Para carregar os dados, rodamos os seguintes comandos.
+
+```{r, eval = FALSE}
+df_carbon <- read_rds("data/df-carbon-2008-2018.rds")
+station_coord <- readxl::read_excel("utils/cetesb_station_geoposition.xlsx")
+```
 
 ## EDA
 
-Filtrando para Pinheiros
+Como temos dados de 10 estações, para facilitar a análise, focaremos inicialmente na estação de Pinheiros, que, pela localização (próxima à marginal Pinheiros), é uma boa representante da circulação de veículos na cidade de São Paulo.
 
-Média horária
+No gráfico a seguir, apresentamos a média da concentração de CO em cada hora do dia, separado por dia da semana. Podemos observar que:
+
+- durante a semana, há dois picos de ozônio durannte o dia, um de manhã, ~7h às ~11h, e outro à noite, ~18h ~0h, períodos de maior congestionamento na cidade;
+
+- nos fins de semana, os picos da noite são mais acentuados, sendo que no domingo nem mesmo existe um pico pela manhã;
+
+- em média, os níveis máximos de ozônio paracem estar por volta de 1.2 ppm ([partes por milhão](https://pt.wikipedia.org/wiki/Parte_por_milh%C3%A3o)) em todos os dias da semana.
 
 ```{r}
 df_carbon %>%
@@ -69,9 +91,8 @@ df_carbon %>%
   scale_x_continuous(breaks = c(1, 6, 11, 16, 21, 24))
 ```
 
-Filtrando para 7h às 11h da manhã
+Vamos agora considerar apenas os picos matinais, excluindo os fins de semana. A série horária da estação de Pinheiros está apresentada abaixo. Pela curva suavizada, observamos que a concentração de CO está diminuindo levemente ao longo dos anos. A principal explicação desse fenômeno é a mudança do padrão de emissão veicular. Apesar de termos mais veículos rodando na cidade, os veículos novos são menos poluentes. Mais informações sobre esse tema podem ser encontradas no artigo [Variations of Carbon Monoxide Concentrations in the Megacity of São Paulo from 2000 to 2015 in Different Time Scales](http://www.mdpi.com/2073-4433/8/5/81).
 
-Série horária de Pinheiros
 
 ```{r}
 df_carbon %>%
@@ -89,7 +110,7 @@ df_carbon %>%
   labs(x = "Ano", y = "CO (ppm)")
 ```
 
-Distribuição por mês
+A seguir, apresentamos a distribuição da concentração de CO na estação de Pinheiros para cada mês do ano. Observamos que os meses mais frios e secos, de maio a setembro, apresentam maior variabilidade e maior concentração em valores altos do que o restante do ano.
 
 ```{r}
 df_carbon %>%
@@ -110,7 +131,7 @@ df_carbon %>%
   labs(x = "CO (ppm)", y = "Mês")
 ```
 
-Série das outras estações
+Avaliando agora as outras estações, podemos observar que o padrão encontrado no gráfico da série da estação Pinheiros parece ser o mesmo na maioria dos casos.
 
 ```{r}
 df_carbon %>%
@@ -131,12 +152,13 @@ df_carbon %>%
   scale_x_date(date_breaks = "3 years", date_labels = "%Y")
 ```
 
-Distribuição das outras estações
+Pela distribuição das concentrações de cada estação, Osasco apresenta a maior variabilidade e, em média, níveis mais elevados de CO.
 
 ```{r}
 df_carbon %>%
   filter(
     !dayofweek %in% c("sáb","dom"),
+    !stationname %in% c("IPEN-USP"),
     hour %in% 7:11
   ) %>%
   mutate(
@@ -150,7 +172,7 @@ df_carbon %>%
   labs(x = "CO (ppm)", y = "Mês")
 ```
 
-médias anuais por estação
+As médias anuais por estação ratificam essa informação. Congonhas está em segundo lugar, como estação com maiores médias anuais. Também podemos observar como as médias anuais diminuem ao longo dos anos.
 
 ```{r}
 df_carbon %>%
@@ -171,7 +193,7 @@ df_carbon %>%
 ```
 
 
-Mapa de calor das estações
+Por fim, apresentamos um mapa de calor da concentração de ozônio para os dados de 2018, sendo que as regiões mais quentes são aquelas com maior concentração média ao longo do ano.
 
 ```{r}
 df_carbon %>%
@@ -183,9 +205,9 @@ df_carbon %>%
   group_by(stationname) %>% 
   summarise(co_mass_conc = mean(co_mass_conc, na.rm = TRUE)) %>% 
   left_join(station_coord, by = "stationname") %>% 
-  leaflet() %>%1354
+  leaflet() %>%
   addProviderTiles(providers$CartoDB.Positron) %>%
-  addHeatmap(
+  leaflet.extras::addHeatmap(
     lng = ~long, 
     lat = ~lat, 
     intensity = ~co_mass_conc,
@@ -194,7 +216,17 @@ df_carbon %>%
   )
 ```
 
+## Referências
 
+### Artigos
 
+- [Variations of Carbon Monoxide Concentrations in the Megacity of São Paulo from 2000 to 2015 in Different Time Scales](http://www.mdpi.com/2073-4433/8/5/81).
 
+- [Air quality in the megacity of São Paulo: Evolution over the last 30 years and future perspectives](https://www.researchgate.net/publication/315715487_Air_quality_in_the_megacity_of_Sao_Paulo_Evolution_over_the_last_30_years_and_future_perspectives)
+
+### Pacotes
+
+- [Leaflet](https://rstudio.github.io/leaflet/)
+
+- [ggplot2 extentions](http://www.ggplot2-exts.org/gallery/)
 
