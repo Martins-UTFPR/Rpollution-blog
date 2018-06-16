@@ -47,8 +47,8 @@ df_carbon %>%
   left_join(station_coord, by = "stationname") %>% 
   distinct(stationname, .keep_all = TRUE) %>% 
   leaflet() %>%
-  addTiles() %>% 
-  addMarkers(lng = ~long, lat = ~lat, popup = ~stationname)
+  addTiles() %>%
+  addCircleMarkers(lng = ~long, lat = ~lat, popup = ~stationname)
 ```
 
 <br>
