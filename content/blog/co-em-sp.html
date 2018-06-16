@@ -1,0 +1,195 @@
+---
+title: Monóxido de carbono em São Paulo
+author: William Amorim
+date: '2018-06-16'
+slug: co-em-sp
+type: "post"
+featured: "co-em-sp.jpg"
+featuredalt: "Poluição veicular"
+featuredpath: "img/2018"
+categories: ["CO"]
+tags:
+  - EDA
+  - São Paulo
+  - Brasil
+---
+
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="/rmarkdown-libs/leaflet/leaflet.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/leaflet/leaflet.js"></script>
+<link href="/rmarkdown-libs/leafletfix/leafletfix.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/Proj4Leaflet/proj4-compressed.js"></script>
+<script src="/rmarkdown-libs/Proj4Leaflet/proj4leaflet.js"></script>
+<link href="/rmarkdown-libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/leaflet-binding/leaflet.js"></script>
+<script src="/rmarkdown-libs/leaflet-providers/leaflet-providers.js"></script>
+<script src="/rmarkdown-libs/leaflet-providers-plugin/leaflet-providers-plugin.js"></script>
+<script src="/rmarkdown-libs/Leaflet.heat/leaflet-heat.js"></script>
+<script src="/rmarkdown-libs/Leaflet.heat/heat-bindings.js"></script>
+
+
+<p>Neste post, vamos analisar a série do monóxido de carbono (CO), de 2008 a 2018, na cidade de São Paulo.</p>
+<p>O que precisamos saber sobre o CO?</p>
+<ul>
+<li><p>O CO é um gás sem cor, sem cheiro, insípido, inflamável e tóxico para humanos, animais e plantas.</p></li>
+<li><p>A exposição ao CO pode causar dor de cabeça, tontura, fraqueza, náusea e, em altas concentrações, desorientação, coma e morte por asfixia.</p></li>
+<li><p>Segundo a CETESB, cerca de 97% do CO liberado na atmosfera em São Paulo é gerada por emissões veiculares.</p></li>
+</ul>
+<p>Entre as estações da CETESB que medem a concentração horária de CO, selecionamos para essa análise aquelas com informação de janeiro de 2008 a maio de 2018. Ao total, foram 10 estações, cuja localidade está apresentada no mapa a seguir:</p>
+<div id="htmlwidget-1" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[[-23.609308,-23.526757,-23.544841,-23.616318,-23.591838,-23.549694,-23.618411,-23.776249,-23.553543,-23.566227,-23.561441],[-46.758288,-46.792086,-46.627672,-46.663455,-46.660682,-46.600418,-46.556301,-46.696962,-46.672703,-46.737457,-46.70202],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["Taboão da Serra","Osasco","Parque D.Pedro II","Congonhas","Ibirapuera","Mooca","São Caetano do Sul","Parelheiros","Cerqueira César","IPEN-USP","Pinheiros"],null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-23.776249,-23.526757],"lng":[-46.792086,-46.556301]}},"evals":[],"jsHooks":[]}</script>
+<p><br></p>
+<div id="dados" class="section level2">
+<h2>Dados</h2>
+<p>Os dados dessa análise foram extraídos do sistema Qualar, como discutido <a href="https://www.rpollution.com/blog/scraper-cetesb/">neste post</a>.</p>
+<p>O código utilizado pode ser acessado <a href="https://github.com/williamorim/Rpollution-blog/blob/master/content/blog/utils/scraper-cetesb-co.R">aqui</a>. Repare que, para facilitar o acompanhamento do processo, as requisições foram feitas separadamente para cada estação/ano, pois requisições com um volume muito grande de dados demoravam muito para serem concluídas. Após todos os arquivos serem baixados, os dados foram consolidados em uma única base, que pode ser acessada <a href="https://github.com/williamorim/Rpollution-blog/blob/master/content/blog/data/df-carbon-2008-2018.rds">neste link</a>.</p>
+<p>Para carregar os dados, rodamos os seguintes comandos.</p>
+<pre class="r"><code>df_carbon &lt;- read_rds(&quot;data/df-carbon-2008-2018.rds&quot;)
+station_coord &lt;- readxl::read_excel(&quot;utils/cetesb_station_geoposition.xlsx&quot;)</code></pre>
+</div>
+<div id="eda" class="section level2">
+<h2>EDA</h2>
+<p>Como temos dados de 10 estações, para facilitar a análise, focaremos inicialmente na estação de Pinheiros, que, pela localização (próxima à marginal Pinheiros), é uma boa representante da circulação de veículos na cidade de São Paulo.</p>
+<p>No gráfico a seguir, apresentamos a média da concentração de CO em cada hora do dia, separado por dia da semana. Podemos observar que:</p>
+<ul>
+<li><p>durante a semana, há dois picos de CO durante o dia, um de manhã, ~7h às ~11h, e outro à noite, ~18h à ~0h, períodos de maior congestionamento na cidade;</p></li>
+<li><p>nos fins de semana, os picos da noite são mais acentuados, sendo que no domingo nem mesmo existe um pico pela manhã;</p></li>
+<li><p>em média, os níveis máximos de CO parecem estar por volta de 1.2 ppm (<a href="https://pt.wikipedia.org/wiki/Parte_por_milh%C3%A3o">partes por milhão</a>) em todos os dias da semana.</p></li>
+</ul>
+<pre class="r"><code>df_carbon %&gt;%
+  filter(stationname == &quot;Pinheiros&quot;) %&gt;% 
+  group_by(dayofweek, hour) %&gt;% 
+  summarise(co_mass_conc = mean(co_mass_conc)) %&gt;% 
+  ggplot(aes(x = hour, y = co_mass_conc)) +
+  geom_line() +
+  facet_wrap(~dayofweek, nrow = 2) +
+  theme_bw() +
+  labs(x = &quot;Hora&quot;, y = &quot;CO (ppm)&quot;) +
+  scale_x_continuous(breaks = c(1, 6, 11, 16, 21, 24))</code></pre>
+<p><img src="/blog/co-em-sp_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Vamos agora considerar apenas os picos matinais, excluindo os fins de semana. A série horária da estação de Pinheiros está apresentada abaixo. Pela curva suavizada, observamos que a concentração de CO está diminuindo levemente ao longo dos anos. Isso é explicado pela redução das emissões veiculares devido a novas tecnologias (como motores menos poluentes) e leis de proteção ambiental que obrigam os fabricantes a cumprir com padrões de emissões estabelecidos pelo governo (<a href="http://www.mdpi.com/2073-4433/8/5/81">Variations of Carbon Monoxide Concentrations in the Megacity of São Paulo from 2000 to 2015 in Different Time Scales</a>).</p>
+<pre class="r"><code>df_carbon %&gt;%
+  filter(
+    stationname == &quot;Pinheiros&quot;, 
+    !dayofweek %in% c(&quot;sáb&quot;,&quot;dom&quot;),
+    hour %in% 7:11
+  ) %&gt;%
+  group_by(date) %&gt;% 
+  summarise(co_mass_conc = mean(co_mass_conc)) %&gt;% 
+  ggplot(aes(x = date, y = co_mass_conc)) +
+  geom_line() +
+  geom_smooth() +
+  theme_bw() +
+  labs(x = &quot;Ano&quot;, y = &quot;CO (ppm)&quot;)</code></pre>
+<p><img src="/blog/co-em-sp_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>A seguir, apresentamos a distribuição da concentração de CO na estação de Pinheiros para cada mês do ano. Observamos que os meses mais frios e secos, de maio a setembro, apresentam maior variabilidade e maior concentração em valores altos do que o restante do ano.</p>
+<pre class="r"><code>df_carbon %&gt;%
+  filter(
+    stationname == &quot;Pinheiros&quot;,
+    !dayofweek %in% c(&quot;sáb&quot;,&quot;dom&quot;),
+    hour %in% 7:11
+  ) %&gt;%
+  group_by(date) %&gt;% 
+  summarise(co_mass_conc = mean(co_mass_conc, na.rm = TRUE)) %&gt;%
+  mutate(month = lubridate::month(date, label = TRUE),
+         month = forcats::fct_rev(as.factor(month)),
+         co_mass_conc = co_mass_conc + 1) %&gt;% 
+  ggplot(aes(x = co_mass_conc, y = month)) +
+  geom_density_ridges(aes(fill = month), show.legend = FALSE) +
+  xlim(0.3, 5) +
+  theme_bw() +
+  labs(x = &quot;CO (ppm)&quot;, y = &quot;Mês&quot;)</code></pre>
+<p><img src="/blog/co-em-sp_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Avaliando agora as outras estações, podemos observar que o padrão encontrado no gráfico da série da estação Pinheiros parece ser o mesmo na maioria dos casos.</p>
+<pre class="r"><code>df_carbon %&gt;%
+  filter(
+    !stationname %in% c(&quot;IPEN-USP&quot;, &quot;Pinheiros&quot;),
+    !dayofweek %in% c(&quot;sáb&quot;,&quot;dom&quot;),
+    hour %in% 7:11
+  ) %&gt;%
+  group_by(stationname, date) %&gt;% 
+  summarise(co_mass_conc = mean(co_mass_conc)) %&gt;%
+  filter(co_mass_conc &lt; 10, co_mass_conc &gt; 0) %&gt;% 
+  ggplot(aes(x = date, y = co_mass_conc)) +
+  geom_line() +
+  geom_smooth() +
+  facet_wrap(~stationname, scales = &quot;free_y&quot;, nrow = 3) +
+  theme_bw() +
+  labs(x = &quot;Ano&quot;, y = &quot;CO (ppm)&quot;) +
+  scale_x_date(date_breaks = &quot;3 years&quot;, date_labels = &quot;%Y&quot;)</code></pre>
+<p><img src="/blog/co-em-sp_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Pela distribuição das concentrações de cada estação, Osasco apresenta a maior variabilidade e, em média, níveis mais elevados de CO.</p>
+<pre class="r"><code>df_carbon %&gt;%
+  filter(
+    !dayofweek %in% c(&quot;sáb&quot;,&quot;dom&quot;),
+    !stationname %in% c(&quot;IPEN-USP&quot;),
+    hour %in% 7:11
+  ) %&gt;%
+  mutate(
+    co_mass_conc = co_mass_conc + 1,
+    stationname = forcats::fct_rev(as.factor(stationname))
+  ) %&gt;%
+  ggplot(aes(x = co_mass_conc, y = stationname)) +
+  geom_density_ridges(aes(fill = stationname), show.legend = FALSE) +
+  xlim(0.8, 5.5) +
+  theme_bw() +
+  labs(x = &quot;CO (ppm)&quot;, y = &quot;Mês&quot;)</code></pre>
+<p><img src="/blog/co-em-sp_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>As médias anuais por estação ratificam essa informação. Congonhas está em segundo lugar, como estação com maiores médias anuais. Também podemos observar como as médias anuais diminuem ao longo dos anos.</p>
+<pre class="r"><code>df_carbon %&gt;%
+  filter(
+    !dayofweek %in% c(&quot;sáb&quot;,&quot;dom&quot;),
+    hour %in% 7:11
+  ) %&gt;%
+  mutate(year = lubridate::year(date)) %&gt;% 
+  group_by(stationname, year) %&gt;% 
+  summarise(co_mass_conc = mean(co_mass_conc, na.rm = TRUE)) %&gt;%
+  ggplot(aes(x = stationname, y = co_mass_conc)) +
+  geom_bar(aes(fill = stationname), stat = &quot;identity&quot;) +
+  facet_wrap(~year) +
+  theme_bw() +
+  labs(y = &quot;CO (ppm)&quot;, fill = &quot;Estações&quot;) +
+  scale_x_discrete(breaks = element_blank()) +
+  theme(legend.position = &quot;bottom&quot;, axis.title.x = element_blank())</code></pre>
+<p><img src="/blog/co-em-sp_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Por fim, apresentamos um mapa de calor da concentração de CO para os dados de 2018, sendo que as regiões mais quentes são aquelas com maior concentração média ao longo do ano.</p>
+<pre class="r"><code>df_carbon %&gt;%
+  filter(
+    !dayofweek %in% c(&quot;sáb&quot;,&quot;dom&quot;),
+    hour %in% 7:11,
+    lubridate::year(date) == 2018
+  ) %&gt;%
+  group_by(stationname) %&gt;% 
+  summarise(co_mass_conc = mean(co_mass_conc, na.rm = TRUE)) %&gt;% 
+  left_join(station_coord, by = &quot;stationname&quot;) %&gt;% 
+  leaflet() %&gt;%
+  addProviderTiles(providers$CartoDB.Positron) %&gt;%
+  leaflet.extras::addHeatmap(
+    lng = ~long, 
+    lat = ~lat, 
+    intensity = ~co_mass_conc,
+    blur = 30,
+    radius = 30
+  )</code></pre>
+<div id="htmlwidget-2" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addHeatmap","args":[[[-23.553543,-46.672703,0.727889908256881],[-23.616318,-46.663455,0.827889908256881],[-23.591838,-46.660682,0.175822050290135],[-23.549694,-46.600418,0.601897533206831],[-23.526757,-46.792086,1.14748603351955],[-23.776249,-46.696962,0.744090056285178],[-23.544841,-46.627672,0.50037037037037],[-23.561441,-46.70202,0.577064220183486],[-23.618411,-46.556301,0.557677902621723],[-23.609308,-46.758288,0.956985294117647]],null,null,{"minOpacity":0.05,"max":1,"radius":30,"blur":30}]}],"limits":{"lat":[-23.776249,-23.526757],"lng":[-46.792086,-46.556301]}},"evals":[],"jsHooks":[]}</script>
+<p><br></p>
+</div>
+<div id="referencias" class="section level2">
+<h2>Referências</h2>
+<div id="artigos" class="section level3">
+<h3>Artigos</h3>
+<ul>
+<li><p><a href="http://www.mdpi.com/2073-4433/8/5/81">Variations of Carbon Monoxide Concentrations in the Megacity of São Paulo from 2000 to 2015 in Different Time Scales</a>.</p></li>
+<li><p><a href="https://www.researchgate.net/publication/315715487_Air_quality_in_the_megacity_of_Sao_Paulo_Evolution_over_the_last_30_years_and_future_perspectives">Air quality in the megacity of São Paulo: Evolution over the last 30 years and future perspectives</a></p></li>
+</ul>
+</div>
+<div id="pacotes" class="section level3">
+<h3>Pacotes</h3>
+<ul>
+<li><p><a href="https://rstudio.github.io/leaflet/">Leaflet</a></p></li>
+<li><p><a href="http://www.ggplot2-exts.org/gallery/">ggplot2 extentions</a></p></li>
+</ul>
+</div>
+</div>

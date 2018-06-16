@@ -6,10 +6,22 @@
     <description>Recent content in São Paulo on R Pollution</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Mon, 16 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 16 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/s%C3%A3o-paulo/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Monóxido de carbono em São Paulo</title>
+      <link>/blog/co-em-sp/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/co-em-sp/</guid>
+      <description>Neste post, vamos analisar a série do monóxido de carbono (CO), de 2008 a 2018, na cidade de São Paulo.
+O que precisamos saber sobre o CO?
+ O CO é um gás sem cor, sem cheiro, insípido, inflamável e tóxico para humanos, animais e plantas.
+ A exposição ao CO pode causar dor de cabeça, tontura, fraqueza, náusea e, em altas concentrações, desorientação, coma e morte por asfixia.</description>
+    </item>
     
     <item>
       <title>Ozônio e etanol</title>
