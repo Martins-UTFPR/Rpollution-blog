@@ -4,6 +4,11 @@
   
   <url>
     <loc>/blog/co-em-sp/</loc>
+    <lastmod>2018-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/blog/co-em-sp/</loc>
     <lastmod>2018-06-16T00:00:00+00:00</lastmod>
   </url>
   
@@ -39,13 +44,13 @@
   
   <url>
     <loc>/blog/</loc>
-    <lastmod>2018-06-16T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/brasil/</loc>
-    <lastmod>2018-06-16T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -69,7 +74,7 @@
   
   <url>
     <loc>/categories/coleta-de-dados/</loc>
-    <lastmod>2018-03-16T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -78,8 +83,14 @@
   </url>
   
   <url>
+    <loc>/categories/diversos/</loc>
+    <lastmod>2018-06-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/eda/</loc>
-    <lastmod>2018-06-16T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -91,19 +102,19 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-06-16T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/s%C3%A3o-paulo/</loc>
-    <lastmod>2018-06-16T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2018-06-16T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

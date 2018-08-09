@@ -36,7 +36,7 @@ O que precisamos saber sobre o CO?
 
 - A exposição ao CO pode causar dor de cabeça, tontura, fraqueza, náusea e, em altas concentrações, desorientação, coma e morte por asfixia. 
 
-- Segundo a CETESB, cerca de 97% do CO liberado na atmosfera em São Paulo é gerado por emissões veiculares.
+- Segundo a CETESB, cerca de 97% do CO liberado na atmosfera em São Paulo é gerada por emissões veiculares.
 
 
 Entre as estações da CETESB que medem a concentração horária de CO, selecionamos para essa análise aquelas com informação de janeiro de 2008 a maio de 2018. Ao total, foram 10 estações, cuja localidade está apresentada no mapa a seguir:
