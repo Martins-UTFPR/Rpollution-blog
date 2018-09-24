@@ -7,7 +7,7 @@ type: "post"
 featured: "co-em-sp.jpg"
 featuredalt: "Poluição veicular"
 featuredpath: "img/2018"
-categories: ["CO"]
+categories: ["Carbono"]
 tags:
   - EDA
   - São Paulo

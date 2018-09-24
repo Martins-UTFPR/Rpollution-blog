@@ -7,7 +7,7 @@ type: "post"
 featured: "truck.png"
 featuredalt: "Poluição caminhão"
 featuredpath: "img/2018"
-categories: ["Coleta de dados", "Diversos"]
+categories: ["Material particulado", "Diversos", "Carbono", "Ozônio", "Nitrogênio"]
 tags:
   - EDA
   - São Paulo

@@ -1,0 +1,41 @@
+---
+title: Material particulado em São Paulo
+author: William Amorim
+date: '2018-09-24'
+slug: pm-em-sp
+type: "post"
+featured: "material-particulado.jpg"
+featuredalt: "Mão derrubando areia"
+featuredpath: "img/2018"
+categories: ["Material particulado"]
+tags:
+  - EDA
+  - São Paulo
+  - Brasil
+---
+
+```{r echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE, 
+  cache = FALSE, 
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+```{r, echo = FALSE}
+library(tidyverse)
+library(leaflet)
+library(patchwork)
+library(lubridate)
+
+df_pm <- read_rds("data/df_pm.rds")
+station_coord <- readxl::read_excel("data/cetesb_station_geoposition.xlsx")
+```
+
+Material particulado é o nome genérico atribuído a partículas microscópicas,  sólidas ou líquidas, suspensas na atmosfera. Por serem tão pequenas, elas podem ser inaladas e causar sérios problemas à saúde. Partículas com menos de 10 micrômetros de diâmetro podem penetrar na estrutura pulmonar (bronquíolos e alvéolos) e cair na corrente sanguínea. Por essa razão, normalmente classifica-se o material particulado em: MP2.5, partículas com até 2.5 micrômetros de diâmetro, e MP10, partículas com diâmetro entre 2.5 e 10 micrômetros. Como referência de magnitude, um fio de cabelo humano tem cerca de 70 micrômetros de diâmetro.
+
+Nas últimas décadas, o material particulado vem sendo um dos principais alvos de estudos epidemiológicos sobre poluição do ar. Ele está associado a diversas doenças respiratórias, cardivasculares e câncer de pulmão, com efeito mais acentuado em crianças, idosos e gestantes.
+
+As fontes de material particulado podem ser naturais ou antropogênicas (causadas pelo homem). O sal marinho suspenso no ar, por exemplo, é um dos maiores contribuidores para a massa global de material particulado. Em grandes cidades, as principais fontes são a poeira levantada do solo pelo vento e os compostos gerados pelos processos industriais e pela queima de combustíveis.
+
