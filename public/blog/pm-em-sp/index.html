@@ -1,0 +1,1446 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        
+            
+                <title>Material particulado em São Paulo</title>
+            
+        
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="generator" content="Hugo 0.38.1" />
+        
+
+
+        
+            <meta name="author" content="William Amorim">
+        
+        
+            
+                <meta name="description" content="Análise de dados de poluição do ar usando o R">
+            
+        
+
+        <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Material particulado em São Paulo"/>
+<meta name="twitter:description" content="Material particulado é o nome genérico atribuído a partículas microscópicas, sólidas ou líquidas, suspensas na atmosfera. Por serem tão pequenas, elas podem ser inaladas e causar sérios problemas à saúde. Partículas com menos de 10 micrômetros de diâmetro, por exemplo, podem penetrar na estrutura pulmonar (bronquíolos e alvéolos) e cair na corrente sanguínea. Por essa razão, esse grupo é normalmente classificado em: MP2."/>
+
+        <meta property="og:title" content="Material particulado em São Paulo" />
+<meta property="og:description" content="Material particulado é o nome genérico atribuído a partículas microscópicas, sólidas ou líquidas, suspensas na atmosfera. Por serem tão pequenas, elas podem ser inaladas e causar sérios problemas à saúde. Partículas com menos de 10 micrômetros de diâmetro, por exemplo, podem penetrar na estrutura pulmonar (bronquíolos e alvéolos) e cair na corrente sanguínea. Por essa razão, esse grupo é normalmente classificado em: MP2." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/pm-em-sp/" />
+
+
+
+<meta property="article:published_time" content="2018-09-24T00:00:00&#43;00:00"/>
+
+<meta property="article:modified_time" content="2018-09-24T00:00:00&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+        <meta property="og:image" content="//images/logo.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="512">
+        <meta property="og:image:height" content="512">
+        
+<meta itemprop="name" content="Material particulado em São Paulo">
+<meta itemprop="description" content="Material particulado é o nome genérico atribuído a partículas microscópicas, sólidas ou líquidas, suspensas na atmosfera. Por serem tão pequenas, elas podem ser inaladas e causar sérios problemas à saúde. Partículas com menos de 10 micrômetros de diâmetro, por exemplo, podem penetrar na estrutura pulmonar (bronquíolos e alvéolos) e cair na corrente sanguínea. Por essa razão, esse grupo é normalmente classificado em: MP2.">
+
+
+<meta itemprop="datePublished" content="2018-09-24T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2018-09-24T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1904">
+
+
+
+<meta itemprop="keywords" content="EDA,São Paulo,Brasil," />
+
+        
+
+        
+            
+        
+
+        
+        
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,800,900|Source+Sans+Pro:400,700">
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.css">
+            <link rel="stylesheet" href="/css/main.css">
+            <link rel="stylesheet" href="/css/add-on.css">
+            <link rel="stylesheet" href="/css/academicons.min.css">
+        
+
+        
+            
+                
+            
+        
+
+
+  
+    
+    <link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+  
+
+
+      
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-115370597-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    </head>
+    <body>
+
+      
+      <div id="wrapper">
+
+    
+    
+<header id="header">
+    
+      <h1><a href="/">blog</a></h1>
+    
+
+    <nav class="links">
+        <ul>
+            
+                <li>
+                    <a href="/">
+                            <i class="fa fa-home">&nbsp;</i>Home
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/blog/">
+                            <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/about/">
+                            <i class="fa fa-id-card-o">&nbsp;</i>Sobre
+                    </a>
+                </li>
+            
+                <li>
+                    <a href="/contato/">
+                            <i class="fa fa-envelope-o">&nbsp;</i>Contato
+                    </a>
+                </li>
+            
+        </ul>
+    </nav>
+    <nav class="main">
+        <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
+            
+            <li class="search">
+                <a class="fa-search" href="#search">Search</a>
+                <form id="search" method="get" action="//google.com/search">
+                    <input type="text" name="q" placeholder="Search" />
+                    <input type="hidden" name="as_sitesearch" value="/">
+                </form>
+            </li>
+            <li class="menu">
+                <a class="fa-bars" href="#menu">Menu</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+<section id="menu">
+
+    
+        <section>
+            <form class="search" method="get" action="//google.com/search">
+                <input type="text" name="q" placeholder="Search" />
+                <input type="hidden" name="as_sitesearch" value="/">
+            </form>
+        </section>
+
+    
+        <section>
+            <ul class="links">
+                
+                    <li>
+                        <a href="/">
+                            <h3>
+                                <i class="fa fa-home">&nbsp;</i>Home
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/blog/">
+                            <h3>
+                                <i class="fa fa-newspaper-o">&nbsp;</i>Blog
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/about/">
+                            <h3>
+                                <i class="fa fa-id-card-o">&nbsp;</i>Sobre
+                            </h3>
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/contato/">
+                            <h3>
+                                <i class="fa fa-envelope-o">&nbsp;</i>Contato
+                            </h3>
+                        </a>
+                    </li>
+                
+            </ul>
+        </section>
+
+    
+        <section class="recent-posts">
+            <div class="mini-posts">
+                <header>
+                    <h3>Posts mais recentes</h3>
+                </header>
+                
+
+                
+                    
+                
+
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/pm-em-sp/">Material particulado em São Paulo</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-09-24'>
+                                    24.09.2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/pm-em-sp/" class="image featured">
+            <img src="/img/2018/material-particulado.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/co-em-sp/">A poluição do ar durante a greve dos caminhoneiros</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-06-18'>
+                                    18.06.2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/co-em-sp/" class="image featured">
+            <img src="/img/2018/truck.png" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/co-em-sp/">Monóxido de carbono em São Paulo</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-06-16'>
+                                    16.06.2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/co-em-sp/" class="image featured">
+            <img src="/img/2018/co-em-sp.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/ozonio-e-etanol/">Ozônio e etanol</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-04-16'>
+                                    16.04.2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/ozonio-e-etanol/" class="image featured">
+            <img src="/img/2018/ozonio-e-etanol.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+                        <article class="mini-post">
+                            <header>
+                                <h3><a href="/blog/ozonio-clima-sp/">Ozônio e o clima (SP)</a></h3>
+                                
+                                <time class="published" datetime=
+                                    '2018-03-28'>
+                                    28.03.2018</time>
+                            </header>
+                            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/ozonio-clima-sp/" class="image featured">
+            <img src="/img/2018/ozonio-clima-sp.jpg" alt="">
+        </a>
+    
+
+
+                        </article>
+                
+
+                
+                    <a href=
+                        
+                            /blog/
+                        
+                        class="button">Mais posts</a>
+                
+            </div>
+        </section>
+
+    
+        
+</section>
+
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Share this post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2fpm-em-sp%2f&amp;text=Material%20particulado%20em%20S%c3%a3o%20Paulo&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//plus.google.com/share?url=%2fblog%2fpm-em-sp%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2fpm-em-sp%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2fpm-em-sp%2f&amp;title=Material%20particulado%20em%20S%c3%a3o%20Paulo" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=%2fblog%2fpm-em-sp%2f&amp;title=Material%20particulado%20em%20S%c3%a3o%20Paulo" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by William%20Amorim&amp;body=%2fblog%2fpm-em-sp%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+        </ul>
+    </section>
+</section>
+
+    
+    <div id="main">
+        
+        
+        <article class="post">
+  <header>
+    <div class="title">
+        
+            <h1><a href="/blog/pm-em-sp/">Material particulado em São Paulo</a></h1>
+            
+        
+        
+    </div>
+    <div class="meta">
+        
+
+        <time class="published"
+            datetime='24-09-2018'>
+            24.09.2018</time>
+        <span class="author">William Amorim</span>
+        
+            <p style = "font-size: x-small">9 minutos de leitura</p>
+        
+        
+    </div>
+</header>
+
+
+  
+    <section id="social-share">
+      <ul class="icons">
+        
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2fpm-em-sp%2f&amp;text=Material%20particulado%20em%20S%c3%a3o%20Paulo&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//plus.google.com/share?url=%2fblog%2fpm-em-sp%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2fpm-em-sp%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2fpm-em-sp%2f&amp;title=Material%20particulado%20em%20S%c3%a3o%20Paulo" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=%2fblog%2fpm-em-sp%2f&amp;title=Material%20particulado%20em%20S%c3%a3o%20Paulo" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by William%20Amorim&amp;body=%2fblog%2fpm-em-sp%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+      </ul>
+    </section>
+  
+
+  
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/pm-em-sp/" class="image featured">
+            <img src="/img/2018/material-particulado.jpg" alt="">
+        </a>
+    
+
+
+  <div id="content">
+    <script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="/rmarkdown-libs/leaflet/leaflet.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/leaflet/leaflet.js"></script>
+<link href="/rmarkdown-libs/leafletfix/leafletfix.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/Proj4Leaflet/proj4-compressed.js"></script>
+<script src="/rmarkdown-libs/Proj4Leaflet/proj4leaflet.js"></script>
+<link href="/rmarkdown-libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/leaflet-binding/leaflet.js"></script>
+<script src="/rmarkdown-libs/plotly-binding/plotly.js"></script>
+<script src="/rmarkdown-libs/typedarray/typedarray.min.js"></script>
+<link href="/rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
+<link href="/rmarkdown-libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/plotly-main/plotly-latest.min.js"></script>
+
+
+<p>Material particulado é o nome genérico atribuído a partículas microscópicas, sólidas ou líquidas, suspensas na atmosfera. Por serem tão pequenas, elas podem ser inaladas e causar sérios problemas à saúde. Partículas com menos de 10 micrômetros de diâmetro, por exemplo, podem penetrar na estrutura pulmonar (bronquíolos e alvéolos) e cair na corrente sanguínea. Por essa razão, esse grupo é normalmente classificado em: MP2.5, partículas com até 2.5 micrômetros de diâmetro, e MP10, partículas com diâmetro entre 2.5 e 10 micrômetros.</p>
+<center>
+<blockquote>
+<p>Referência de magnitude: <br> um fio de cabelo humano tem cerca de 70 micrômetros de diâmetro.</p>
+</blockquote>
+</center>
+<p>Nas últimas décadas, o material particulado vem sendo um dos principais alvos de estudos epidemiológicos sobre poluição do ar. Ele está associado a diversas doenças respiratórias, cardiovasculares e câncer de pulmão, com efeito mais acentuado em crianças, idosos e gestantes.</p>
+<p>As fontes de material particulado podem ser naturais ou antropogênicas (causadas pelo homem). O sal marinho suspenso no ar, por exemplo, é um dos maiores contribuidores para a massa global de material particulado. Em grandes cidades, as principais fontes são a poeira levantada do solo pelo vento e os compostos gerados por processos industriais e queima de combustíveis.</p>
+<p>Neste post, vamos analisar os últimos dez anos de material particulado na cidade de São Paulo. Para isso, coletamos dados os dados disponíveis de MP2.5 e MP10 de 2008 a 2017, que podem ser encontrados <a href="https://github.com/williamorim/Rpollution-blog/blob/master/content/blog/data/df_pm.rds">aqui</a>. Para carregar os dados, utilizamos o seguinte código:</p>
+<pre class="r"><code>df_pm &lt;- read_rds(&quot;data/df_pm.rds&quot;)
+station_coord &lt;- readxl::read_excel(&quot;data/cetesb_station_geoposition.xlsx&quot;) %&gt;% 
+  mutate(stationname = case_when(
+    stationname == &quot;Parelheiros&quot; ~ &quot;Grajaú-Parelheiros&quot;,
+    stationname == &quot;IPEN-USP&quot; ~ &quot;Cid.Universitária-USP-Ipen&quot;,
+    stationname == &quot;Nossa Senhora do Ó&quot; ~ &quot;N.Senhora do Ó&quot;
+  ))</code></pre>
+<p>O objeto <code>station_coord</code> guarda as coordenadas espaciais de cada estação. A base com essas informações se encontra <a href="https://github.com/williamorim/Rpollution-blog/blob/master/content/blog/data/cetesb_station_geoposition.xlsx">aqui</a>. As estações utilizadas estão representadas no mapa abaixo.</p>
+<pre class="r"><code>df_pm %&gt;%
+  left_join(station_coord, by = &quot;stationname&quot;) %&gt;% 
+  distinct(stationname, .keep_all = TRUE) %&gt;% 
+  leaflet() %&gt;%
+  addTiles() %&gt;%
+  addCircleMarkers(lng = ~long, lat = ~lat, popup = ~stationname)</code></pre>
+<div id="htmlwidget-1" style="width:672px;height:480px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addCircleMarkers","args":[[-23.526757,-23.654966,null,-23.505992,-23.544841,-23.616318,-23.591838,-23.549694,-23.553543,-23.48002,-23.776249,-23.561441,-23.566227],[-46.792086,-46.710002,null,-46.628971,-46.627672,-46.663455,-46.660682,-46.600418,-46.672703,-46.69197,-46.696962,-46.70202,-46.737457],10,null,null,{"interactive":true,"className":"","stroke":true,"color":"#03F","weight":5,"opacity":0.5,"fill":true,"fillColor":"#03F","fillOpacity":0.2},null,null,["Osasco","Santo Amaro","Interlagos","Santana","Parque D.Pedro II","Congonhas","Ibirapuera","Mooca","Cerqueira César","N.Senhora do Ó","Grajaú-Parelheiros","Pinheiros","Cid.Universitária-USP-Ipen"],null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[-23.776249,-23.48002],"lng":[-46.792086,-46.600418]}},"evals":[],"jsHooks":[]}</script>
+<p><br></p>
+<div id="eda" class="section level2">
+<h2>EDA</h2>
+<p>Nos gráficos abaixo, plotamos as séries de MP2.5 e MP10 para os dados disponíveis. Observamos que os picos concentração dos dois grupos costumam ser no inverno. Repare que, no período analisado, há menos estações medindo de MP2.5 e com menor frequência.</p>
+<pre class="r"><code>df_pm %&gt;% 
+  filter(
+    parameter == &quot;MP2.5&quot;, 
+    !stationname %in% c(&quot;Osasco&quot;, &quot;Santana&quot;, &quot;Pinheiros&quot;)
+  ) %&gt;%
+  ggplot(aes(x = date_time, y = mass_conc)) +
+  geom_line(alpha = 0.3) +
+  geom_smooth(se = FALSE) +
+  facet_wrap(~stationname, scales = &quot;free&quot;) +
+  theme_bw() +
+  labs(x = &quot;Ano&quot;, y = expression(paste(&quot;MP2.5 (&quot;, mu, &quot;g/&quot;, m^3, &quot;)&quot;)))</code></pre>
+<p><img src="/blog/pm-em-sp_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>df_pm %&gt;% 
+  filter(parameter == &quot;MP10&quot;) %&gt;%
+  ggplot(aes(x = date_time, y = mass_conc)) +
+  geom_line(alpha = 0.3) +
+  geom_smooth(se = FALSE) +
+  facet_wrap(~stationname, scales = &quot;free&quot;) +
+  theme_bw() +
+  labs(x = &quot;Ano&quot;, y = expression(paste(&quot;MP10 (&quot;, mu, &quot;g/&quot;, m^3, &quot;)&quot;))) +
+  scale_x_datetime(date_breaks = &quot;3 years&quot;, date_labels = &quot;%Y&quot;)</code></pre>
+<p><img src="/blog/pm-em-sp_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>O gráfico abaixo apresenta a média horária de MP2.5 e MP10 para cada dia da semana. Observamos que:</p>
+<ul>
+<li><p>o MP10 tem dois picos durante o dia, associados aos períodos de tráfego intenso;</p></li>
+<li><p>as maiores concentrações de MP2.5 acontecem ao redor da meia-noite;</p></li>
+<li><p>a concentração de ambos tende a ser menor nos fins de semana.</p></li>
+</ul>
+<pre class="r"><code>df_pm %&gt;%
+  mutate(dayofweek = lubridate::wday(date, label = TRUE)) %&gt;%
+  group_by(parameter, hour, dayofweek) %&gt;% 
+  summarise(mass_conc = mean(mass_conc, na.rm = TRUE)) %&gt;% 
+  ggplot(aes(x = hour, y = mass_conc)) +
+  geom_line() +
+  facet_grid(parameter ~ dayofweek) +
+  scale_x_continuous(breaks = seq(0, 24, 4)) +
+  theme_bw() +
+  labs(x = &quot;Hora&quot;, y = expression(paste(&quot;MP (&quot;, mu, &quot;g/&quot;, m^3, &quot;)&quot;))) +
+  scale_x_continuous(breaks = seq(0, 24, 6))</code></pre>
+<p><img src="/blog/pm-em-sp_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Pelas médias anuais para cada estação, apresentadas nos gráficos a seguir, notamos uma tendência decrescente da concentração de MP10 em algumas estações. Em outras, a concentração anual média parece estar estável nos últimos anos. Na estação de Pinheiros, próxima à Marginal Pinheiros, a concentração anual média aumentou no nos últimos dois anos.</p>
+<pre class="r"><code>df_pm %&gt;%
+  filter(
+    hour %in% 6:22, 
+    parameter == &quot;MP2.5&quot;,
+    !stationname %in% c(&quot;Osasco&quot;, &quot;Santana&quot;, &quot;Pinheiros&quot;)
+  ) %&gt;% 
+    mutate(
+    year = lubridate::year(date),
+    year = as.character(year)
+  ) %&gt;% 
+  group_by(year, parameter, stationname) %&gt;% 
+  summarise(mass_conc = mean(mass_conc, na.rm = TRUE)) %&gt;% 
+  ggplot(aes(x = year, y = mass_conc)) +
+  geom_bar(stat = &quot;identity&quot;, fill = &quot;grey&quot;) +
+  facet_wrap(~stationname) +
+  labs(x = &quot;Hora&quot;, y = expression(paste(&quot;MP2.5 (&quot;, mu, &quot;g/&quot;, m^3, &quot;)&quot;))) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90))</code></pre>
+<p><img src="/blog/pm-em-sp_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>df_pm %&gt;%
+  filter(hour %in% 6:22, parameter == &quot;MP10&quot;) %&gt;% 
+  mutate(
+    year = lubridate::year(date),
+    year = as.character(year)
+  ) %&gt;% 
+  group_by(year, parameter, stationname) %&gt;% 
+  summarise(mass_conc = mean(mass_conc, na.rm = TRUE)) %&gt;% 
+  filter(
+    !(stationname == &quot;Pinheiros&quot; &amp; year == 2013),
+    !(stationname == &quot;Santana&quot; &amp; year == 2017)
+  ) %&gt;%
+  ggplot(aes(x = year, y = mass_conc)) +
+  geom_bar(stat = &quot;identity&quot;, fill = &quot;grey&quot;) +
+  facet_wrap(~stationname) +
+  labs(x = &quot;Hora&quot;, y = expression(paste(&quot;MP10 (&quot;, mu, &quot;g/&quot;, m^3, &quot;)&quot;))) +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90))</code></pre>
+<p><img src="/blog/pm-em-sp_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>O gráfico a seguir compara as médias anuais de MP10 de cada estação ao longo do período analisado.</p>
+<pre class="r"><code>p &lt;- df_pm %&gt;%
+  filter(hour %in% 6:22, parameter == &quot;MP10&quot;, !dayofweek %in% c(&quot;sat&quot;, &quot;sun&quot;)) %&gt;% 
+  mutate(year = lubridate::year(date)) %&gt;% 
+  group_by(year, stationname) %&gt;% 
+  summarise(mass_conc = mean(mass_conc, na.rm = TRUE)) %&gt;%
+  ungroup %&gt;% 
+  rename(Station = stationname, Year = year, Mass = mass_conc) %&gt;%
+  mutate(Mass = round(Mass, 2)) %&gt;% 
+  ggplot(aes(x = Year, y = Mass, color = Station)) +
+  geom_line() +
+  geom_point() +
+  theme(
+    legend.position = &quot;top&quot;
+  ) +
+  labs(
+    x = &quot;Year&quot;,
+    y = &quot;PM10&quot;,
+    color = &quot;&quot;
+  ) +
+  scale_x_continuous(breaks = seq(2008, 2017, 3)) +
+  theme_bw()
+
+plotly::ggplotly(p)</code></pre>
+<div id="htmlwidget-2" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"data":[{"x":[2008,2010,2011,2012,2013,2014,2015,2016,2017],"y":[37.98,29.59,31.97,33.08,35.1,32.62,27.87,26.29,26],"text":["Year: 2008<br />Mass: 37.98<br />Station: Cerqueira César","Year: 2010<br />Mass: 29.59<br />Station: Cerqueira César","Year: 2011<br />Mass: 31.97<br />Station: Cerqueira César","Year: 2012<br />Mass: 33.08<br />Station: Cerqueira César","Year: 2013<br />Mass: 35.10<br />Station: Cerqueira César","Year: 2014<br />Mass: 32.62<br />Station: Cerqueira César","Year: 2015<br />Mass: 27.87<br />Station: Cerqueira César","Year: 2016<br />Mass: 26.29<br />Station: Cerqueira César","Year: 2017<br />Mass: 26.00<br />Station: Cerqueira César"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)","dash":"solid"},"hoveron":"points","name":"Cerqueira César","legendgroup":"Cerqueira César","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(248,118,109,1)"}},"frame":null},{"x":[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017],"y":[43.88,36.75,34.46,34.82,35.81,32.85,34.68,29.17,27.2,27.07],"text":["Year: 2008<br />Mass: 43.88<br />Station: Congonhas","Year: 2009<br />Mass: 36.75<br />Station: Congonhas","Year: 2010<br />Mass: 34.46<br />Station: Congonhas","Year: 2011<br />Mass: 34.82<br />Station: Congonhas","Year: 2012<br />Mass: 35.81<br />Station: Congonhas","Year: 2013<br />Mass: 32.85<br />Station: Congonhas","Year: 2014<br />Mass: 34.68<br />Station: Congonhas","Year: 2015<br />Mass: 29.17<br />Station: Congonhas","Year: 2016<br />Mass: 27.20<br />Station: Congonhas","Year: 2017<br />Mass: 27.07<br />Station: Congonhas"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(222,140,0,1)","dash":"solid"},"hoveron":"points","name":"Congonhas","legendgroup":"Congonhas","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(222,140,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(222,140,0,1)"}},"frame":null},{"x":[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017],"y":[41.45,40.47,41.85,37.77,37.32,39.22,44.02,38.3,35.44,36.44],"text":["Year: 2008<br />Mass: 41.45<br />Station: Grajaú-Parelheiros","Year: 2009<br />Mass: 40.47<br />Station: Grajaú-Parelheiros","Year: 2010<br />Mass: 41.85<br />Station: Grajaú-Parelheiros","Year: 2011<br />Mass: 37.77<br />Station: Grajaú-Parelheiros","Year: 2012<br />Mass: 37.32<br />Station: Grajaú-Parelheiros","Year: 2013<br />Mass: 39.22<br />Station: Grajaú-Parelheiros","Year: 2014<br />Mass: 44.02<br />Station: Grajaú-Parelheiros","Year: 2015<br />Mass: 38.30<br />Station: Grajaú-Parelheiros","Year: 2016<br />Mass: 35.44<br />Station: Grajaú-Parelheiros","Year: 2017<br />Mass: 36.44<br />Station: Grajaú-Parelheiros"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(183,159,0,1)","dash":"solid"},"hoveron":"points","name":"Grajaú-Parelheiros","legendgroup":"Grajaú-Parelheiros","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(183,159,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(183,159,0,1)"}},"frame":null},{"x":[2008,2009,2010,2011,2012,2013,2014],"y":[32.73,25.5,37.86,37.8,34.98,29.22,28.33],"text":["Year: 2008<br />Mass: 32.73<br />Station: Ibirapuera","Year: 2009<br />Mass: 25.50<br />Station: Ibirapuera","Year: 2010<br />Mass: 37.86<br />Station: Ibirapuera","Year: 2011<br />Mass: 37.80<br />Station: Ibirapuera","Year: 2012<br />Mass: 34.98<br />Station: Ibirapuera","Year: 2013<br />Mass: 29.22<br />Station: Ibirapuera","Year: 2014<br />Mass: 28.33<br />Station: Ibirapuera"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(124,174,0,1)","dash":"solid"},"hoveron":"points","name":"Ibirapuera","legendgroup":"Ibirapuera","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(124,174,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(124,174,0,1)"}},"frame":null},{"x":[2013,2014,2015,2016,2017],"y":[28.92,30.5,22.04,21.69,21.07],"text":["Year: 2013<br />Mass: 28.92<br />Station: Interlagos","Year: 2014<br />Mass: 30.50<br />Station: Interlagos","Year: 2015<br />Mass: 22.04<br />Station: Interlagos","Year: 2016<br />Mass: 21.69<br />Station: Interlagos","Year: 2017<br />Mass: 21.07<br />Station: Interlagos"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)","dash":"solid"},"hoveron":"points","name":"Interlagos","legendgroup":"Interlagos","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(0,186,56,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,186,56,1)"}},"frame":null},{"x":[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017],"y":[31.6,28.54,30.76,31.16,32.1,29.22,36.48,27.41,22.28,26.76],"text":["Year: 2008<br />Mass: 31.60<br />Station: Mooca","Year: 2009<br />Mass: 28.54<br />Station: Mooca","Year: 2010<br />Mass: 30.76<br />Station: Mooca","Year: 2011<br />Mass: 31.16<br />Station: Mooca","Year: 2012<br />Mass: 32.10<br />Station: Mooca","Year: 2013<br />Mass: 29.22<br />Station: Mooca","Year: 2014<br />Mass: 36.48<br />Station: Mooca","Year: 2015<br />Mass: 27.41<br />Station: Mooca","Year: 2016<br />Mass: 22.28<br />Station: Mooca","Year: 2017<br />Mass: 26.76<br />Station: Mooca"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(0,192,139,1)","dash":"solid"},"hoveron":"points","name":"Mooca","legendgroup":"Mooca","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(0,192,139,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,192,139,1)"}},"frame":null},{"x":[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017],"y":[32.29,26.74,30.51,36.28,32.86,29.48,27.04,22.09,22.92,25.83],"text":["Year: 2008<br />Mass: 32.29<br />Station: N.Senhora do Ó","Year: 2009<br />Mass: 26.74<br />Station: N.Senhora do Ó","Year: 2010<br />Mass: 30.51<br />Station: N.Senhora do Ó","Year: 2011<br />Mass: 36.28<br />Station: N.Senhora do Ó","Year: 2012<br />Mass: 32.86<br />Station: N.Senhora do Ó","Year: 2013<br />Mass: 29.48<br />Station: N.Senhora do Ó","Year: 2014<br />Mass: 27.04<br />Station: N.Senhora do Ó","Year: 2015<br />Mass: 22.09<br />Station: N.Senhora do Ó","Year: 2016<br />Mass: 22.92<br />Station: N.Senhora do Ó","Year: 2017<br />Mass: 25.83<br />Station: N.Senhora do Ó"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)","dash":"solid"},"hoveron":"points","name":"N.Senhora do Ó","legendgroup":"N.Senhora do Ó","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(0,191,196,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,191,196,1)"}},"frame":null},{"x":[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017],"y":[45.61,34.41,47.84,46.02,42.54,39.16,40.26,36.93,35.43,34.98],"text":["Year: 2008<br />Mass: 45.61<br />Station: Osasco","Year: 2009<br />Mass: 34.41<br />Station: Osasco","Year: 2010<br />Mass: 47.84<br />Station: Osasco","Year: 2011<br />Mass: 46.02<br />Station: Osasco","Year: 2012<br />Mass: 42.54<br />Station: Osasco","Year: 2013<br />Mass: 39.16<br />Station: Osasco","Year: 2014<br />Mass: 40.26<br />Station: Osasco","Year: 2015<br />Mass: 36.93<br />Station: Osasco","Year: 2016<br />Mass: 35.43<br />Station: Osasco","Year: 2017<br />Mass: 34.98<br />Station: Osasco"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(0,180,240,1)","dash":"solid"},"hoveron":"points","name":"Osasco","legendgroup":"Osasco","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(0,180,240,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,180,240,1)"}},"frame":null},{"x":[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017],"y":[35.99,36.42,35.33,41.58,33.99,30.09,29.21,25.73,27.68,25.98],"text":["Year: 2008<br />Mass: 35.99<br />Station: Parque D.Pedro II","Year: 2009<br />Mass: 36.42<br />Station: Parque D.Pedro II","Year: 2010<br />Mass: 35.33<br />Station: Parque D.Pedro II","Year: 2011<br />Mass: 41.58<br />Station: Parque D.Pedro II","Year: 2012<br />Mass: 33.99<br />Station: Parque D.Pedro II","Year: 2013<br />Mass: 30.09<br />Station: Parque D.Pedro II","Year: 2014<br />Mass: 29.21<br />Station: Parque D.Pedro II","Year: 2015<br />Mass: 25.73<br />Station: Parque D.Pedro II","Year: 2016<br />Mass: 27.68<br />Station: Parque D.Pedro II","Year: 2017<br />Mass: 25.98<br />Station: Parque D.Pedro II"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)","dash":"solid"},"hoveron":"points","name":"Parque D.Pedro II","legendgroup":"Parque D.Pedro II","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(97,156,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(97,156,255,1)"}},"frame":null},{"x":[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017],"y":[39.68,27.83,24.61,27.44,21.57,0,26.04,23.74,34.03,34.87],"text":["Year: 2008<br />Mass: 39.68<br />Station: Pinheiros","Year: 2009<br />Mass: 27.83<br />Station: Pinheiros","Year: 2010<br />Mass: 24.61<br />Station: Pinheiros","Year: 2011<br />Mass: 27.44<br />Station: Pinheiros","Year: 2012<br />Mass: 21.57<br />Station: Pinheiros","Year: 2013<br />Mass:  0.00<br />Station: Pinheiros","Year: 2014<br />Mass: 26.04<br />Station: Pinheiros","Year: 2015<br />Mass: 23.74<br />Station: Pinheiros","Year: 2016<br />Mass: 34.03<br />Station: Pinheiros","Year: 2017<br />Mass: 34.87<br />Station: Pinheiros"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(199,124,255,1)","dash":"solid"},"hoveron":"points","name":"Pinheiros","legendgroup":"Pinheiros","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(199,124,255,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(199,124,255,1)"}},"frame":null},{"x":[2008,2009,2010,2011,2012,2013,2014,2015,2016,2017],"y":[35.05,36.41,40.09,38.9,36.15,32.11,41.96,29.24,28.79,5.78],"text":["Year: 2008<br />Mass: 35.05<br />Station: Santana","Year: 2009<br />Mass: 36.41<br />Station: Santana","Year: 2010<br />Mass: 40.09<br />Station: Santana","Year: 2011<br />Mass: 38.90<br />Station: Santana","Year: 2012<br />Mass: 36.15<br />Station: Santana","Year: 2013<br />Mass: 32.11<br />Station: Santana","Year: 2014<br />Mass: 41.96<br />Station: Santana","Year: 2015<br />Mass: 29.24<br />Station: Santana","Year: 2016<br />Mass: 28.79<br />Station: Santana","Year: 2017<br />Mass:  5.78<br />Station: Santana"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(245,100,227,1)","dash":"solid"},"hoveron":"points","name":"Santana","legendgroup":"Santana","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(245,100,227,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(245,100,227,1)"}},"frame":null},{"x":[2008,2009,2010,2012,2013,2014,2015,2016,2017],"y":[34.48,29.13,25.61,31.09,28.3,30.23,26.83,27.3,25.99],"text":["Year: 2008<br />Mass: 34.48<br />Station: Santo Amaro","Year: 2009<br />Mass: 29.13<br />Station: Santo Amaro","Year: 2010<br />Mass: 25.61<br />Station: Santo Amaro","Year: 2012<br />Mass: 31.09<br />Station: Santo Amaro","Year: 2013<br />Mass: 28.30<br />Station: Santo Amaro","Year: 2014<br />Mass: 30.23<br />Station: Santo Amaro","Year: 2015<br />Mass: 26.83<br />Station: Santo Amaro","Year: 2016<br />Mass: 27.30<br />Station: Santo Amaro","Year: 2017<br />Mass: 25.99<br />Station: Santo Amaro"],"type":"scatter","mode":"lines+markers","line":{"width":1.88976377952756,"color":"rgba(255,100,176,1)","dash":"solid"},"hoveron":"points","name":"Santo Amaro","legendgroup":"Santo Amaro","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","marker":{"autocolorscale":false,"color":"rgba(255,100,176,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(255,100,176,1)"}},"frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":37.2602739726027},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2007.55,2017.45],"tickmode":"array","ticktext":["2008","2011","2014","2017"],"tickvals":[2008,2011,2014,2017],"categoryorder":"array","categoryarray":["2008","2011","2014","2017"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"Year","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-2.392,50.232],"tickmode":"array","ticktext":["0","10","20","30","40","50"],"tickvals":[0,10,20,30,40,50],"categoryorder":"array","categoryarray":["0","10","20","30","40","50"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"PM10","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.96751968503937},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"source":"A","attrs":{"374d2d84deb6":{"x":{},"y":{},"colour":{},"type":"scatter"},"374d1600ee3d":{"x":{},"y":{},"colour":{}}},"cur_data":"374d2d84deb6","visdat":{"374d2d84deb6":["function (y) ","x"],"374d1600ee3d":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
+</div>
+<div id="conclusoes" class="section level2">
+<h2>Conclusões</h2>
+<ul>
+<li><p>A disponibilidade de dados de MP2.5 para a cidade de São Paulo de 2008 a 2017 é muito ruim, o que prejudica a análise da tendência da concentração dessas partículas e a comparação entre regiões da cidade.</p></li>
+<li><p>Os picos e MP10 ao longo do dia estão associados com os horários de trânsito mais intenso.</p></li>
+<li><p>As estações com maiores concentrações anuais de MP10 ao longo do período analisado foram Grajaú-Parelheiros e Osasco.</p></li>
+</ul>
+</div>
+
+  </div>
+
+  <footer>
+    <ul class="stats">
+  <li class="categories">
+    <ul>
+        
+            
+            
+                <i class="fa fa-folder"></i>
+                
+                
+                <li><a class="article-category-link" href="/categories/material-particulado">Material particulado</a></li>
+                
+            
+        
+    </ul>
+  </li>
+  <li class="tags">
+    <ul>
+        
+            
+            
+                <i class="fa fa-tags"></i>
+                
+                
+                <li><a class="article-category-link" href="/tags/eda">EDA</a></li>
+                
+                
+                <li><a class="article-category-link" href="/tags/s%C3%A3o-paulo">São Paulo</a></li>
+                
+                
+                <li><a class="article-category-link" href="/tags/brasil">Brasil</a></li>
+                
+            
+        
+    </ul>
+  </li>
+</ul>
+
+  </footer>
+
+</article>
+
+    <article class="post">
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "rpollution" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </article>
+
+
+<ul class="actions pagination">
+    
+        <li><a href="/blog/co-em-sp/"
+                class="button big previous">A poluição do ar durante a greve dos caminhoneiros</a></li>
+    
+
+    
+</ul>
+
+
+    </div>
+    
+<section id="sidebar">
+
+  
+  <section id="intro">
+    
+    
+      
+        <a href='/'><img src="/img/main/logo.png" width="180" alt="R pollution" /></a>
+      
+    
+    
+      <header>
+        <h2>R Pollution</h2>
+        <p>Análises de dados de poluição do ar usando o R</p>
+      </header>
+    
+    
+      <ul class="icons">
+        
+          
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/williamorim/Rpollution-blog" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </ul>
+    
+  </section>
+
+  
+  <section class="recent-posts">
+    <div class="mini-posts">
+      <header>
+        <h3>Posts mais recentes</h3>
+      </header>
+      <div class="posts-container">
+        
+
+        
+          
+        
+
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/pm-em-sp/">Material particulado em São Paulo</a>
+              </h3>
+              
+              <time class="published" datetime='2018-09-24'>
+                24.09.2018
+              </time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/pm-em-sp/" class="image featured">
+            <img src="/img/2018/material-particulado.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/co-em-sp/">A poluição do ar durante a greve dos caminhoneiros</a>
+              </h3>
+              
+              <time class="published" datetime='2018-06-18'>
+                18.06.2018
+              </time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/co-em-sp/" class="image featured">
+            <img src="/img/2018/truck.png" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/co-em-sp/">Monóxido de carbono em São Paulo</a>
+              </h3>
+              
+              <time class="published" datetime='2018-06-16'>
+                16.06.2018
+              </time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/co-em-sp/" class="image featured">
+            <img src="/img/2018/co-em-sp.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/ozonio-e-etanol/">Ozônio e etanol</a>
+              </h3>
+              
+              <time class="published" datetime='2018-04-16'>
+                16.04.2018
+              </time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/ozonio-e-etanol/" class="image featured">
+            <img src="/img/2018/ozonio-e-etanol.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+          <article class="mini-post">
+            <header>
+              <h3>
+                <a href="/blog/ozonio-clima-sp/">Ozônio e o clima (SP)</a>
+              </h3>
+              
+              <time class="published" datetime='2018-03-28'>
+                28.03.2018
+              </time>
+            </header>
+            
+    
+
+    
+        
+        
+
+
+
+
+
+
+
+  
+
+
+        
+        
+        
+
+        <a href="/blog/ozonio-clima-sp/" class="image featured">
+            <img src="/img/2018/ozonio-clima-sp.jpg" alt="">
+        </a>
+    
+
+
+          </article>
+        
+      </div>
+
+      
+        <a href=
+          
+            /blog/
+          
+        class="button">Mais posts</a>
+      
+    </div>
+  </section>
+
+  
+  
+  
+  
+  
+    <section id="categories">
+      <header>
+        <h3>
+          <a href="/categories/">Categorias</a>
+        </h3>
+      </header>
+        
+          
+        
+
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/oz%C3%B4nio/">Ozônio</a>
+                <span style="float:right;">5</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/carbono/">Carbono</a>
+                <span style="float:right;">2</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/material-particulado/">Material particulado</a>
+                <span style="float:right;">2</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/coleta-de-dados/">Coleta de dados</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/diversos/">Diversos</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+        <p>
+          <article>
+            <header>
+              
+                <a href="/categories/nitrog%C3%AAnio/">Nitrogênio</a>
+                <span style="float:right;">1</span>
+              
+            </header>
+          </article>
+        </p>
+        
+    </section>
+  
+  
+
+  
+  
+
+  
+  <section id="footer">
+    
+      <ul class="icons">
+        
+          
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+
+
+        
+        
+  <li><a href="//github.com/williamorim/Rpollution-blog" target="_blank" title="GitHub" class="fa fa-github"></a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </ul>
+    
+    <p class="copyright">
+      
+        &copy; 2018
+        
+          R Pollution
+        
+      .
+      Powered by <a href="//gohugo.io" target="_blank">Hugo</a>
+    </p>
+  </section>
+</section>
+
+    </div>
+    <a id="back-to-top" href="#" class="fa fa-arrow-up fa-border fa-2x"></a>
+    
+
+    
+      
+    
+
+    
+      
+      
+      
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+        
+        
+        
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+        <script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/css.min.js"></script>
+        <script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+      
+    
+    
+    
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.1.25/jquery.fancybox.min.js"></script>
+      <script src="/js/util.js"></script>
+      <script src="/js/main.js"></script>
+      <script src="/js/backToTop.js"></script>
+    
+
+    
+      
+        
+      
+    
+
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+<script src="//yihui.name/js/math-code.js"></script>
+<script async
+src="//cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+  </body>
+</html>
+

@@ -6,10 +6,19 @@
     <description>Recent content on R Pollution</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Mon, 18 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 24 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Material particulado em São Paulo</title>
+      <link>/blog/pm-em-sp/</link>
+      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/pm-em-sp/</guid>
+      <description>Material particulado é o nome genérico atribuído a partículas microscópicas, sólidas ou líquidas, suspensas na atmosfera. Por serem tão pequenas, elas podem ser inaladas e causar sérios problemas à saúde. Partículas com menos de 10 micrômetros de diâmetro, por exemplo, podem penetrar na estrutura pulmonar (bronquíolos e alvéolos) e cair na corrente sanguínea. Por essa razão, esse grupo é normalmente classificado em: MP2.</description>
+    </item>
     
     <item>
       <title>A poluição do ar durante a greve dos caminhoneiros</title>

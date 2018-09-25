@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Carbono on R Pollution</title>
+    <link>/categories/carbono/</link>
+    <description>Recent content in Carbono on R Pollution</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Mon, 18 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/carbono/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A poluição do ar durante a greve dos caminhoneiros</title>
+      <link>/blog/co-em-sp/</link>
+      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/co-em-sp/</guid>
+      <description>Com a greve dos caminhoneiros no final do mês de maio, muitas cidades tiveram uma redução atípica no tráfego de caminhões e, posteriormente, com a falta de combustível, de veículos em geral.
+Como as emissões veiculares são a principal fonte de diversos poluentes em centros urbanos, faz todo o sentido analisarmos o impacto das paralisações nos níveis de poluição.
+Neste post, vamos analisar descritivamente as concentrações de alguns poluentes um pouco antes, durante e um pouco depois da greve dos caminhoneiros.</description>
+    </item>
+    
+    <item>
+      <title>Monóxido de carbono em São Paulo</title>
+      <link>/blog/co-em-sp/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/blog/co-em-sp/</guid>
+      <description>Neste post, vamos analisar a série do monóxido de carbono (CO), de 2008 a 2018, na cidade de São Paulo.
+O que precisamos saber sobre o CO?
+ O CO é um gás sem cor, sem cheiro, insípido, inflamável e tóxico para humanos, animais e plantas.
+ A exposição ao CO pode causar dor de cabeça, tontura, fraqueza, náusea e, em altas concentrações, desorientação, coma e morte por asfixia.</description>
+    </item>
+    
+  </channel>
+</rss>

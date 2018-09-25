@@ -6,24 +6,24 @@
     <description>Recent content in Categories on R Pollution</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Sat, 16 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 18 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>CO</title>
-      <link>/categories/co/</link>
-      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      <title>Carbono</title>
+      <link>/categories/carbono/</link>
+      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>/categories/co/</guid>
+      <guid>/categories/carbono/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Coleta de dados</title>
       <link>/categories/coleta-de-dados/</link>
-      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 16 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/categories/coleta-de-dados/</guid>
       <description></description>
@@ -39,9 +39,27 @@
     </item>
     
     <item>
+      <title>Material particulado</title>
+      <link>/categories/material-particulado/</link>
+      <pubDate>Mon, 24 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/material-particulado/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nitrogênio</title>
+      <link>/categories/nitrog%C3%AAnio/</link>
+      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/nitrog%C3%AAnio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Ozônio</title>
       <link>/categories/oz%C3%B4nio/</link>
-      <pubDate>Mon, 16 Apr 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 18 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/categories/oz%C3%B4nio/</guid>
       <description></description>
