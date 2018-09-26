@@ -175,10 +175,18 @@ O gráfico a seguir compara as médias anuais de MP10 de cada estação ao longo
 
 ```{r}
 p <- df_pm %>%
-  filter(hour %in% 6:22, parameter == "MP10", !dayofweek %in% c("sat", "sun")) %>% 
+  filter(
+    hour %in% 6:22, 
+    parameter == "MP10", 
+    !dayofweek %in% c("sat", "sun")
+  ) %>% 
   mutate(year = lubridate::year(date)) %>% 
   group_by(year, stationname) %>% 
   summarise(mass_conc = mean(mass_conc, na.rm = TRUE)) %>%
+  filter(
+    !(stationname == "Pinheiros" & year == 2013),
+    !(stationname == "Santana" & year == 2017)
+  ) %>% 
   ungroup %>% 
   rename(Station = stationname, Year = year, Mass = mass_conc) %>%
   mutate(Mass = round(Mass, 2)) %>% 
