@@ -2,7 +2,7 @@
 title: A poluição do ar durante a greve dos caminhoneiros
 author: William Amorim
 date: '2018-06-18'
-slug: co-em-sp
+slug: greve-caminhoneiros
 type: "post"
 featured: "truck.png"
 featuredalt: "Poluição caminhão"
