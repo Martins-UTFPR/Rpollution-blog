@@ -248,7 +248,8 @@ df %>%
   geom_line() +
   facet_grid(polluent ~ dayofweek, scales = "free_y") +
   theme_bw() +
-  labs(x = "Hora", y = "Concentração")
+  labs(x = "Hora", y = "Concentração") +
+  scale_x_continuous(breaks = seq(0, 24, 6))
 ```
 
 Usando então a função `make_grid_plot()` e as informações do gráfico acima, podemos construir e analisar as séries de cada poluente. Nos gráficos abaixo, o intervalo entre as retas pontilhadas representa o período de greve.

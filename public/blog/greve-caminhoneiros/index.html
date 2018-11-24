@@ -65,7 +65,7 @@ Neste post, vamos analisar descritivamente as concentrações de alguns poluente
 
 <meta itemprop="datePublished" content="2018-06-18T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2018-06-18T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="1608">
+<meta itemprop="wordCount" content="1614">
 
 
 
@@ -837,7 +837,8 @@ ga('send', 'pageview');
   geom_line() +
   facet_grid(polluent ~ dayofweek, scales = &quot;free_y&quot;) +
   theme_bw() +
-  labs(x = &quot;Hora&quot;, y = &quot;Concentração&quot;)</code></pre>
+  labs(x = &quot;Hora&quot;, y = &quot;Concentração&quot;) +
+  scale_x_continuous(breaks = seq(0, 24, 6))</code></pre>
 <p><img src="/blog/poluicao-greve-caminhoneiros_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>Usando então a função <code>make_grid_plot()</code> e as informações do gráfico acima, podemos construir e analisar as séries de cada poluente. Nos gráficos abaixo, o intervalo entre as retas pontilhadas representa o período de greve.</p>
 <p>O gráfico abaixo mostra as séries do monóxido de carbono (CO), utilizando a média diária das 7 às 11 horas. Os fins de semana foram retirados da amostra.</p>
