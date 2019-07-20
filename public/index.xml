@@ -13,10 +13,10 @@
     
     <item>
       <title>Nova versão do scraper da CETESB</title>
-      <link>/blog/scraper-cetesb/</link>
+      <link>/blog/scraper-cetesb-v2/</link>
       <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>/blog/scraper-cetesb/</guid>
+      <guid>/blog/scraper-cetesb-v2/</guid>
       <description>Neste post, vou apresentar algumas mudanças no scraper em R que eu montei para baixar os dados da CETESB a partir do Qualar.
 O que é o Qualar? O Qualar é o sistema de informações de qualidade do ar da CETESB. Por meio dele, podemos acessar os dados de todas as estações de monitoramento do estado de São Paulo. O sistema exige a criação de um login e então o envio de um pequeno formulário com quais informações você gostaria de visualizar.</description>
     </item>

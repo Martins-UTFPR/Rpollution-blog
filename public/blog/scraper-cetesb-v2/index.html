@@ -1,19 +1,11 @@
-
-
-
-    
-        
-    
-
-
-
-
 <!DOCTYPE HTML>
 
 <html>
     <head>
         
-            <title>Material particulado Posts - R Pollution</title>
+            
+                <title>Nova versão do scraper da CETESB</title>
+            
         
 
         <meta charset="utf-8" />
@@ -23,6 +15,8 @@
 
 
         
+            <meta name="author" content="William Amorim">
+        
         
             
                 <meta name="description" content="Análise de dados de poluição do ar usando o R">
@@ -30,24 +24,35 @@
         
 
         <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Material particulado"/>
-<meta name="twitter:description" content="Análise de dados de poluição do ar usando o R"/>
+<meta name="twitter:title" content="Nova versão do scraper da CETESB"/>
+<meta name="twitter:description" content="Neste post, vou apresentar algumas mudanças no scraper em R que eu montei para baixar os dados da CETESB a partir do Qualar.
+O que é o Qualar? O Qualar é o sistema de informações de qualidade do ar da CETESB. Por meio dele, podemos acessar os dados de todas as estações de monitoramento do estado de São Paulo. O sistema exige a criação de um login e então o envio de um pequeno formulário com quais informações você gostaria de visualizar."/>
 
-        <meta property="og:title" content="Material particulado" />
-<meta property="og:description" content="Análise de dados de poluição do ar usando o R" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="/categories/material-particulado/" />
-
-<meta property="og:updated_time" content="2018-09-24T00:00:00&#43;00:00"/>
+        <meta property="og:title" content="Nova versão do scraper da CETESB" />
+<meta property="og:description" content="Neste post, vou apresentar algumas mudanças no scraper em R que eu montei para baixar os dados da CETESB a partir do Qualar.
+O que é o Qualar? O Qualar é o sistema de informações de qualidade do ar da CETESB. Por meio dele, podemos acessar os dados de todas as estações de monitoramento do estado de São Paulo. O sistema exige a criação de um login e então o envio de um pequeno formulário com quais informações você gostaria de visualizar." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/scraper-cetesb-v2/" />
+<meta property="article:published_time" content="2019-07-20T00:00:00&#43;00:00"/>
+<meta property="article:modified_time" content="2019-07-20T00:00:00&#43;00:00"/>
 
         <meta property="og:image" content="//images/logo.png">
         <meta property="og:image:type" content="image/png">
         <meta property="og:image:width" content="512">
         <meta property="og:image:height" content="512">
         
-<meta itemprop="name" content="Material particulado">
-<meta itemprop="description" content="Análise de dados de poluição do ar usando o R">
+<meta itemprop="name" content="Nova versão do scraper da CETESB">
+<meta itemprop="description" content="Neste post, vou apresentar algumas mudanças no scraper em R que eu montei para baixar os dados da CETESB a partir do Qualar.
+O que é o Qualar? O Qualar é o sistema de informações de qualidade do ar da CETESB. Por meio dele, podemos acessar os dados de todas as estações de monitoramento do estado de São Paulo. O sistema exige a criação de um login e então o envio de um pequeno formulário com quais informações você gostaria de visualizar.">
 
+
+<meta itemprop="datePublished" content="2019-07-20T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2019-07-20T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="606">
+
+
+
+<meta itemprop="keywords" content="CETESB,São Paulo,Brasil," />
 
         
 
@@ -100,9 +105,10 @@ if (!doNotTrack) {
       <div id="wrapper">
 
     
+    
 <header id="header">
     
-      <h1><a href="/">categories</a></h1>
+      <h1><a href="/">blog</a></h1>
     
 
     <nav class="links">
@@ -136,6 +142,10 @@ if (!doNotTrack) {
     </nav>
     <nav class="main">
         <ul>
+            
+            <li id="share-nav" class="share-menu" style="display:none;">
+                <a class="fa-share-alt" href="#share-menu">Share</a>
+            </li>
             
             <li class="search">
                 <a class="fa-search" href="#search">Search</a>
@@ -409,16 +419,95 @@ if (!doNotTrack) {
         
 </section>
 
+    <section id="share-menu">
+    <section id="social-share-nav">
+        <ul class="links">
+            <header>
+                <h3>Share this post <i class="fa fa-smile-o"></i></h3>
+            </header>
+            
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2fscraper-cetesb-v2%2f&amp;text=Nova%20vers%c3%a3o%20do%20scraper%20da%20CETESB&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//plus.google.com/share?url=%2fblog%2fscraper-cetesb-v2%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2fscraper-cetesb-v2%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2fscraper-cetesb-v2%2f&amp;title=Nova%20vers%c3%a3o%20do%20scraper%20da%20CETESB" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=%2fblog%2fscraper-cetesb-v2%2f&amp;title=Nova%20vers%c3%a3o%20do%20scraper%20da%20CETESB" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by William%20Amorim&amp;body=%2fblog%2fscraper-cetesb-v2%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+        </ul>
+    </section>
+</section>
+
     
     <div id="main">
-        <h1>Material particulado</h1>
         
         
-            <article class="post">
+        <article class="post">
   <header>
     <div class="title">
         
-            <h2><a href="/blog/pm-em-sp/">Material particulado em São Paulo</a></h2>
+            <h1><a href="/blog/scraper-cetesb-v2/">Nova versão do scraper da CETESB</a></h1>
+            
         
         
     </div>
@@ -426,16 +515,93 @@ if (!doNotTrack) {
         
 
         <time class="published"
-            datetime='24-09-2018'>
-            24.09.2018</time>
+            datetime='20-07-2019'>
+            20.07.2019</time>
         <span class="author">William Amorim</span>
         
-            <p style = "font-size: x-small">9 minutos de leitura</p>
+            <p style = "font-size: x-small">3 minutos de leitura</p>
         
         
     </div>
 </header>
 
+
+  
+    <section id="social-share">
+      <ul class="icons">
+        
+
+
+
+<li>
+  <a href="//twitter.com/share?url=%2fblog%2fscraper-cetesb-v2%2f&amp;text=Nova%20vers%c3%a3o%20do%20scraper%20da%20CETESB&amp;via=" target="_blank" class="share-btn twitter">
+    <i class="fa fa-twitter"></i>
+    <p>Twitter</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//plus.google.com/share?url=%2fblog%2fscraper-cetesb-v2%2f" target="_blank" class="share-btn google-plus">
+    <i class="fa fa-google-plus"></i>
+    <p>Google+</p>
+  </a>
+</li>
+
+
+
+
+
+<li>
+  <a href="//www.facebook.com/sharer/sharer.php?u=%2fblog%2fscraper-cetesb-v2%2f" target="_blank" class="share-btn facebook">
+    <i class="fa fa-facebook"></i>
+    <p>Facebook</p>
+    </a>
+</li>
+
+
+
+
+<li>
+  <a href="//reddit.com/submit?url=%2fblog%2fscraper-cetesb-v2%2f&amp;title=Nova%20vers%c3%a3o%20do%20scraper%20da%20CETESB" target="_blank" class="share-btn reddit">
+    <i class="fa fa-reddit-alien"></i>
+    <p>Reddit</p>
+  </a>
+</li>
+
+
+
+
+<li>
+  <a href="//www.linkedin.com/shareArticle?url=%2fblog%2fscraper-cetesb-v2%2f&amp;title=Nova%20vers%c3%a3o%20do%20scraper%20da%20CETESB" target="_blank" class="share-btn linkedin">
+      <i class="fa fa-linkedin"></i>
+      <p>LinkedIn</p>
+    </a>
+</li>
+
+
+
+
+
+
+
+
+
+
+<li>
+  <a href="mailto:?subject=Check out this post by William%20Amorim&amp;body=%2fblog%2fscraper-cetesb-v2%2f" target="_blank" class="share-btn email">
+    <i class="fa fa-envelope"></i>
+    <p>Email</p>
+  </a>
+</li>
+
+
+      </ul>
+    </section>
+  
+
   
     
 
@@ -456,19 +622,96 @@ if (!doNotTrack) {
         
         
 
-        <a href="/blog/pm-em-sp/" class="image featured">
-            <img src="/img/2018/material-particulado.jpg" alt="">
+        <a href="/blog/scraper-cetesb-v2/" class="image featured">
+            <img src="/img/2019/scraper-cetesb.png" alt="">
         </a>
     
 
 
+  <div id="content">
+    
+
+
+<p>Neste post, vou apresentar algumas mudanças no <a href="https://www.rpollution.com/blog/scraper-cetesb/">scraper em R que eu montei</a> para baixar os dados da CETESB a partir do Qualar.</p>
+<div id="o-que-e-o-qualar" class="section level1">
+<h1>O que é o Qualar?</h1>
+<p>O <a href="http://qualar.cetesb.sp.gov.br/qualar/home.do">Qualar</a> é o sistema de informações de qualidade do ar da CETESB. Por meio dele, podemos acessar os dados de todas as estações de monitoramento do estado de São Paulo. O sistema exige a criação de um login e então o envio de um pequeno formulário com quais informações você gostaria de visualizar.</p>
+<p>O Qualar funciona muito bem para pequenas consultas, mas na extração de várias estações ou parâmetros o trabalho se torna maçante.</p>
+<p>O scraper contorna esse problema, simulando requisições de dados ao Qualar que podem ser facilmente iteradas para diversas estações e parâmetros.</p>
+</div>
+<div id="o-pacote-rpollution" class="section level1">
+<h1>O pacote Rpollution</h1>
+<p>A principal mudança nessa nova versão é onde a função <code>scraper_cetesb()</code> passará a morar. Anteriormente, ela estava no pacote <code>koffing</code>, encontrado <a href="https://github.com/atmoschem/koffing">neste repositório</a> da organização <code>atmoschem</code>.</p>
+<p>Agora, ele passará a morar no pacote <code>Rpollution</code>, encontrado <a href="https://github.com/williamorim/Rpollution">neste repositório</a>. Eu resolvi fazer essa mudança pois quero reviver o <code>Rpollution</code>, criando ferramentas mais gerais para trabalhar com dados de poluição, além de apenas web scrapers.</p>
+<p>A versão do pacote <code>koffing</code> é a atual e continuará disponível, mas em algum momento eu deixarei de dar manutenção a ela.</p>
+</div>
+<div id="o-que-mudou-no-scraper" class="section level1">
+<h1>O que mudou no scraper?</h1>
+<ul>
+<li><p>A função está muito mais rápida, pois utiliza agora a seção <em>Exportar Dados Avançado</em> que não imprime os dados na tela antes do download.</p></li>
+<li><p>Os argumentos <code>type</code>, <code>invalidData</code> e <code>network</code> foram removidos.</p></li>
+<li><p>Dois novos argumentos foram incluídos: <code>file</code> e <code>safe</code>.</p>
+<ul>
+<li>O argumento <code>file</code> permite salvar os dados diretamente em um arquivo, em vez de imprimir na tela ou salvar em um objeto do R.</li>
+<li>O argumento <code>safe</code>, quando <code>TRUE</code>, impede que o scraper devolva um erro caso não consiga baixar os dados. Isso é útil quando a função é iterada para diversos parâmetros.</li>
+</ul></li>
+</ul>
+</div>
+<div id="exemplo" class="section level1">
+<h1>Exemplo</h1>
+<p>Para instalar o pacote <code>RPollution</code>, basta rodar o código abaixo.</p>
+<pre class="r"><code>remotes::install_github(&quot;williamorim/Rpollution&quot;)
+
+# Se você não tiver o pacote `remotes` instalado, rode este código antes:
+install.packages(&quot;remotes&quot;)</code></pre>
+<p>No exemplo abaixo, estamos baixando os dados de ozônio (63) para a estação Dom Pedro II (72) para o mês de janeiro de 2018. Os dados são guardados no objeto <code>dados_ozonio</code>.</p>
+<pre class="r"><code>library(Rpollution)
+
+dados_ozonio &lt;- scraper_cetesb(
+  station = 72, 
+  parameter = 63,
+  start = &quot;01/01/2018&quot;, 
+  end = &quot;31/01/2018&quot;,
+  login = &quot;login&quot;, 
+  password = &quot;senha&quot;
+)</code></pre>
+<p>Para esse código rodar de fato, você precisa substituir os argumentos <code>login</code> e <code>password</code> com os seus dados de cadastro do Qualar.</p>
+<p>Se quiséssemos agora baixar os dados tanto de ozônio quanto de NO2 (15), poderíamos fazer um <code>for</code>, iterando no valor do argumento <code>parameter</code>.</p>
+<pre class="r"><code>parametros &lt;- c(15, 63)
+
+for(i in parametros) {
   
-  <p>Material particulado é o nome genérico atribuído a partículas microscópicas, sólidas ou líquidas, suspensas na atmosfera. Por serem tão pequenas, elas podem ser inaladas e causar sérios problemas à saúde. Partículas com menos de 10 micrômetros de diâmetro, por exemplo, podem penetrar na estrutura pulmonar (bronquíolos e alvéolos) e cair na corrente sanguínea. Por essa razão, esse grupo é normalmente classificado em: MP2.5, partículas com até 2.5 micrômetros de diâmetro, e MP10, partículas com&hellip;</p>
+  dados_ozonio &lt;- scraper_cetesb(
+  station = 72, 
+  parameter = i,
+  start = &quot;01/01/2018&quot;, 
+  end = &quot;31/01/2018&quot;,
+  login = &quot;login&quot;, 
+  password = &quot;senha&quot;,
+  file = paste0(&quot;dados_&quot;, i, &quot;.rds&quot;),
+  safe = TRUE
+)
+  
+}</code></pre>
+<p>Nesse exemplo, os dados são guardados agora em arquivos, um para cada poluente. Isso é feito a partir do parâmetro <code>file</code>, que recebe uma string com o nome do arquivo em formato <code>.rds</code>.</p>
+<p>Além disso, repare que adicionamos o argumento <code>safe = TRUE</code>. Isso impede que o R retorne um erro caso o scraper não consiga baixar os dados para um dos poluentes, interrompendo a execução do <code>for</code> pela metade. Dessa forma, ele sempre vai tentar baixar os dados para todos os poluentes selecionados no objeto <code>parametros</code>.</p>
+<blockquote>
+<p>Web scrapers são altamente vulneráveis a alterações no site em que estão raspando. Se você encontrar algum erro ou o scraper parar de funcionar, por favor me avise. :)</p>
+</blockquote>
+</div>
+<div id="referencias" class="section level1">
+<h1>Referências</h1>
+<ul>
+<li><p><a href="http://curso-r.com/blog/2018/02/18/2018-02-18-fluxo-scraping/">O fluxo do web scraping</a></p></li>
+<li><p><a href="http://curso-r.com/blog/2018/02/17/2018-02-17-scraper-distribuido/">Web Scraper Distribuído</a></p></li>
+<li><p><a href="https://github.com/curso-r/201904-workshop-web-scraping">Repositório do workshop de web scraping da Curso-R</a></p></li>
+</ul>
+</div>
+
+  </div>
+
   <footer>
-    <ul class="actions">
-      <li><a href="/blog/pm-em-sp/" class="button big">Continue lendo</a></li>
-    </ul>
-  <ul class="stats">
+    <ul class="stats">
   <li class="categories">
     <ul>
         
@@ -477,7 +720,7 @@ if (!doNotTrack) {
                 <i class="fa fa-folder"></i>
                 
                 
-                <li><a class="article-category-link" href="/categories/material-particulado">Material particulado</a></li>
+                <li><a class="article-category-link" href="/categories/coleta-de-dados">Coleta de dados</a></li>
                 
             
         
@@ -491,7 +734,7 @@ if (!doNotTrack) {
                 <i class="fa fa-tags"></i>
                 
                 
-                <li><a class="article-category-link" href="/tags/eda">EDA</a></li>
+                <li><a class="article-category-link" href="/tags/cetesb">CETESB</a></li>
                 
                 
                 <li><a class="article-category-link" href="/tags/s%C3%A3o-paulo">São Paulo</a></li>
@@ -506,127 +749,42 @@ if (!doNotTrack) {
 </ul>
 
   </footer>
+
 </article>
 
-        
-            <article class="post">
-  <header>
-    <div class="title">
-        
-            <h2><a href="/blog/greve-caminhoneiros/">A poluição do ar durante a greve dos caminhoneiros</a></h2>
-        
-        
-    </div>
-    <div class="meta">
-        
-
-        <time class="published"
-            datetime='18-06-2018'>
-            18.06.2018</time>
-        <span class="author">William Amorim</span>
-        
-            <p style = "font-size: x-small">8 minutos de leitura</p>
-        
-        
-    </div>
-</header>
-
-  
+    <article class="post">
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
     
-
     
-        
-        
-
-
-
-
-
-
-
-  
-
-
-        
-        
-        
-
-        <a href="/blog/greve-caminhoneiros/" class="image featured">
-            <img src="/img/2018/truck.png" alt="">
-        </a>
     
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "rpollution" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </article>
 
 
-  
-  <p>Com a greve dos caminhoneiros no final do mês de maio, muitas cidades tiveram uma redução atípica no tráfego de caminhões e, posteriormente, com a falta de combustível, de veículos em geral.</p>
-  <footer>
-    <ul class="actions">
-      <li><a href="/blog/greve-caminhoneiros/" class="button big">Continue lendo</a></li>
-    </ul>
-  <ul class="stats">
-  <li class="categories">
-    <ul>
-        
-            
-            
-                <i class="fa fa-folder"></i>
-                
-                
-                <li><a class="article-category-link" href="/categories/material-particulado">Material particulado</a></li>
-                
-                
-                <li><a class="article-category-link" href="/categories/diversos">Diversos</a></li>
-                
-                
-                <li><a class="article-category-link" href="/categories/carbono">Carbono</a></li>
-                
-                
-                <li><a class="article-category-link" href="/categories/oz%C3%B4nio">Ozônio</a></li>
-                
-                
-                <li><a class="article-category-link" href="/categories/nitrog%C3%AAnio">Nitrogênio</a></li>
-                
-            
-        
-    </ul>
-  </li>
-  <li class="tags">
-    <ul>
-        
-            
-            
-                <i class="fa fa-tags"></i>
-                
-                
-                <li><a class="article-category-link" href="/tags/eda">EDA</a></li>
-                
-                
-                <li><a class="article-category-link" href="/tags/s%C3%A3o-paulo">São Paulo</a></li>
-                
-                
-                <li><a class="article-category-link" href="/tags/brasil">Brasil</a></li>
-                
-            
-        
-    </ul>
-  </li>
-</ul>
-
-  </footer>
-</article>
-
-        
-
-        
 <ul class="actions pagination">
     
-        <li><a href="#" class="disabled button big previous">Página anterior</a></li>
+        <li><a href="/blog/pm-em-sp/"
+                class="button big previous">Material particulado em São Paulo</a></li>
     
 
     
-        <li><a href="#" class="disabled button big next">Próxima página</a></li>
-    
 </ul>
+
 
     </div>
     
@@ -650,7 +808,7 @@ if (!doNotTrack) {
       <ul class="icons">
         
           
-    <li><a href="/categories/material-particulado/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
 
 
         
@@ -1051,7 +1209,7 @@ if (!doNotTrack) {
       <ul class="icons">
         
           
-    <li><a href="/categories/material-particulado/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
+    <li><a href="/index.xml" type="application/rss+xml" target="_blank" title="RSS" class="fa fa-rss"></a></li>
 
 
         
