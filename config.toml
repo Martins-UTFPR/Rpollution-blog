@@ -149,7 +149,7 @@ pluralizeListTitles = false
   wordpress        = ""
   medium           = ""
   # Professional/Business Oriented Communities
-  linkedin         = ""
+  linkedin         = "https://www.linkedin.com/in/william-amorim-776162108/"
   linkedin_company = ""
   foursquare       = ""
   xing             = ""
