@@ -1,0 +1,111 @@
+---
+title: Nova versão do scraper da CETESB
+author: William Amorim
+date: '2019-07-20'
+slug: scraper-cetesb
+type: "post"
+featured: "scraper-cetesb.png"
+featuredalt: "Dados"
+featuredpath: "img/2019"
+categories: ["Coleta de dados"]
+tags:
+  - CETESB
+  - São Paulo
+  - Brasil
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE,
+                      cache = TRUE, collapse = TRUE, eval = FALSE)
+```
+
+Neste post, vou apresentar algumas mudanças no [scraper em R que eu montei](https://www.rpollution.com/blog/scraper-cetesb/) para baixar os dados da CETESB a partir do Qualar.
+
+# O que é o Qualar?
+
+O [Qualar](http://qualar.cetesb.sp.gov.br/qualar/home.do) é o sistema de informações de qualidade do ar da CETESB. Por meio dele, podemos acessar os dados de todas as estações de monitoramento do estado de São Paulo. O sistema exige a criação de um login e então o envio de um pequeno formulário com quais informações você gostaria de visualizar.
+
+O Qualar funciona muito bem para pequenas consultas, mas na extração de várias estações ou parâmetros o trabalho se torna maçante.
+
+O scraper contorna esse problema, simulando requisições de dados ao Qualar que podem ser facilmente iteradas para diversas estações e parâmetros.
+
+# O pacote Rpollution
+
+A principal mudança nessa nova versão é onde a função `scraper_cetesb()` passará a morar. Anteriormente, ela estava no pacote `koffing`, encontrado [neste repositório](https://github.com/atmoschem/koffing) da organização `atmoschem`.
+
+Agora, ele passará a morar no pacote `Rpollution`, encontrado [neste repositório](https://github.com/williamorim/Rpollution). Eu resolvi fazer essa mudança pois quero reviver o `Rpollution`, criando ferramentas mais gerais para trabalhar com dados de poluição, além de apenas web scrapers.
+
+A versão do pacote `koffing` é a atual e continuará disponível, mas em algum momento eu deixarei de dar manutenção a ela.
+
+# O que mudou no scraper?
+
+- A função está muito mais rápida, pois utiliza agora a seção _Exportar Dados Avançado_ que não imprime os dados na tela antes do download.
+
+- Os argumentos `type`, `invalidData` e `network` foram removidos.
+
+- Dois novos argumentos foram incluídos: `file` e `safe`.
+    - O argumento `file` permite salvar os dados diretamente em um arquivo, em vez de imprimir na tela ou salvar em um objeto do R.
+    - O argumento `safe`, quando `TRUE`, impede que o scraper devolva um erro caso não consiga baixar os dados. Isso é útil quando a função é iterada para diversos parâmetros.
+
+# Exemplo
+
+Para instalar o pacote `RPollution`, basta rodar o código abaixo.
+
+```{r}
+remotes::install_github("williamorim/Rpollution")
+
+# Se você não tiver o pacote `remotes` instalado, rode este código antes:
+install.packages("remotes")
+```
+
+No exemplo abaixo, estamos baixando os dados de ozônio (63) para a estação Dom Pedro II (72) para o mês de janeiro de 2018. Os dados são guardados no objeto `dados_ozonio`.
+
+```{r}
+library(Rpollution)
+
+dados_ozonio <- scraper_cetesb(
+  station = 72, 
+  parameter = 63,
+  start = "01/01/2018", 
+  end = "31/01/2018",
+  login = "login", 
+  password = "senha"
+)
+```
+
+Para esse código rodar de fato, você precisa substituir os argumentos `login` e `password` com os seus dados de cadastro do Qualar.
+
+Se quiséssemos agora baixar os dados tanto de ozônio quanto de NO2 (15), poderíamos fazer um `for`, iterando no valor do argumento `parameter`.
+
+```{r}
+parametros <- c(15, 63)
+
+for(i in parametros) {
+  
+  dados_ozonio <- scraper_cetesb(
+  station = 72, 
+  parameter = i,
+  start = "01/01/2018", 
+  end = "31/01/2018",
+  login = "login", 
+  password = "senha",
+  file = paste0("dados_", i, ".rds"),
+  safe = TRUE
+)
+  
+}
+```
+
+Nesse exemplo, os dados são guardados agora em arquivos, um para cada poluente. Isso é feito a partir do parâmetro `file`, que recebe uma string com o nome do arquivo em formato `.rds`.
+
+Além disso, repare que adicionamos o argumento `safe = TRUE`. Isso impede que o R retorne um erro caso o scraper não consiga baixar os dados para um dos poluentes, interrompendo a execução do `for` pela metade. Dessa forma, ele sempre vai tentar baixar os dados para todos os poluentes selecionados no objeto `parametros`. 
+
+> Web scrapers são altamente vulneráveis a alterações no site em que estão raspando. Se você encontrar algum erro ou o scraper parar de funcionar, por favor me avise. :)
+
+# Referências
+
+- [O fluxo do web scraping](http://curso-r.com/blog/2018/02/18/2018-02-18-fluxo-scraping/)
+
+- [Web Scraper Distribuído](http://curso-r.com/blog/2018/02/17/2018-02-17-scraper-distribuido/)
+
+- [Repositório do workshop de web scraping da Curso-R](https://github.com/curso-r/201904-workshop-web-scraping)
