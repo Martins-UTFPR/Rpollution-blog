@@ -3,7 +3,11 @@ title = "Sobre o autor e o blog"
 date = "2018-02-24"
 +++
 
-Meu nome é William Amorim e sou o idealizador deste blog. Também sou doutorando em Estatística no IME-USP, sócio-fundador da [Curso-R](cusro-r.com) e gosto de escrever [histórias](https://www.wattpad.com/user/WilliamAmorim5) nas horas vagas. 
+Meu nome é William Amorim, o idealizador deste blog. Sou Doutor em Estatística pelo IME-USP, sócio-fundador da [Curso-R](cusro-r.com) e gosto de escrever [histórias](https://www.wattpad.com/user/WilliamAmorim5) nas horas vagas. 
+
+<center>
+<img src = "/img/main/william-amorim-foto.png" width = "20%"> 
+</center>
 
 Eu comecei a trabalhar com poluição do ar em 2016, como tema da minha tese de Doutorado. Foi uma ótima sugestão dos meus orientadores [Antonio Carlos Pedroso de Lima](https://www.ime.usp.br/~acarlos/doku.php) e [Julio Singer](https://www.ime.usp.br/~jmsinger/doku.php).
 
